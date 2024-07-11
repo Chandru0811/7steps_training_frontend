@@ -4,3 +4,10 @@
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
 }
+
+:root {
+  --admin-primary-color: #bfe8e7;
+  --admin-secondary-color: #01a49e;
+  --admin-background-color: #fff;
+  --admin-text-color: #000;
+}
