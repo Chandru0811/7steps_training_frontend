@@ -6,8 +6,143 @@
 }
 
 :root {
-  --admin-primary-color: #bfe8e7;
+  --admin-primary-color: rgba(1, 164, 158, 0.50);
   --admin-secondary-color: #01a49e;
   --admin-background-color: #fff;
   --admin-text-color: #000;
+  --admin-teritary-color: rgba(1, 164, 158, 0.75);
+  --admin-button-color: #dedede;
 }
+
+/* Header Start */
+.offcanvas-primary {
+  background-color: var(--admin-secondary-color);
+}
+
+.offcanvas-body {
+  background-color: var(--admin-secondary-color);
+}
+
+.offcanvas-body .nav-link {
+  margin-bottom: 15px;
+}
+
+.adminNavbar {
+  background-color: var(--admin-primary-color);
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+}
+
+.nav-link {
+  color: var(--admin-text-color) !important;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 10px;
+}
+
+.nav-link:hover {
+  color: var(--admin-background-color) !important;
+}
+
+.nav-link.active {
+  color: var(--admin-background-color) !important;
+}
+
+.nav-link.active::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--admin-background-color);
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+
+.user-dropdown .dropdown-toggle::after {
+  display: none;
+}
+
+.user-dropdown .dropdown-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav .other-modules-dropdown .dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-menu{
+  --bs-dropdown-link-active-color: var(--admin-background-color);
+  --bs-dropdown-link-active-bg: var(--admin-teritary-color);
+}
+/* Header End */
+
+/* Footer Start */
+.adminFooter {
+  background-color: var(--admin-text-color);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+/* Footer End */
+
+/* Home */
+.btn-button {
+  color: var(--admin-background-color);
+  background-color: var(--admin-primary-color);
+  border-color: var(--admin-primary-color);
+}
+.btn-button:hover {
+  color: var(--admin-background-color);
+  background-color: var(--admin-primary-color);
+  border-color: var(--admin-primary-color);
+}
+.btn-check:focus + .btn-button,
+.btn-button:focus {
+  color: var(--admin-background-color);
+  background-color: var(--admin-primary-color);
+  border-color: var(--admin-primary-color);
+  box-shadow: 0 0 0 0.25rem var(--admin-teritary-color);
+}
+.btn-check:checked + .btn-button,
+.btn-check:active + .btn-button,
+.btn-button:active,
+.btn-button.active,
+.show > .btn-button.dropdown-toggle {
+  color: var(--admin-background-color);
+  background-color: var(--admin-primary-color);
+  border-color: var(--admin-primary-color);
+}
+.btn-check:checked + .btn-button:focus,
+.btn-check:active + .btn-button:focus,
+.btn-button:active:focus,
+.btn-button.active:focus,
+.show > .btn-button.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.25rem var(--admin-teritary-color);
+}
+.btn-button:disabled,
+.btn-button.disabled {
+  color: var(--admin-background-color);
+  background-color: var(--admin-primary-color);
+  border-color: var(--admin-primary-color);
+}
+
+.btn-button-check:checked + .btn-button,
+.btn-button.active,
+.btn-button.show,
+.btn-button:first-child:active,
+:not(.btn-button-check) + .btn-button:active {
+  background-color: var(--admin-primary-color);
+  border-color: var(--admin-primary-color);
+  color: var(--admin-background-color);
+}
+
+.btn-light{
+  background-color: var(--admin-button-color);
+}
+/* Home End */
