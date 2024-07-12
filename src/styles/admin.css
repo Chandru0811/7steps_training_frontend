@@ -6,7 +6,7 @@
 }
 
 :root {
-  --admin-primary-color: rgba(1, 164, 158, 0.50);
+  --admin-primary-color: rgba(1, 164, 158, 0.5);
   --admin-secondary-color: #01a49e;
   --admin-background-color: #fff;
   --admin-text-color: #000;
@@ -14,16 +14,20 @@
   --admin-button-color: #dedede;
 }
 
+body {
+  background-color: #f9f9f9;
+}
+
 /* Header Start */
-.offcanvas-primary {
+.adminNavbar .offcanvas-primary {
+  background-color: var(--admin-secondary-color) !important;
+}
+
+.adminNavbar .offcanvas-body {
   background-color: var(--admin-secondary-color);
 }
 
-.offcanvas-body {
-  background-color: var(--admin-secondary-color);
-}
-
-.offcanvas-body .nav-link {
+.adminNavbar .offcanvas-body .nav-link {
   margin-bottom: 15px;
 }
 
@@ -31,11 +35,11 @@
   background-color: var(--admin-primary-color);
 }
 
-.navbar-brand img {
+.adminNavbar .navbar-brand img {
   margin-right: 10px;
 }
 
-.nav-link {
+.adminNavbar .nav-link {
   color: var(--admin-text-color) !important;
   font-size: 13px;
   display: flex;
@@ -44,16 +48,16 @@
   margin-left: 10px;
 }
 
-.nav-link:hover {
+.adminNavbar .nav-link:hover {
   color: var(--admin-background-color) !important;
 }
 
-.nav-link.active {
+.adminNavbar .nav-link.active {
   color: var(--admin-background-color) !important;
 }
 
-.nav-link.active::after {
-  content: '';
+.adminNavbar .nav-link.active::after {
+  content: "";
   display: block;
   width: 100%;
   height: 2px;
@@ -63,20 +67,20 @@
   left: 0;
 }
 
-.user-dropdown .dropdown-toggle::after {
+.adminNavbar .user-dropdown .dropdown-toggle::after {
   display: none;
 }
 
-.user-dropdown .dropdown-toggle {
+.adminNavbar .user-dropdown .dropdown-toggle {
   display: flex;
   align-items: center;
 }
 
-.navbar-nav .other-modules-dropdown .dropdown-toggle::after {
+.adminNavbar .navbar-nav .other-modules-dropdown .dropdown-toggle::after {
   display: none;
 }
 
-.dropdown-menu{
+.adminNavbar .dropdown-menu {
   --bs-dropdown-link-active-color: var(--admin-background-color);
   --bs-dropdown-link-active-bg: var(--admin-teritary-color);
 }
@@ -88,6 +92,7 @@
   position: fixed;
   width: 100%;
   bottom: 0;
+  font-size: x-small;
 }
 /* Footer End */
 
@@ -142,7 +147,7 @@
   color: var(--admin-background-color);
 }
 
-.btn-light{
+.btn-light {
   background-color: var(--admin-button-color);
 }
 /* Home End */

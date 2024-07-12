@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/heading-has-content */
 import React from "react";
 import "../../../styles/client.css";
 import heroImg from "../../../assets/Home hero img.jpg";
