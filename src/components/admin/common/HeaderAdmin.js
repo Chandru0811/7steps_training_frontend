@@ -26,7 +26,7 @@ function HeaderAdmin({ handleLogout }) {
       <Navbar expand={expand} className="adminNavbar">
         <Container fluid>
           <Navbar.Brand as={NavLink} to="/">
-            <img src={Logo} alt="LOGO" className="img-fluid" width={30} />
+            <img src={Logo} alt="LOGO" className="img-fluid" width={30} />&nbsp;
             <span style={{ color: "#fff", fontWeight: "bolder" }}>7STEPS</span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} />
