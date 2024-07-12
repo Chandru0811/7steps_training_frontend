@@ -1,7 +1,6 @@
 import React from 'react'
-import "../../../styles/client.css"
 import { Navbar, Container, Nav, Offcanvas } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from '../../../assets/Logo.png';
 
 function Header() {
@@ -10,8 +9,8 @@ function Header() {
     <Navbar expand={expand} className="header">
       <Container fluid>
         <Navbar.Brand href="#" className='align-items-center mx-3'>
-        <img src={Logo} alt="7 STEPS" className="img-fluid" width={50} />
-        <span className='mx-2' style={{ color: "#fff", fontWeight: "bolder" }}>7 STEPS</span>
+          <img src={Logo} alt="7 STEPS" className="img-fluid" width={50} />
+          <span className='mx-2' style={{ color: "#fff", fontWeight: "bolder" }}>7 STEPS</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
         <Navbar.Offcanvas
@@ -21,8 +20,8 @@ function Header() {
         >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-            <img src={Logo} alt="7 STEPS" className="img-fluid" width={50} />
-            <span className='mx-2 ' style={{ color: "#7C2C83" }}>7 STEPS</span>
+              <img src={Logo} alt="7 STEPS" className="img-fluid" width={50} />
+              <span className='mx-2 ' style={{ color: "#7C2C83" }}>7 STEPS</span>
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
@@ -92,17 +91,11 @@ function Header() {
               >
                 CONTACT US
               </NavLink>
-
-              <NavLink
-                to="/login"
-                activeClassName="active"
-                className="custom-nav-link"
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                LOGIN
-              </NavLink>
+              <Link to="/auth" style={{textDecoration: "none"}}>
+                <button style={{ width: '100px'}} id="signup" className='btn btn-button my-2'>
+                  SIGN IN
+                </button>
+              </Link>
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>

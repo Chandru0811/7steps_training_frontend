@@ -14,6 +14,8 @@
   --greyColor-text: #5c5f6a;
   --background-color: #fff;
   --text-color: #000;
+  --card-color: rgba(1, 164, 158, 0.50);
+  --cardbg-color: rgba(1, 164, 158, 0.10);
 }
 
 /* / Home Hero / */
@@ -124,11 +126,11 @@
 
 .header .logo {
   color: var(--accent-color);
-  font-size: 24px;
+  font-size: 20px;
 }
 .header .logo-text {
   color: var(--secondary-color);
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .header .active {
@@ -139,8 +141,8 @@
 
 .header .custom-nav-link {
   color: var(--text-color);
-  font-weight: bold;
-  padding: 25px;
+  padding: 15px;
+  margin-left: 10px;
 }
 
 .header .custom-nav-link:hover {
@@ -153,12 +155,17 @@
 
 .header nav .nav-link {
   color: var(--text-color);
-  font-size: 18px;
+  font-size: 13px;
   line-height: normal;
 }
 
 .header nav .nav-link Link {
   color: var(--text-color) !important;
+}
+
+.header #signup{
+   color: var(--secondary-color);
+   background-color: var(--background-color);
 }
 
 @media (max-width: 991.98px) {
@@ -196,6 +203,12 @@
 .copyrights {
   background-color: var(--text-color);
   color: var(--background-color);
+}
+
+.copyrights a{
+ font-size: 25px;
+ color: var(--background-color);
+ margin-right: 12px;
 }
 
 .footerSection .custom-nav-link {
@@ -237,8 +250,12 @@
 .about-card {
   background-color: var(--primary-color);
   color: var(--text-color);
-  border-radius: 30px;
+  border-radius: 20px;
   border: none;
+}
+
+.iconImage{
+  width: 30px !important;
 }
 
 .head-color {
@@ -282,3 +299,154 @@
   }
 }
 /* / About End  / */
+
+/* Auth Page */
+.auth-container {
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.auth-container .card-header{
+  background-color: var(--background-color);
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 10px 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 16px;
+}
+
+.tabs button.active {
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.tab-content {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-container {
+  text-align: left;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input[type="email"],
+.input-group input[type="password"],
+.input-group input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid var(--greyColor-text);
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.auth-container .btn-login{
+  background-color: var(--secondary-color);
+  color: var(--background-color);
+}
+
+.forgot-password {
+  display: block;
+  margin-top: 10px;
+  color: #4285f4;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+.or-separator {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.or-separator::before,
+.or-separator::after {
+  content: '';
+  display: block;
+  width: 40%;
+  height: 1px;
+  background: #ddd;
+  position: absolute;
+  top: 50%;
+}
+
+.or-separator::before {
+  left: 0;
+}
+
+.or-separator::after {
+  right: 0;
+}
+
+.or-separator span {
+  background: white;
+  padding: 0 10px;
+  position: relative;
+}
+
+/* / Hope Start / */
+.hopeSection1 .goalImg{
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.hopeSection1 .programmeCard{
+  background-color: var(--card-color);
+  border: none;
+  border-radius: 30px;
+  padding: 10px 0px;
+}
+
+.programmeHeading{
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--accent-color);
+}
+
+.hopeSection2{
+  background-color: var(--cardbg-color);
+}
+
+.hopeSection2 .modulesCard{
+  background-color: var(--background-color);
+  border: var(--secondary-color);
+}
+
+.hopeSection2 .modulesHeading{
+  color: var(--background-color);
+  border: 1px solid var(--accent-color);
+}
+/* / Hope End / */
+
