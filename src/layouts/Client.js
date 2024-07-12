@@ -5,9 +5,10 @@ import Header from "../components/client/common/Header";
 import Footer from "../components/client/common/Footer";
 import { Toaster } from "react-hot-toast";
 import Login from "../components/client/common/Login";
-import About from "../pages/client/About/About";
 import "../styles/client.css";
 import Auth from "../pages/client/Auth";
+import About from "../pages/client/About";
+import Hope from "../pages/client/Hope"
 
 
 function Client({ handleLogin }) {
@@ -26,6 +27,7 @@ function Client({ handleLogin }) {
         <Routes>
           <Route path="/" element={<Home  />} />
           <Route path="/about" element={<About />} />
+          <Route path="/hope" element={<Hope />} />
           <Route path="/login" element={<Login handleLogin={handleLogin} />} />
           <Route path="/auth" element={<Auth handleLogin={handleLogin}/>} />
         </Routes>

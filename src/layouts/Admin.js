@@ -6,6 +6,7 @@ import FooterAdmin from "../components/admin/common/FooterAdmin";
 import { Toaster } from "react-hot-toast";
 import "../styles/admin.css";
 import Home from "../pages/admin/Home";
+import AdminAbout from "../pages/admin/AdminAbout";
 
 function Admin({ handleLogout }) {
   return (
@@ -23,6 +24,7 @@ function Admin({ handleLogout }) {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<AdminAbout />} />
         </Routes>
         <FooterAdmin />
       </BrowserRouter>
