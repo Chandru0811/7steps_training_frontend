@@ -9,7 +9,7 @@ function Home({ handleLogin }) {
         <Hero />
         <Testimonial />
       </h2>
-      {/* <button onClick={handleLogin}>Login</button> */}
+      <button onClick={handleLogin}>Login</button>
     </div>
   );
 }

@@ -2,6 +2,12 @@
 import React from "react";
 import "../../../styles/client.css";
 import heroImg from "../../../assets/Home hero img.jpg";
+import cardIcon1 from "../../../assets/Home-card-icon-1.jpg";
+import cardIcon2 from "../../../assets/Home-card-icon-2.jpg";
+import cardIcon3 from "../../../assets/Home-card-icon-3.jpg";
+import cardIcon4 from "../../../assets/Home-card-icon-4.jpg";
+import cardIcon5 from "../../../assets/Home-card-icon-5.jpg";
+import cardIcon6 from "../../../assets/Home-card-icon-6.jpg";
 
 function hero() {
   return (
@@ -46,7 +52,12 @@ function hero() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title"></h5>
-                  <p className="text-center">My Journey</p>
+                  <p className="text-center">
+                    <span>
+                      <img src={cardIcon1} alt="cardIcon" />
+                    </span>
+                    &nbsp; My Journey
+                  </p>
                   <div className="fs-6 p-4">
                     <p>
                       Having lost her mum to schizophrenia. Her own journey of
@@ -72,7 +83,12 @@ function hero() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title"></h5>
-                  <p className="text-center">My Transformation</p>
+                  <p className="text-center">
+                    <span>
+                      <img src={cardIcon2} alt="cardIcon" />
+                    </span>
+                    &nbsp; My Transformation
+                  </p>
                   <div className="fs-6 p-4">
                     <p>
                       In 2019-2020, she managed to turn her life around,
@@ -93,7 +109,12 @@ function hero() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title"></h5>
-                  <p className="text-center">My Mission</p>
+                  <p className="text-center">
+                    <span>
+                      <img src={cardIcon3} alt="cardIcon" />
+                    </span>
+                    &nbsp; My Mission
+                  </p>
                   <div className="fs-6 p-4">
                     <p>
                       Realising that many people were, like herself, victims of
@@ -118,7 +139,12 @@ function hero() {
               <div className="card">
                 <div className="card-body card-second-row">
                   <h5 className="card-title"></h5>
-                  <p className="text-center">My Success</p>
+                  <p className="text-center">
+                    <span>
+                      <img src={cardIcon4} alt="cardIcon" />
+                    </span>
+                    &nbsp; My Success
+                  </p>
                   <div className="fs-6 p-4">
                     <p>
                       In a few short years, she has changed her life drastically
@@ -134,7 +160,12 @@ function hero() {
               <div className="card">
                 <div className="card-body card-second-row">
                   <h5 className="card-title"></h5>
-                  <p className="text-center">My Passion</p>
+                  <p className="text-center">
+                    <span>
+                      <img src={cardIcon5} alt="cardIcon" />
+                    </span>
+                    &nbsp; My Passion
+                  </p>
                   <div className="fs-6 p-4">
                     <p>
                       Her passion still remails with working with youths and the
@@ -148,7 +179,12 @@ function hero() {
               <div className="card">
                 <div className="card-body card-second-row">
                   <h5 className="card-title"></h5>
-                  <p className="text-center">My Motto</p>
+                  <p className="text-center">
+                    <span>
+                      <img src={cardIcon6} alt="cardIcon" />
+                    </span>
+                    &nbsp; My Motto
+                  </p>
                   <div className="fs-6 p-4">
                     <p>Passion and commitment in all that I do</p>
                     <p>Become a progressivist in your own life.</p>
