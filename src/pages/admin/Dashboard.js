@@ -1,10 +1,9 @@
 import React from "react";
 
-function Dashboard({ handleLogout }) {
+function Dashboard() {
   return (
-    <div>
-      <h2>Dashboard</h2>
-      <button onClick={handleLogout}>Logout</button>
+    <div className="d-flex justify-content-center">
+      <h2 style={{marginTop: "225px"}}>Coming Soon...</h2>
     </div>
   );
 }
