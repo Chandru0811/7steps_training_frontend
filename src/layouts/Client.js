@@ -5,6 +5,7 @@ import Header from "../components/client/common/Header";
 import Footer from "../components/client/common/Footer";
 import { Toaster } from "react-hot-toast";
 import Login from "../components/client/common/Login";
+import About from "../pages/client/About/About";
 
 function Client({ handleLogin }) {
   return (
@@ -20,7 +21,8 @@ function Client({ handleLogin }) {
         />
         <Header />
         <Routes>
-          <Route path="/" element={<Home handleLogin={handleLogin} />} />
+          <Route path="/" element={<Home  />} />
+          <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         </Routes>
         <Footer />
