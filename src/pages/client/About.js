@@ -49,7 +49,7 @@ function About() {
         </div>
         {/* Card Section */}
         <div className="container mb-5">
-          <div className="row d-flex align-items-stretch">
+          <div className="row">
             <div className="col-md-6 col-12 mb-2">
               <div className="card about-card h-100">
                 <div className="card-heading text-center">

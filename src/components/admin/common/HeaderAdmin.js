@@ -27,7 +27,7 @@ function HeaderAdmin({ handleLogout }) {
         <Container fluid>
           <Navbar.Brand as={NavLink} to="/">
             <img src={Logo} alt="LOGO" className="img-fluid" width={30} />&nbsp;
-            <span style={{ color: "#fff", fontWeight: "bolder" }}>7STEPS</span>
+            <span style={{ color: "#7C2C83", fontWeight: "bolder" }}>7STEPS</span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={handleShow} />
           <Navbar.Collapse id="basic-navbar-nav" className="d-none d-lg-flex">
@@ -72,7 +72,7 @@ function HeaderAdmin({ handleLogout }) {
           <Offcanvas.Title>
             <img src={Logo} alt="LOGO" className="img-fluid" width={30} />
             &nbsp;
-            <span style={{ color: "#fff", fontWeight: "bolder" }}>7STEPS</span>
+            <span style={{ color: "#7C2C83", fontWeight: "bolder" }}>7STEPS</span>
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
