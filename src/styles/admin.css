@@ -6,11 +6,11 @@
 }
 
 :root {
-  --admin-primary-color: rgba(1, 164, 158, 0.5);
-  --admin-secondary-color: #01a49e;
-  --admin-background-color: #fff;
+  --admin-primary-color: #fdefc2;
+  --admin-secondary-color: #fadf85;
+  --admin-background-color: #7C2C83;
   --admin-text-color: #000;
-  --admin-teritary-color: rgba(1, 164, 158, 0.75);
+  --admin-teritary-color: #F6C00B;
   --admin-button-color: #dedede;
 }
 
@@ -20,11 +20,11 @@ body {
 
 /* Header Start */
 .adminNavbar .offcanvas-primary {
-  background-color: var(--admin-secondary-color) !important;
+  background-color: var(--admin-primary-color) !important;
 }
 
 .adminNavbar .offcanvas-body {
-  background-color: var(--admin-secondary-color);
+  background-color: var(--admin-primary-color);
 }
 
 .adminNavbar .offcanvas-body .nav-link {
@@ -50,6 +50,7 @@ body {
 
 .adminNavbar .nav-link.active {
   color: var(--admin-background-color) !important;
+  font-weight: bold;
 }
 
 .adminNavbar .nav-link.active::after {

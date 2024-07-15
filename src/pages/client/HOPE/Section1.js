@@ -4,13 +4,13 @@ import { IoSend } from "react-icons/io5";
 
 function Section1() {
     return (
-        <section className='hopeSection1 mt-5'>
+        <section className='hopeSection1 pt-5'>
             <div className='container'>
-                <div className='row'>
-                    <div className='col-md-5 col-12'>
-                        <img src={Image} alt='Goal' width="80%" className='img-fluid goalImg' />
+                <div className='row flex-1 justify-content-center align-items-center'>
+                    <div className='col-lg-5 col-12 mb-3'>
+                        <img src={Image} alt='Goal' className='img-fluid goalImg' />
                     </div>
-                    <div className='col-md-7 col-12'>
+                    <div className='col-lg-7 col-12'>
                         <h5 className='fw-bold mb-3' style={{ color: "#7C2C83" }}>Goals</h5>
                         <p className='mb-4'>To develop the 21st Century Competencies that are essential for the child to develop to prepare them for the future</p>
                         <h5 className='fw-bold mb-3' style={{ color: "#7C2C83" }}>Objectives</h5>
@@ -26,7 +26,7 @@ function Section1() {
                 </div>
                 <div className='row py-5'>
                     <h1 className='fw-bolder text-center mb-5'>Programme <span style={{ color: "#7C2C83" }}>Outcomes</span></h1>
-                    <div className='col-md-3 col-12'>
+                    <div className='col-md-6 col-lg-6 col-xl-3 col-12 mb-3'>
                         <div className='card programmeCard h-100'>
                             <div className='programmeHeading'>H</div>
                             <div className='card-body'>
@@ -38,7 +38,7 @@ function Section1() {
                             </div>
                         </div>
                     </div>
-                    <div className='col-md-3 col-12'>
+                    <div className='col-md-6 col-lg-6 col-xl-3 col-12 mb-3'>
                         <div className='card programmeCard h-100'>
                             <div className='programmeHeading'>O</div>
                             <div className='card-body'>
@@ -50,7 +50,7 @@ function Section1() {
                             </div>
                         </div>
                     </div>
-                    <div className='col-md-3 col-12'>
+                    <div className='col-md-6 col-lg-6 col-xl-3 col-12 mb-3'>
                         <div className='card programmeCard h-100'>
                             <div className='programmeHeading'>P</div>
                             <div className='card-body'>
@@ -62,7 +62,7 @@ function Section1() {
                             </div>
                         </div>
                     </div>
-                    <div className='col-md-3 col-12'>
+                    <div className='col-md-6 col-lg-6 col-xl-3 col-12 mb-3'>
                         <div className='card programmeCard h-100'>
                             <div className='programmeHeading'>E</div>
                             <div className='card-body'>

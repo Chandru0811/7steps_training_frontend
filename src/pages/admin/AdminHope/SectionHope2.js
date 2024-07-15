@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaCheckSquare } from "react-icons/fa";
 
-function Section2() {
+function HopeSection2() {
     return (
         <section className='hopeSection2 pb-5'>
             <div className='container py-4'>
@@ -89,4 +89,4 @@ function Section2() {
     )
 }
 
-export default Section2;
+export default HopeSection2;

@@ -6,75 +6,64 @@
 }
 
 :root {
-  --primary-color: rgba(1, 164, 158, 0.25);
-  --secondary-color: #01a49e;
-  --teritary-color: #01a49f9a;
+  --primary-color: #f6bf0b38;
+  --secondary-color: #f6c00b;
+  --imagebg-color: #d9d9d9;
+  --teritary-color: #01a49f3a;
   --accent-color: #7c2c83;
+  --linear-color: #d884e078;
   --greyBackground-color: #f9f9f9;
   --greyColor-text: #5c5f6a;
   --background-color: #fff;
   --text-color: #000;
-  --card-color: rgba(1, 164, 158, 0.50);
-  --cardbg-color: rgba(1, 164, 158, 0.10);
+  --card-color: rgba(1, 164, 158, 0.5);
+  --cardbg-color: rgba(1, 164, 158, 0.1);
+  --containerbg-color: #f6bf0b7e;
 }
 
-/* / Home Hero / */
+/* / / Home Hero / / */
 .home {
-  background-image: linear-gradient(to left, #01a49f43, #fff);
-}
-.hero-heading {
-  font-size: 65px;
-  font-weight: 630;
-  color: var(--text-color);
-}
-@media screen and (max-width: 768px) {
-  .hero-heading {
-    font-size: 90%;
-    font-weight: 630;
-    color: var(--text-color);
-  }
-  .hero-cards .card .card-body {
-    padding: 0;
-    height: fit-content !important;
-  }
+  background-image: linear-gradient(
+    to left,
+    var(--linear-color),
+    var(--background-color)
+  );
 }
 
-@media screen and (max-width: 1300px) {
-  .hero-cards .card .card-body {
-    padding: 0;
-    height: 640px !important;
-  }
-  .hero-cards .card .card-second-row {
-    padding: 0;
-    height: 300px !important;
-  }
+.hero-cards {
+  border-radius: 0 0 80px 0;
 }
-@media screen and (max-width: 768px) {
-  .hero-cards .card .card-body {
-    padding: 0;
-    height: fit-content !important;
-  }
-  .hero-cards .card .card-second-row {
-    padding: 0;
-    height: fit-content !important;
-  }
+.border-design {
+  border-top: 15px solid var(--secondary-color);
+  border-radius: 4px 4px 40px 40px;
 }
 
 .hero-heading span {
   color: var(--secondary-color);
 }
-.hero p {
-  font-size: 58%;
+.hero h1 {
+  font-size: 62px;
   color: var(--text-color);
 }
+.hero span {
+  color: var(--accent-color);
+}
+@media screen and (max-width: 992px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+}
+
 .second-heading h3 {
-  color: var(--secondary-color);
+  color: var(--accent-color);
   font-weight: 650;
 }
+
 .hero-img {
   background-color: var(--background-color);
   border-radius: 10px;
   max-width: fit-content !important;
+  height: fit-content;
 }
 .hero-cards .card .card-title {
   border-top: 17px solid var(--secondary-color);
@@ -92,11 +81,11 @@
   padding: 0;
   height: 240px;
 }
-/* / Home Hero / */
+/* / / Home Hero / / */
 
-/* / Home Testimonial / */
+/* / / Home Testimonial / / */
 .testimonial {
-  background: var(--teritary-color);
+  background: var(--containerbg-color);
 }
 .card {
   cursor: pointer;
@@ -122,20 +111,22 @@
 /* / Header / */
 .header {
   background-color: var(--primary-color);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 15px;
 }
 
 .header .logo {
   color: var(--accent-color);
   font-size: 20px;
 }
+
 .header .logo-text {
   color: var(--secondary-color);
   font-size: 20px;
 }
 
 .header .active {
-  color: var(--secondary-color) !important;
-  border-bottom: 2px solid var(--secondary-color);
+  color: var(--accent-color) !important;
+  border-bottom: 2px solid var(--accent-color);
   padding: 10px;
 }
 
@@ -146,7 +137,7 @@
 }
 
 .header .custom-nav-link:hover {
-  color: var(--secondary-color) !important;
+  color: var(--accent-color) !important;
 }
 
 .header .navbar-brand {
@@ -164,7 +155,7 @@
 }
 
 .header #signup{
-   color: var(--secondary-color);
+   color: var(--accent-color);
    background-color: var(--background-color);
 }
 
@@ -237,7 +228,7 @@
 /* / About  / */
 .about-container {
   text-align: center;
-  background: url("../assets/About_hero_image.png") no-repeat center center;
+  /* background: url("../assets/About_hero_image.png") no-repeat center center; */
   background-size: cover;
   color: var(--background-color);
   min-height: 80vh;
@@ -262,16 +253,9 @@
   color: var(--accent-color);
 }
 
-@media (max-width: 767px) {
-  .about-card {
-    width: 80%;
-    margin: 10px auto;
-  }
-}
-
 .ourPartner {
   border-radius: 50%;
-  background-color: var(--secondary-color);
+  background-color: var(--imagebg-color);
   width: 100%;
   padding-bottom: 100%;
   position: relative;
@@ -441,12 +425,111 @@
 
 .hopeSection2 .modulesCard{
   background-color: var(--background-color);
-  border: var(--secondary-color);
+  position: relative;
+  top: -75px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 10px;
 }
 
 .hopeSection2 .modulesHeading{
   color: var(--background-color);
-  border: 1px solid var(--accent-color);
+  font-size: 60px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--accent-color);
+}
+
+.hopeSection2 .modulesSubcard1{
+  background-color: var(--background-color);
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  border: none;
+}
+
+.hopeCardRow>*{
+  padding-left: 0px;
+}
+
+@media (min-width: 768px) {
+  .hopeImageCard1 {
+    background: linear-gradient(90deg, var(--cardbg-color) 50%, var(--background-color) 50%);
+  }
+}
+
+@media (max-width: 767px) {
+  .hopeImageCard1 {
+    background: transparent;
+  }
+}
+
+.hopeSection2 .modulesSubcard2{
+  background-color: var(--background-color);
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+  border: none;
+}
+
+@media (min-width: 768px) {
+  .hopeImageCard2 {
+    background: linear-gradient(90deg, var(--background-color) 50%, var(--cardbg-color) 50%);
+  }
+}
+
+@media (max-width: 767px) {
+  .hopeImageCard2 {
+    background: transparent;
+  }
+}
+
+.hopeCardRow2>*{
+  padding-right: 0px;
+  margin-top: 50px;
 }
 /* / Hope End / */
 
+/* / portfolio / */
+.custom-badge{
+  background-color: #7C2C83;
+  border-radius: 20px;
+  padding: 4px 20px;
+  color: #fff;
+}
+/* .imageContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+} */
+
+
+/* / Default styles for all screens / */
+.portfolio_img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 7.5vh !important;
+  height: fit-content;
+}
+
+/* / Styles for screens between 700px and 1700px / */
+@media screen and (min-width: 700px) and (max-width: 1700px) {
+  .portfolio_img {
+    top: 1.5vh !important;
+    width: 47%;
+  }
+}
+
+
+
+.imageContainer{
+  display: flex;
+  justify-content: center ;
+  align-items: center;
+}
+.portyellow{
+  background-color:#F6C00B;
+}
+/* / portfolio end / */
