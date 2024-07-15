@@ -1,5 +1,5 @@
 import React from "react";
-import AdminHome from "./AdminHome/AdminHome";
+import AdminHome from "../admin/AdminHome";
 
 function Home() {
   return (

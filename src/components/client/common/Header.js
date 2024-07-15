@@ -1,16 +1,21 @@
-import React from 'react'
+import React from "react";
 import { Navbar, Container, Nav, Offcanvas } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import Logo from '../../../assets/Logo.png';
+import Logo from "../../../assets/Logo.png";
 
 function Header() {
   const expand = "lg";
   return (
     <Navbar expand={expand} className="header">
       <Container fluid>
-        <Navbar.Brand href="#" className='align-items-center mx-3'>
+        <Navbar.Brand href="#" className="align-items-center mx-3">
           <img src={Logo} alt="7 STEPS" className="img-fluid" width={50} />
-          <span className='mx-2' style={{ color: "#fff", fontWeight: "bolder" }}>7 STEPS</span>
+          <span
+            className="mx-2"
+            style={{ color: "#7C2C83", fontWeight: "bolder" }}
+          >
+            7 STEPS
+          </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
         <Navbar.Offcanvas
@@ -21,7 +26,9 @@ function Header() {
           <Offcanvas.Header closeButton>
             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
               <img src={Logo} alt="7 STEPS" className="img-fluid" width={50} />
-              <span className='mx-2 ' style={{ color: "#7C2C83" }}>7 STEPS</span>
+              <span className="mx-2 " style={{ color: "#7C2C83" }}>
+                7 STEPS
+              </span>
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
@@ -91,8 +98,12 @@ function Header() {
               >
                 CONTACT US
               </NavLink>
-              <Link to="/auth" style={{textDecoration: "none"}}>
-                <button style={{ width: '100px'}} id="signup" className='btn btn-button my-2'>
+              <Link to="/auth" style={{ textDecoration: "none" }}>
+                <button
+                  style={{ width: "100px" }}
+                  id="signup"
+                  className="btn btn-button my-2"
+                >
                   SIGN IN
                 </button>
               </Link>
@@ -101,7 +112,7 @@ function Header() {
         </Navbar.Offcanvas>
       </Container>
     </Navbar>
-  )
+  );
 }
 
-export default Header
+export default Header;
