@@ -5,10 +5,8 @@ import Testimonial from "../client/Home/Testimonial";
 function Home({ handleLogin }) {
   return (
     <div>
-      <h2>
-        <Hero />
-        <Testimonial />
-      </h2>
+      <Hero />
+      <Testimonial />
       <button onClick={handleLogin}>Login</button>
     </div>
   );
