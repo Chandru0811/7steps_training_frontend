@@ -148,3 +148,11 @@ body {
   background-color: var(--admin-button-color);
 }
 /* Home End */
+/* portfolio */
+.edit-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* portfolio end */
