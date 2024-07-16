@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import bgImg from "../../../assets/portfolio_background.png";
 import heroImg from "../../../assets/portfolioImg-removebg-preview.png";
 import coach from "../../../assets/coach.png";
 import speaker from "../../../assets/speaker.png";
 import life from "../../../assets/life.png";
 import trainer from "../../../assets/trainer.png";
+import PortFolioCarousel from "./PortFolioCarousel";
+import PortFolioBoottom from "./PortFolioBoottom";
 
 export default function PortFolio() {
+  const [activeTab, setActiveTab] = useState("home");
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "home":
+        return <PortFolioCarousel />;
+      case "profile":
+        return <PortFolioCarousel />;
+      case "longer-tab":
+        return <PortFolioCarousel />;
+      case "new-tab":
+        return <PortFolioCarousel />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div>
       <div
@@ -17,40 +36,33 @@ export default function PortFolio() {
           backgroundPosition: "center",
         }}
       >
-        <h2 className=" text-dark d-flex justify-content-center">
+        <h2 className="text-dark d-flex justify-content-center">
           Who is Reihana Abdullah?
         </h2>
-        <p className=" d-flex justify-content-center">
-          <span className="custom-badge ">TRAINER</span>
+        <p className="d-flex justify-content-center">
+          <span className="custom-badge">TRAINER</span>
         </p>
-        <div
-          className="d-flex justify-content-center"
-          style={{ gap: "20rem", marginTop: "5rem" }}
-        >
+        <div className="d-flex justify-content-around">
           <span className="custom-badge">COACH</span>
           <span className="custom-badge">SPEAKER</span>
         </div>
         <div className="imageContainer">
           <img
             src={heroImg}
-            alt="heroImg "
+            alt="heroImg"
             className="img-fluid portfolio_img"
           />
         </div>
       </div>
-      <div className="portyellow">
-        <div className="row">
-          <div className="col-md-6">
-            <div className="card align-items-center p-3 m-3 h-100">
-            <div className="d-flex gap-1">
-            <img
-            src={coach}
-            alt="heroImg "
-            className="img-fluid w-25"
-          />
-              <h2 className="text-dark border-bottom">COACH</h2>
+      <div className="container-fluid">
+        <div className="row portyellow">
+          <div className="col-md-6 p-3">
+            <div className="card align-items-center p-3 h-100">
+              <div className="d-flex gap-1">
+                <img src={coach} alt="coach" className="img-fluid" />
+                <h2 className="text-dark border-bottom">COACH</h2>
               </div>
-              <p>
+              <p className="preserve-whitespace">
                 Reihana Abdullah is a revolutionary Mindset Intervention Coach.
                 She guides individuals in breaking free of sabotaging beliefs,
                 negative programming and past traumas to creating breakthroughs
@@ -62,16 +74,13 @@ export default function PortFolio() {
               </p>
             </div>
           </div>
-          <div className=" col-md-6">
-            <div className="card align-items-center p-3 m-3 h-100">
-            <div className="d-flex gap-1">
-            <img
-            src={trainer}
-            alt="heroImg "
-            className="img-fluid w-25"
-          />
-              <h2 className="text-dark border-bottom">TRAINER</h2>
-              </div> <p>
+          <div className="col-md-6 p-3">
+            <div className="card align-items-center p-3 h-100">
+              <div className="d-flex gap-1">
+                <img src={trainer} alt="trainer" className="img-fluid w-25" />
+                <h2 className="text-dark border-bottom">TRAINER</h2>
+              </div>
+              <p className="preserve-whitespace">
                 She has helped more than 12,000 young students, professionals,
                 matured adults across Asia, Europe and USA through her
                 Life-skills training programmes for students and proven Mindset
@@ -81,18 +90,13 @@ export default function PortFolio() {
               </p>
             </div>
           </div>
-        </div>
-        <div className="row mt-5 ">
-          <div className="col-md-6">
-            <div className="card align-items-center p-3 m-3 h-100">
-            <div className="d-flex gap-1">
-            <img
-            src={speaker}
-            alt="heroImg "
-            className="img-fluid w-25"
-          />
-              <h2 className="text-dark border-bottom">SPEAKER</h2>
-              </div> <p>
+          <div className="col-md-6 p-3 mt-4">
+            <div className="card align-items-center p-3 h-100">
+              <div className="d-flex gap-1">
+                <img src={speaker} alt="speaker" className="img-fluid w-25" />
+                <h2 className="text-dark border-bottom">SPEAKER</h2>
+              </div>
+              <p className="preserve-whitespace">
                 She is constantly invited to speak online at International
                 platforms, such as World Speech Day and International Women's
                 Day and participates in forums, panel discussions, emceeing,
@@ -104,16 +108,13 @@ export default function PortFolio() {
               </p>
             </div>
           </div>
-          <div className=" col-md-6">
-            <div className="card align-items-center p-3 m-3 h-100">
-            <div className="d-flex gap-1">
-            <img
-            src={life}
-            alt="heroImg "
-            className="img-fluid w-25"
-          />
-              <h2 className="text-dark border-bottom">LIFE MISSION</h2>
-              </div>  <p>
+          <div className="col-md-6 p-3 mt-4">
+            <div className="card align-items-center p-3 h-100">
+              <div className="d-flex gap-1">
+                <img src={life} alt="life" className="img-fluid w-25" />
+                <h2 className="text-dark border-bottom">LIFE MISSION</h2>
+              </div>
+              <p className="preserve-whitespace">
                 She is a strong advocate for education and uplifting of
                 communities through entrepreneurship and empowerment. Her
                 philosophy is to RISE—Raise ourselves, Inspire others, Serve
@@ -125,6 +126,36 @@ export default function PortFolio() {
           </div>
         </div>
       </div>
+      <div className="custom-tabs mt-5">
+        <div className="tabs-header">
+          <button
+            className={activeTab === "home" ? "active" : ""}
+            onClick={() => setActiveTab("home")}
+          >
+            <span className="p-5">Certifications</span>
+          </button>
+          <button
+            className={activeTab === "profile" ? "active" : ""}
+            onClick={() => setActiveTab("profile")}
+          >
+            <span className="p-5">Training Experience</span>
+          </button>
+          <button
+            className={activeTab === "longer-tab" ? "active" : ""}
+            onClick={() => setActiveTab("longer-tab")}
+          >
+            <span className="p-5">Training In Schools</span>
+          </button>
+          <button
+            className={activeTab === "new-tab" ? "active" : ""}
+            onClick={() => setActiveTab("new-tab")}
+          >
+            <span className="p-5"> School Training Programmes</span>
+          </button>
+        </div>
+        <div className="tabs-content">{renderContent()}</div>
+      </div>
+      <PortFolioBoottom />
     </div>
   );
 }
