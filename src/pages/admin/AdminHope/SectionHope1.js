@@ -12,11 +12,8 @@ function HopeSection1() {
     description2: false,
     objectivesPoints: false,
     card1Heading: false,
-    subcard1Heading: false,
     subcard1Description: false,
-    subcard2Heading: false,
     subcard2Description: false,
-    subcard3Heading: false,
     subcard3Description: false,
   });
 
@@ -130,12 +127,10 @@ function HopeSection1() {
       description2: false,
       objectivesPoints: false,
       card1Heading: false,
-      subcard1Heading: false,
       subcard1Description: false,
-      subcard2Heading: false,
       subcard2Description: false,
-      subcard3Heading: false,
       subcard3Description: false,
+      subcard4Description: false,
     });
   };
 
@@ -149,12 +144,10 @@ function HopeSection1() {
       description2: false,
       objectivesPoints: false,
       card1Heading: false,
-      subcard1Heading: false,
       subcard1Description: false,
-      subcard2Heading: false,
       subcard2Description: false,
-      subcard3Heading: false,
       subcard3Description: false,
+      subcard4Description: false,
     });
   };
 
@@ -168,34 +161,6 @@ function HopeSection1() {
     setSection2Text((prevState) => ({
       ...prevState,
       card1Heading: e.target.value,
-    }));
-  };
-
-  const handlesubcard1HeadingChange = (e) => {
-    setSection2Text((prevState) => ({
-      ...prevState,
-      subcard1Heading: e.target.value,
-    }));
-  };
-
-  const handlesubcard2HeadingChange = (e) => {
-    setSection2Text((prevState) => ({
-      ...prevState,
-      subcard2Heading: e.target.value,
-    }));
-  };
-
-  const handlesubcard3HeadingChange = (e) => {
-    setSection2Text((prevState) => ({
-      ...prevState,
-      subcard3Heading: e.target.value,
-    }));
-  };
-
-  const handlesubcard4HeadingChange = (e) => {
-    setSection2Text((prevState) => ({
-      ...prevState,
-      subcard4Heading: e.target.value,
     }));
   };
 
@@ -453,9 +418,9 @@ function HopeSection1() {
             </div>
           )}
           <div className='col-md-6 col-lg-6 col-xl-3 col-12 mb-3'>
-            {!editMode.subcard1Heading ? (
-              <div className='card programmeCard h-100'>
-                <div className='programmeHeading'>{section2Text.subcard1Heading}</div>
+            <div className='card programmeCard h-100'>
+              <div className='programmeHeading'>{section2Text.subcard1Heading}</div>
+              {!editMode.subcard1Description ? (
                 <div className='card-body'>
                   <ul style={{ listStyle: "none" }}>
                     {section2Text.subcard1Description.map((description, index) => (
@@ -465,53 +430,47 @@ function HopeSection1() {
                     ))}
                   </ul>
                   <FaEdit
-                    onClick={() => handleEditClick("subcard1Heading")}
-                    className="position-absolute top-0 end-0 mt-3 me-3"
+                    onClick={() => handleEditClick("subcard1Description")}
+                    className="position-absolute top-0 end-0 mt-5 me-3"
                   />
                 </div>
-              </div>
-            ) : (
-              <div className='card programmeCard h-100 p-3'>
-                <input
-                  type="text"
-                  className="form-control mb-3"
-                  value={section2Text.subcard1Heading}
-                  onChange={handlesubcard1HeadingChange}
-                />
-                <ul style={{ listStyle: "none", paddingLeft: "0px" }}>
-                  {section2Text.subcard1Description.map((item, index) => (
-                    <li key={index} className='mb-3 d-flex'>
+              ) : (
+                <div>
+                  <ul className="mx-1" style={{ listStyle: "none", paddingLeft: "0px" }}>
+                    {section2Text.subcard1Description.map((item, index) => (
+                      <li key={index} className='mb-3 d-flex'>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={item}
+                          onChange={(e) => handleInputChange(e, `subcard1Description[${index}]`)}
+                        />
+                        <FaTrash onClick={() => handleDeleteSubDescription(index)} className="ms-2 mt-2" />
+                      </li>
+                    ))}
+                    <li>
                       <input
                         type="text"
                         className="form-control"
-                        value={item}
-                        onChange={(e) => handleInputChange(e, `subcard1Description[${index}]`)}
+                        value={newPoint}
+                        onChange={(e) => setNewPoint(e.target.value)}
+                        placeholder="Add new outcome"
                       />
-                      <FaTrash onClick={() => handleDeleteSubDescription(index)} className="ms-2 mt-2" />
                     </li>
-                  ))}
-                  <li>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={newPoint}
-                      onChange={(e) => setNewPoint(e.target.value)}
-                      placeholder="Add new outcome"
-                    />
-                  </li>
-                </ul>
-                <span>
-                  <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className='mx-2' />
-                  <FaPlus onClick={handleAddSubDescription} />
-                </span>
-              </div>
-            )}
+                  </ul>
+                  <span className='mx-2'>
+                    <FaSave onClick={handleSave} />
+                    <FaTimes onClick={handleCancel} className='mx-2' />
+                    <FaPlus onClick={handleAddSubDescription} />
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
           <div className='col-md-6 col-lg-6 col-xl-3 col-12 mb-3'>
-            {!editMode.subcard2Heading ? (
-              <div className='card programmeCard h-100'>
-                <div className='programmeHeading'>{section2Text.subcard2Heading}</div>
+            <div className='card programmeCard h-100'>
+              <div className='programmeHeading'>{section2Text.subcard2Heading}</div>
+              {!editMode.subcard2Description ? (
                 <div className='card-body'>
                   <ul style={{ listStyle: "none" }}>
                     {section2Text.subcard2Description.map((description, index) => (
@@ -521,53 +480,47 @@ function HopeSection1() {
                     ))}
                   </ul>
                   <FaEdit
-                    onClick={() => handleEditClick("subcard2Heading")}
-                    className="position-absolute top-0 end-0 mt-3 me-3"
+                    onClick={() => handleEditClick("subcard2Description")}
+                    className="position-absolute top-0 end-0 mt-5 me-3"
                   />
                 </div>
-              </div>
-            ) : (
-              <div className='card programmeCard h-100 p-3'>
-                <input
-                  type="text"
-                  className="form-control mb-3"
-                  value={section2Text.subcard2Heading}
-                  onChange={handlesubcard2HeadingChange}
-                />
-                <ul style={{ listStyle: "none", paddingLeft: "0px" }}>
-                  {section2Text.subcard2Description.map((item, index) => (
-                    <li key={index} className='mb-3 d-flex'>
+              ) : (
+                <div>
+                  <ul className="mx-1" style={{ listStyle: "none", paddingLeft: "0px" }}>
+                    {section2Text.subcard2Description.map((item, index) => (
+                      <li key={index} className='mb-3 d-flex'>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={item}
+                          onChange={(e) => handleInputChange(e, `subcard2Description[${index}]`)}
+                        />
+                        <FaTrash onClick={() => handleDeleteSubDescription2(index)} className="ms-2 mt-2" />
+                      </li>
+                    ))}
+                    <li>
                       <input
                         type="text"
                         className="form-control"
-                        value={item}
-                        onChange={(e) => handleInputChange(e, `subcard2Description[${index}]`)}
+                        value={newPoint}
+                        onChange={(e) => setNewPoint(e.target.value)}
+                        placeholder="Add new outcome"
                       />
-                      <FaTrash onClick={() => handleDeleteSubDescription2(index)} className="ms-2 mt-2" />
                     </li>
-                  ))}
-                  <li>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={newPoint}
-                      onChange={(e) => setNewPoint(e.target.value)}
-                      placeholder="Add new outcome"
-                    />
-                  </li>
-                </ul>
-                <span>
-                  <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className='mx-2' />
-                  <FaPlus onClick={handleAddSubDescription2} />
-                </span>
-              </div>
-            )}
+                  </ul>
+                  <span className='mx-2'>
+                    <FaSave onClick={handleSave} />
+                    <FaTimes onClick={handleCancel} className='mx-2' />
+                    <FaPlus onClick={handleAddSubDescription2} />
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
           <div className='col-md-6 col-lg-6 col-xl-3 col-12 mb-3'>
-            {!editMode.subcard3Heading ? (
-              <div className='card programmeCard h-100'>
-                <div className='programmeHeading'>{section2Text.subcard3Heading}</div>
+            <div className='card programmeCard h-100'>
+              <div className='programmeHeading'>{section2Text.subcard3Heading}</div>
+              {!editMode.subcard3Description ? (
                 <div className='card-body'>
                   <ul style={{ listStyle: "none" }}>
                     {section2Text.subcard3Description.map((description, index) => (
@@ -577,53 +530,47 @@ function HopeSection1() {
                     ))}
                   </ul>
                   <FaEdit
-                    onClick={() => handleEditClick("subcard3Heading")}
-                    className="position-absolute top-0 end-0 mt-3 me-3"
+                    onClick={() => handleEditClick("subcard3Description")}
+                    className="position-absolute top-0 end-0 mt-5 me-3"
                   />
                 </div>
-              </div>
-            ) : (
-              <div className='card programmeCard h-100 p-3'>
-                <input
-                  type="text"
-                  className="form-control mb-3"
-                  value={section2Text.subcard3Heading}
-                  onChange={handlesubcard3HeadingChange}
-                />
-                <ul style={{ listStyle: "none", paddingLeft: "0px" }}>
-                  {section2Text.subcard3Description.map((item, index) => (
-                    <li key={index} className='mb-3 d-flex'>
+              ) : (
+                <div>
+                  <ul className="mx-1" style={{ listStyle: "none", paddingLeft: "0px" }}>
+                    {section2Text.subcard3Description.map((item, index) => (
+                      <li key={index} className='mb-3 d-flex'>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={item}
+                          onChange={(e) => handleInputChange(e, `subcard3Description[${index}]`)}
+                        />
+                        <FaTrash onClick={() => handleDeleteSubDescription3(index)} className="ms-2 mt-2" />
+                      </li>
+                    ))}
+                    <li>
                       <input
                         type="text"
                         className="form-control"
-                        value={item}
-                        onChange={(e) => handleInputChange(e, `subcard3Description[${index}]`)}
+                        value={newPoint}
+                        onChange={(e) => setNewPoint(e.target.value)}
+                        placeholder="Add new outcome"
                       />
-                      <FaTrash onClick={() => handleDeleteSubDescription3(index)} className="ms-2 mt-2" />
                     </li>
-                  ))}
-                  <li>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={newPoint}
-                      onChange={(e) => setNewPoint(e.target.value)}
-                      placeholder="Add new outcome"
-                    />
-                  </li>
-                </ul>
-                <span>
-                  <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className='mx-2' />
-                  <FaPlus onClick={handleAddSubDescription3} />
-                </span>
-              </div>
-            )}
+                  </ul>
+                  <span className='mx-2'>
+                    <FaSave onClick={handleSave} />
+                    <FaTimes onClick={handleCancel} className='mx-2' />
+                    <FaPlus onClick={handleAddSubDescription3} />
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
           <div className='col-md-6 col-lg-6 col-xl-3 col-12 mb-3'>
-            {!editMode.subcard4Heading ? (
-              <div className='card programmeCard h-100'>
-                <div className='programmeHeading'>{section2Text.subcard4Heading}</div>
+            <div className='card programmeCard h-100'>
+              <div className='programmeHeading'>{section2Text.subcard4Heading}</div>
+              {!editMode.subcard4Description ? (
                 <div className='card-body'>
                   <ul style={{ listStyle: "none" }}>
                     {section2Text.subcard4Description.map((description, index) => (
@@ -633,48 +580,42 @@ function HopeSection1() {
                     ))}
                   </ul>
                   <FaEdit
-                    onClick={() => handleEditClick("subcard4Heading")}
-                    className="position-absolute top-0 end-0 mt-3 me-3"
+                    onClick={() => handleEditClick("subcard4Description")}
+                    className="position-absolute top-0 end-0 mt-5 me-3"
                   />
                 </div>
-              </div>
-            ) : (
-              <div className='card programmeCard h-100 p-3'>
-                <input
-                  type="text"
-                  className="form-control mb-3"
-                  value={section2Text.subcard4Heading}
-                  onChange={handlesubcard4HeadingChange}
-                />
-                <ul style={{ listStyle: "none", paddingLeft: "0px" }}>
-                  {section2Text.subcard4Description.map((item, index) => (
-                    <li key={index} className='mb-3 d-flex'>
+              ) : (
+                <div>
+                  <ul className="mx-1" style={{ listStyle: "none", paddingLeft: "0px" }}>
+                    {section2Text.subcard4Description.map((item, index) => (
+                      <li key={index} className='mb-3 d-flex'>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={item}
+                          onChange={(e) => handleInputChange(e, `subcard4Description[${index}]`)}
+                        />
+                        <FaTrash onClick={() => handleDeleteSubDescription4(index)} className="ms-2 mt-2" />
+                      </li>
+                    ))}
+                    <li>
                       <input
                         type="text"
                         className="form-control"
-                        value={item}
-                        onChange={(e) => handleInputChange(e, `subcard4Description[${index}]`)}
+                        value={newPoint}
+                        onChange={(e) => setNewPoint(e.target.value)}
+                        placeholder="Add new outcome"
                       />
-                      <FaTrash onClick={() => handleDeleteSubDescription4(index)} className="ms-2 mt-2" />
                     </li>
-                  ))}
-                  <li>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={newPoint}
-                      onChange={(e) => setNewPoint(e.target.value)}
-                      placeholder="Add new outcome"
-                    />
-                  </li>
-                </ul>
-                <span>
-                  <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className='mx-2' />
-                  <FaPlus onClick={handleAddSubDescription4} />
-                </span>
-              </div>
-            )}
+                  </ul>
+                  <span className='mx-2'>
+                    <FaSave onClick={handleSave} />
+                    <FaTimes onClick={handleCancel} className='mx-2' />
+                    <FaPlus onClick={handleAddSubDescription4} />
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
