@@ -11,10 +11,9 @@ import person_5 from "../../assets/ELEFPI LEARNSCAPE.png";
 import { ImCheckmark } from "react-icons/im";
 import { FaEdit, FaSave, FaTimes, FaPlus, FaTrash } from "react-icons/fa";
 import { Modal } from "react-bootstrap";
+import defaultBgImage from "../../assets/About_hero_image.png";
 
 function AdminAbout() {
-  const defaultBgImage = "../assets/About_hero_image.png";
-
   const [show, setShow] = useState(false);
   const [currentSection, setCurrentSection] = useState(null);
   const [newPoint, setNewPoint] = useState("");
@@ -49,6 +48,105 @@ function AdminAbout() {
   const handlePointsChange = (e, index) => {
     const { value } = e.target;
     setCardSection1((prevState) => {
+      const updatedPoints = [...prevState.cardParagraph];
+      updatedPoints[index] = value;
+      return {
+        ...prevState,
+        cardParagraph: updatedPoints,
+      };
+    });
+  };
+
+  const handleAddPoint2 = () => {
+    if (newPoint.trim() !== "") {
+      setCardSection2((prevState) => ({
+        ...prevState,
+        cardParagraph: [...prevState.cardParagraph, newPoint],
+      }));
+      setNewPoint("");
+    }
+  };
+
+  const handleDeletePoint2 = (index) => {
+    setCardSection2((prevState) => {
+      const updatedPoints = [...prevState.cardParagraph];
+      updatedPoints.splice(index, 1);
+      return {
+        ...prevState,
+        cardParagraph: updatedPoints,
+      };
+    });
+  };
+
+  const handlePointsChange2 = (e, index) => {
+    const { value } = e.target;
+    setCardSection2((prevState) => {
+      const updatedPoints = [...prevState.cardParagraph];
+      updatedPoints[index] = value;
+      return {
+        ...prevState,
+        cardParagraph: updatedPoints,
+      };
+    });
+  };
+
+  const handleAddPoint3 = () => {
+    if (newPoint.trim() !== "") {
+      setCardSection3((prevState) => ({
+        ...prevState,
+        cardParagraph: [...prevState.cardParagraph, newPoint],
+      }));
+      setNewPoint("");
+    }
+  };
+
+  const handleDeletePoint3 = (index) => {
+    setCardSection3((prevState) => {
+      const updatedPoints = [...prevState.cardParagraph];
+      updatedPoints.splice(index, 1);
+      return {
+        ...prevState,
+        cardParagraph: updatedPoints,
+      };
+    });
+  };
+
+  const handlePointsChange3 = (e, index) => {
+    const { value } = e.target;
+    setCardSection3((prevState) => {
+      const updatedPoints = [...prevState.cardParagraph];
+      updatedPoints[index] = value;
+      return {
+        ...prevState,
+        cardParagraph: updatedPoints,
+      };
+    });
+  };
+
+  const handleAddPoint4 = () => {
+    if (newPoint.trim() !== "") {
+      setCardSection4((prevState) => ({
+        ...prevState,
+        cardParagraph: [...prevState.cardParagraph, newPoint],
+      }));
+      setNewPoint("");
+    }
+  };
+
+  const handleDeletePoint4 = (index) => {
+    setCardSection4((prevState) => {
+      const updatedPoints = [...prevState.cardParagraph];
+      updatedPoints.splice(index, 1);
+      return {
+        ...prevState,
+        cardParagraph: updatedPoints,
+      };
+    });
+  };
+
+  const handlePointsChange4 = (e, index) => {
+    const { value } = e.target;
+    setCardSection4((prevState) => {
       const updatedPoints = [...prevState.cardParagraph];
       updatedPoints[index] = value;
       return {
@@ -115,14 +213,15 @@ function AdminAbout() {
   const [cardSection2, setCardSection2] = useState({
     cardImage: mission,
     cardHeading: "MISSION",
-    cardParagraph:
+    cardParagraph: [
       "To support every individual, child or adult, irregardless of background, culture or limitations, in his or her endeavour to better themselves and the world through the 3 E’s - Education, Entrepreneurship and Empowerment.",
+    ],
   });
 
   const [cardSection3, setCardSection3] = useState({
     cardImage: coreValue,
     cardHeading: "CORE VALUES",
-    cardList: [
+    cardParagraph: [
       "R – Raise Ourself",
       "S – Serve Many",
       "I – Inspire Others",
@@ -133,9 +232,9 @@ function AdminAbout() {
   const [cardSection4, setCardSection4] = useState({
     cardImage: objective,
     cardHeading: "OBJECTIVES",
-    cardParagraph1:
+    cardParagraph: [
       "To provide a safe and supportive environment to nurture, grow and learn.",
-    cardParagraph2: "To Inspire, Educate and Empower.",
+    ],
   });
 
   const [ourPartner, setOurPartner] = useState({
@@ -266,150 +365,173 @@ function AdminAbout() {
       <div className="container-fluid py-4">
         {/* Hero Section */}
         <section>
-        <div>
-          <FaEdit
-            onClick={() => handleEditClick("heroImage")}
-            className="ms-3"
-          />
+          <div>
+            <FaEdit
+              onClick={() => handleEditClick("heroImage")}
+              className="ms-3"
+            />
 
-          {!editMode.heroSection && (
-            <div className="row mb-5">
-              <div
-                className="about-container"
-                style={{
-                  backgroundImage: `url(${heroText.bgImage || defaultBgImage})`,
-                }}
-                
-              >
-                {editMode.heroImage && (
-                  <>
-                    <input
-                      type="file"
-                      className="form-control mt-4"
-                      accept="image/*"
-                      onChange={(e) => handleChange(e, setHeroText, "bgImage")}
-                    />
-                    <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} />
-                  </>
-                  
-                )}
-               
-                {editMode.heroHeader ? (
-                  <>
-                    <input
-                      type="text"
-                      className="form-control mt-5"
-                      value={heroText.header}
-                      onChange={(e) => handleChange(e, setHeroText, "header")}
-                    />
-                    <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} />
-                  </>
-                ) : (
-                  <h1>
-                    {heroText.header}
-                    <FaEdit
-                      onClick={() => handleEditClick("heroHeader")}
-                      className="ms-3"
-                    />
-                  </h1>
-                )}
-                {editMode.heroDescription ? (
-                  <>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={heroText.description}
-                      onChange={(e) =>
-                        handleChange(e, setHeroText, "description")
-                      }
-                    />
-                    <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} />
-                  </>
-                ) : (
-                  <p>
-                    {heroText.description}
-                    <FaEdit
-                      onClick={() => handleEditClick("heroDescription")}
-                      className="ms-3"
-                    />
-                  </p>
-                )}
-                {editMode.heroFounder ? (
-                  <>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={heroText.founded}
-                      onChange={(e) => handleChange(e, setHeroText, "founded")}
-                    />
-                    <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} />
-                  </>
-                ) : (
-                  <p>
-                    {heroText.founded}
-                    <FaEdit
-                      onClick={() => handleEditClick("heroFounder")}
-                      className="ms-3"
-                    />
-                  </p>
-                )}
+            {!editMode.heroSection && (
+              <div className="row mb-5">
+                <div
+                  className="about-container edit-container"
+                  style={{
+                    backgroundImage: `url(${
+                      heroText.bgImage || defaultBgImage
+                    })`,
+                    width: "100%",
+                    height: "auto",
+                    maxHeight: "120vh",
+                    opacity: "0.3",
+                  }}
+                >
+                  {editMode.heroImage && (
+                    <>
+                      <input
+                        type="file"
+                        className="form-control mt-4"
+                        accept="image/*"
+                        onChange={(e) =>
+                          handleChange(e, setHeroText, "bgImage")
+                        }
+                      />
+                      <FaSave onClick={handleSave} />
+                      <FaTimes onClick={handleCancel} />
+                    </>
+                  )}
+
+                  {editMode.heroHeader ? (
+                    <>
+                      <input
+                        type="text"
+                        className="form-control mt-5"
+                        value={heroText.header}
+                        onChange={(e) => handleChange(e, setHeroText, "header")}
+                      />
+                      <FaSave onClick={handleSave} />
+                      <FaTimes onClick={handleCancel} />
+                    </>
+                  ) : (
+                    <h1
+                    // style={{
+                    //   width: "100%",
+                    //   fontSize: "clamp(18px, 4vw, 48px)",
+                    //   textAlign: "center",
+                    //   background: "transparent",
+                    //   border: "none",
+                    //   fontWeight: "bolder",
+                    //   minHeight: "50%",
+                    // }}
+                    >
+                      {heroText.header}
+                      <FaEdit
+                        onClick={() => handleEditClick("heroHeader")}
+                        className="ms-3"
+                      />
+                    </h1>
+                  )}
+                  {editMode.heroDescription ? (
+                    <>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={heroText.description}
+                        onChange={(e) =>
+                          handleChange(e, setHeroText, "description")
+                        }
+                      />
+                      <FaSave onClick={handleSave} />
+                      <FaTimes onClick={handleCancel} />
+                    </>
+                  ) : (
+                    <p>
+                      {heroText.description}
+                      <FaEdit
+                        onClick={() => handleEditClick("heroDescription")}
+                        className="ms-3"
+                      />
+                    </p>
+                  )}
+                  {editMode.heroFounder ? (
+                    <>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={heroText.founded}
+                        onChange={(e) =>
+                          handleChange(e, setHeroText, "founded")
+                        }
+                      />
+                      <FaSave onClick={handleSave} />
+                      <FaTimes onClick={handleCancel} />
+                    </>
+                  ) : (
+                    <p>
+                      {heroText.founded}
+                      <FaEdit
+                        onClick={() => handleEditClick("heroFounder")}
+                        className="ms-3"
+                      />
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
         </section>
         {/* What we do */}
         <section>
-        <div>
-          {editMode.whatWeDoHeading ? (
-            <>
-              <input
-                type="text"
-                className="form-control"
-                value={whatWeDoText.heading}
-                onChange={(e) => handleChange(e, setWhatWeDoText, "heading")}
-              />
-              <FaSave onClick={handleSave} />
-              <FaTimes onClick={handleCancel} />
-            </>
-          ) : (
-            <h2 className="text-center" style={{ textDecoration: "underline" }}>
-              {whatWeDoText.heading}
-              <FaEdit
-                onClick={() => handleEditClick("whatWeDoHeading")}
-                className="ms-3"
-              />
-            </h2>
-          )}
-          {editMode.whatWeDoDescription ? (
-            <>
-              <textarea
-                className="form-control"
-                value={whatWeDoText.paragraph1}
-                onChange={(e) => handleChange(e, setWhatWeDoText, "paragraph1")}
-              />
-              <FaSave onClick={handleSave} />
-              <FaTimes onClick={handleCancel} />
-            </>
-          ) : (
-            <p className="text-center">
-              {whatWeDoText.paragraph1}
-              <FaEdit
-                onClick={() => handleEditClick("whatWeDoDescription")}
-                className="ms-3"
-              />
-            </p>
-          )}
-        </div>
+          <div className="edit-container">
+            {editMode.whatWeDoHeading ? (
+              <>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={whatWeDoText.heading}
+                  onChange={(e) => handleChange(e, setWhatWeDoText, "heading")}
+                />
+                <FaSave onClick={handleSave} />
+                <FaTimes onClick={handleCancel} />
+              </>
+            ) : (
+              <h2
+                className="text-center"
+                style={{ textDecoration: "underline" }}
+              >
+                {whatWeDoText.heading}
+                <FaEdit
+                  onClick={() => handleEditClick("whatWeDoHeading")}
+                  className="ms-3"
+                />
+              </h2>
+            )}
+            {editMode.whatWeDoDescription ? (
+              <>
+                <textarea
+                  className="form-control"
+                  value={whatWeDoText.paragraph1}
+                  onChange={(e) =>
+                    handleChange(e, setWhatWeDoText, "paragraph1")
+                  }
+                />
+                <FaSave onClick={handleSave} />
+                <FaTimes onClick={handleCancel} />
+              </>
+            ) : (
+              <p className="text-center">
+                {whatWeDoText.paragraph1}
+                <FaEdit
+                  onClick={() => handleEditClick("whatWeDoDescription")}
+                  className="ms-3"
+                />
+              </p>
+            )}
+          </div>
         </section>
         {/* Card Section */}
         <section>
           <div className="container mb-5">
-            <div className="row d-flex justify-content-between">
+            <div className="row d-flex justify-content-between ">
               {/* Card Section */}
               <>
                 <div className="col-md-6 col-12 mb-2">
@@ -452,82 +574,81 @@ function AdminAbout() {
                           src={cardSection2.cardImage}
                           alt="vision"
                           className="image-fluid iconImage m-2"
-                        ></img>
+                        />
                         {cardSection2.cardHeading}
                       </h4>
                     </div>
                     <div className="card-body">
-                      <ul>
-                        <li style={{ listStyle: "none" }}>
-                          <ImCheckmark style={{ color: "#7c2c83" }} />{" "}
-                          {cardSection2.cardParagraph}
-                        </li>
+                      <ul style={{ listStyle: "none" }}>
+                        {Array.isArray(cardSection2.cardParagraph) &&
+                          cardSection2.cardParagraph.map((paragraph, index) => (
+                            <li key={index}>
+                              <ImCheckmark style={{ color: "#7c2c83" }} />{" "}
+                              {paragraph}
+                            </li>
+                          ))}
                       </ul>
                     </div>
                   </div>
                 </div>
-                <div className="col-md-6 col-12 mb-2">
+                <div className="col-md-6 col-12 mb-2 pt-5">
                   <FaEdit
                     onClick={() => handleShow("cardSection3")}
-                    className="mt-5"
+                    className="mb-4"
                   />
                   <div className="card about-card h-100">
                     <div className="card-heading text-center">
                       <h4 className="head-color pt-3">
                         <img
                           src={cardSection3.cardImage}
-                          alt="coreValue"
+                          alt="vision"
                           className="image-fluid iconImage m-2"
-                        ></img>
+                        />
                         {cardSection3.cardHeading}
                       </h4>
                     </div>
                     <div className="card-body">
-                      <ul>
-                        {cardSection3.cardList.map((item, index) => (
-                          <li key={index} style={{ listStyle: "none" }}>
-                            <ImCheckmark style={{ color: "#7c2c83" }} /> {item}
-                          </li>
-                        ))}
+                      <ul style={{ listStyle: "none" }}>
+                        {Array.isArray(cardSection3.cardParagraph) &&
+                          cardSection3.cardParagraph.map((paragraph, index) => (
+                            <li key={index}>
+                              <ImCheckmark style={{ color: "#7c2c83" }} />{" "}
+                              {paragraph}
+                            </li>
+                          ))}
                       </ul>
                     </div>
                   </div>
                 </div>
-                <div className="col-md-6 col-12 mb-2">
+                <div className="col-md-6 col-12 mb-2 pt-5">
                   <FaEdit
                     onClick={() => handleShow("cardSection4")}
-                    className="mt-5"
+                    className="mb-4"
                   />
                   <div className="card about-card h-100">
                     <div className="card-heading text-center">
                       <h4 className="head-color pt-3">
                         <img
                           src={cardSection4.cardImage}
-                          alt="objective"
+                          alt="vision"
                           className="image-fluid iconImage m-2"
-                        ></img>
+                        />
                         {cardSection4.cardHeading}
                       </h4>
                     </div>
                     <div className="card-body">
-                      <ul>
-                        {cardSection4.cardParagraph1 && (
-                          <li style={{ listStyle: "none" }}>
-                            <ImCheckmark style={{ color: "#7c2c83" }} />{" "}
-                            {cardSection4.cardParagraph1}
-                          </li>
-                        )}
-                        {cardSection4.cardParagraph2 && (
-                          <li style={{ listStyle: "none" }}>
-                            <ImCheckmark style={{ color: "#7c2c83" }} />{" "}
-                            {cardSection4.cardParagraph2}
-                          </li>
-                        )}
+                      <ul style={{ listStyle: "none" }}>
+                        {Array.isArray(cardSection4.cardParagraph) &&
+                          cardSection4.cardParagraph.map((paragraph, index) => (
+                            <li key={index}>
+                              <ImCheckmark style={{ color: "#7c2c83" }} />{" "}
+                              {paragraph}
+                            </li>
+                          ))}
                       </ul>
                     </div>
                   </div>
                 </div>
-
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
                     <Modal.Title>Edit Section</Modal.Title>
@@ -580,6 +701,9 @@ function AdminAbout() {
                             />
                           </li>
                         </ul>
+                        <FaSave onClick={handleSave} />
+                        <FaTimes onClick={handleCancel} className="mx-2" />
+                        <FaPlus onClick={handleAddPoint} />
                       </>
                     )}
                     {currentSection === "cardSection2" && (
@@ -603,11 +727,45 @@ function AdminAbout() {
                         <input
                           type="text"
                           className="form-control mb-3"
-                          value={cardSection2.cardParagraph}
+                          value={cardSection2.cardParagraph.join(", ")}
                           onChange={(e) =>
                             handleChange(e, setCardSection2, "cardParagraph")
                           }
                         />
+                        <ul
+                          style={{ listStyle: "none", padding: 0 }}
+                          className="me-2"
+                        >
+                          {cardSection2.cardParagraph.map(
+                            (paragraph, index) => (
+                              <li key={index} className="mb-2">
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={paragraph}
+                                  onChange={(e) =>
+                                    handlePointsChange2(e, index)
+                                  }
+                                />
+                                <FaTrash
+                                  onClick={() => handleDeletePoint2(index)}
+                                  className="ms-2"
+                                />
+                              </li>
+                            )
+                          )}
+                          <li className="mb-2">
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={newPoint}
+                              onChange={(e) => setNewPoint(e.target.value)}
+                            />
+                          </li>
+                        </ul>
+                        <FaSave onClick={handleSave} />
+                        <FaTimes onClick={handleCancel} className="mx-2" />
+                        <FaPlus onClick={handleAddPoint2} />
                       </>
                     )}
                     {currentSection === "cardSection3" && (
@@ -623,23 +781,53 @@ function AdminAbout() {
                         <input
                           type="text"
                           className="form-control mb-3"
-                          value={cardSection3.cardHeading}
+                          value={setCardSection3.cardHeading}
                           onChange={(e) =>
                             handleChange(e, setCardSection3, "cardHeading")
                           }
                         />
-                        {cardSection3.cardList.map((item, index) => (
-                          <input
-                            key={index}
-                            type="text"
-                            className="form-control mb-3"
-                            value={item}
-                            data-index={index}
-                            onChange={(e) =>
-                              handleChange(e, setCardSection3, "cardList")
-                            }
-                          />
-                        ))}
+                        <input
+                          type="text"
+                          className="form-control mb-3"
+                          value={cardSection3.cardParagraph.join(", ")}
+                          onChange={(e) =>
+                            handleChange(e, setCardSection3, "cardParagraph")
+                          }
+                        />
+                        <ul
+                          style={{ listStyle: "none", padding: 0 }}
+                          className="me-2"
+                        >
+                          {cardSection3.cardParagraph.map(
+                            (paragraph, index) => (
+                              <li key={index} className="mb-2">
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={paragraph}
+                                  onChange={(e) =>
+                                    handlePointsChange3(e, index)
+                                  }
+                                />
+                                <FaTrash
+                                  onClick={() => handleDeletePoint3(index)}
+                                  className="ms-2"
+                                />
+                              </li>
+                            )
+                          )}
+                          <li className="mb-2">
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={newPoint}
+                              onChange={(e) => setNewPoint(e.target.value)}
+                            />
+                          </li>
+                        </ul>
+                        <FaSave onClick={handleSave} />
+                        <FaTimes onClick={handleCancel} className="mx-2" />
+                        <FaPlus onClick={handleAddPoint3} />
                       </>
                     )}
                     {currentSection === "cardSection4" && (
@@ -655,7 +843,7 @@ function AdminAbout() {
                         <input
                           type="text"
                           className="form-control mb-3"
-                          value={cardSection4.cardHeading}
+                          value={setCardSection4.cardHeading}
                           onChange={(e) =>
                             handleChange(e, setCardSection4, "cardHeading")
                           }
@@ -663,27 +851,49 @@ function AdminAbout() {
                         <input
                           type="text"
                           className="form-control mb-3"
-                          value={cardSection4.cardParagraph1}
+                          value={cardSection4.cardParagraph.join(", ")}
                           onChange={(e) =>
-                            handleChange(e, setCardSection4, "cardParagraph1")
+                            handleChange(e, setCardSection4, "cardParagraph")
                           }
                         />
-                        <input
-                          type="text"
-                          className="form-control mb-3"
-                          value={cardSection4.cardParagraph2}
-                          onChange={(e) =>
-                            handleChange(e, setCardSection4, "cardParagraph2")
-                          }
-                        />
+                        <ul
+                          style={{ listStyle: "none", padding: 0 }}
+                          className="me-2"
+                        >
+                          {cardSection4.cardParagraph.map(
+                            (paragraph, index) => (
+                              <li key={index} className="mb-2">
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={paragraph}
+                                  onChange={(e) =>
+                                    handlePointsChange4(e, index)
+                                  }
+                                />
+                                <FaTrash
+                                  onClick={() => handleDeletePoint4(index)}
+                                  className="ms-2"
+                                />
+                              </li>
+                            )
+                          )}
+                          <li className="mb-2">
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={newPoint}
+                              onChange={(e) => setNewPoint(e.target.value)}
+                            />
+                          </li>
+                        </ul>
+                        <FaSave onClick={handleSave} />
+                        <FaTimes onClick={handleCancel} className="mx-2" />
+                        <FaPlus onClick={handleAddPoint4} />
                       </>
                     )}
                   </Modal.Body>
-                  <Modal.Footer>
-                    <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} className="mx-2" />
-                    <FaPlus onClick={handleAddPoint} />
-                  </Modal.Footer>
+                  <Modal.Footer></Modal.Footer>
                 </Modal>
               </>
             </div>
@@ -718,7 +928,6 @@ function AdminAbout() {
                   />
                 </h2>
               )}
-
               {editMode.ourPartnerParagraph ? (
                 <>
                   <textarea

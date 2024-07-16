@@ -8,7 +8,11 @@ import "../styles/admin.css";
 import Home from "../pages/admin/Home";
 import AdminAbout from "../pages/admin/AdminAbout";
 import AdminHope from "../pages/admin/AdminHope";
-import PortFolio from "../pages/client/PortFolio/PortFolio";
+import AdminPortFolio from "../pages/admin/PortFolio/AdminPortFolio";
+import AdminContact from "../pages/admin/AdminContact";
+import AdminTesimonial from "../pages/admin/AdminTestimonial/AdminTesimonial";
+import HopeTestimonial from "../pages/admin/AdminTestimonial/HopeTestimonial";
+import AdminOurProgrammes from "../pages/admin/AdminOurProgrammes";
 
 function Admin({ handleLogout }) {
   return (
@@ -27,8 +31,12 @@ function Admin({ handleLogout }) {
           <Route path="/" element={<Dashboard />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<AdminAbout />} />
+          <Route path="/contactus" element={<AdminContact />} />
           <Route path="/hope" element={<AdminHope />} />
-          <Route path="/portfolio" element={<PortFolio />} />
+          <Route path="/ourprogrammes" element={<AdminOurProgrammes />} />
+          <Route path="/testimonial" element={<AdminTesimonial />} />
+          <Route path="/hopetesimonial" element={<HopeTestimonial />} />
+          <Route path="/portfolio" element={<AdminPortFolio />} />
         </Routes>
         <FooterAdmin />
       </BrowserRouter>
