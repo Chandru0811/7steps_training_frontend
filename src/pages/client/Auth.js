@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Auth = ({ handleLogin }) => {
     const [activeTab, setActiveTab] = useState('signin')
@@ -92,7 +92,7 @@ const SignInForm = ({ handleLogin }) => {
                     {formik.touched.password && formik.errors.password && (
                         <div className="invalid-feedback">{formik.errors.password}</div>
                     )}
-                    <a href="#" className="forgot-password">Forgot Password?</a>
+                    <Link to='/forgotpassword' className='mt-2'>Forgot Password?</Link>
                 </div>
                 <button type="submit" className="btn btn-login">Sign In</button>
             </form>

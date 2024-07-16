@@ -9,16 +9,14 @@
   --primary-color: #f6bf0b38;
   --secondary-color: #f6c00b;
   --imagebg-color: #d9d9d9;
-  --teritary-color: #01a49f3a;
+  --teritary-color: #fadf84;
   --accent-color: #7c2c83;
   --linear-color: #d884e078;
   --greyBackground-color: #f9f9f9;
   --greyColor-text: #5c5f6a;
   --background-color: #fff;
   --text-color: #000;
-  --card-color: rgba(1, 164, 158, 0.5);
-  --cardbg-color: rgba(1, 164, 158, 0.1);
-  --containerbg-color: #f6bf0b7e;
+  --cardbg-color: #fff9e7;
 }
 
 /* / / Home Hero / / */
@@ -85,7 +83,7 @@
 
 /* / / Home Testimonial / / */
 .testimonial {
-  background: var(--containerbg-color);
+  background: var(--teritary-color);
 }
 .card {
   cursor: pointer;
@@ -128,6 +126,7 @@
   color: var(--accent-color) !important;
   border-bottom: 2px solid var(--accent-color);
   padding: 10px;
+  font-weight: bold;
 }
 
 .header .custom-nav-link {
@@ -228,7 +227,7 @@
 /* / About  / */
 .about-container {
   text-align: center;
-  /* background: url("../assets/About_hero_image.png") no-repeat center center; */
+  background: url("../assets/About_hero_image.png") no-repeat center center;
   background-size: cover;
   color: var(--background-color);
   min-height: 80vh;
@@ -315,7 +314,6 @@
 }
 
 .tab-content {
-  border: 1px solid #ddd;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -357,17 +355,6 @@
   color: var(--background-color);
 }
 
-.forgot-password {
-  display: block;
-  margin-top: 10px;
-  color: #4285f4;
-  text-decoration: none;
-}
-
-.forgot-password:hover {
-  text-decoration: underline;
-}
-
 .or-separator {
   text-align: center;
   margin: 20px 0;
@@ -406,7 +393,7 @@
 }
 
 .hopeSection1 .programmeCard{
-  background-color: var(--card-color);
+  background-color: var(--teritary-color);
   border: none;
   border-radius: 30px;
   padding: 10px 0px;
@@ -492,16 +479,60 @@
 
 /* / portfolio / */
 .custom-badge{
-  background-color: #7C2C83;
+  background-color: var(--accent-color);
   border-radius: 20px;
   padding: 4px 20px;
-  color: #fff;
+  color: var(--background-color);
 }
 /* .imageContainer {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 } */
+.portyellow {
+  background-color: var(--secondary-color);
+}
+.preserve-whitespace {
+  white-space: pre-wrap;
+}
+.custom-tabs {
+  width: 100%;
+}
+
+.tabs-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tabs-header button {
+  /* / padding: 10px 20px; / */
+  margin: 0px !important; 
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tabs-header button.active,
+.tabs-header button:hover:not([disabled]) {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.tabs-header button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.tabs-content {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+.react-multi-carousel-list  {
+  background-color: #f6bf0b7e;
+}
 
 
 /* / Default styles for all screens / */
@@ -530,6 +561,28 @@
   align-items: center;
 }
 .portyellow{
-  background-color:#F6C00B;
+  background-color: var(--teritary-color-color);
 }
 /* / portfolio end / */
+
+/* / Contact Us / */
+.contactBtn{
+  background-color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  color: var(--background-color);
+}
+
+.contactBtn:hover{
+  background-color: var(--background-color);
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+.socialMedia-card{
+  border-radius: 50%;
+  border: none;
+  background: var(--containerbg-color);
+  color: var(--background-color);
+}
+/* / Contact Us End / */
