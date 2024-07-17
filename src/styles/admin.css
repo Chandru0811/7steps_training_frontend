@@ -15,7 +15,7 @@
 }
 
 body {
-  background-color: #f9f9f9;
+  background-color: #f9f9f9 !important;
 }
 
 /* Header Start */
@@ -95,14 +95,15 @@ body {
 
 /* Home */
 .btn-button {
-  color: var(--admin-background-color);
-  background-color: var(--admin-primary-color);
-  border-color: var(--admin-primary-color);
+  color: var(--admin-background-color) !important;
+  background-color: var(--admin-primary-color) !important;
+  border-color: var(--admin-primary-color) !important;
+  font-weight: bold !important;
 }
 .btn-button:hover {
-  color: var(--admin-background-color);
-  background-color: var(--admin-teritary-color);
-  border-color: var(--admin-teritary-color);
+  color: var(--admin-background-color) !important;
+  background-color: var(--admin-secondary-color) !important;
+  border-color: var(--admin-secondary-color) !important;
 }
 .btn-check:focus + .btn-button,
 .btn-button:focus {
