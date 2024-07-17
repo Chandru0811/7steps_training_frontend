@@ -68,6 +68,20 @@ function AdminOurProgrammes() {
     }));
   };
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewModalData((prevData) => ({
+          ...prevData,
+          cardImg: reader.result,
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const [CardDatas, setCardDatas] = useState([
     {
       id: 1,
@@ -256,36 +270,26 @@ function AdminOurProgrammes() {
           </div>
         </div>
 
-        <Modal show={show} onHide={handleClose} size="lg">
+        <Modal show={show} onHide={handleClose}>
           <Modal.Header>
             <Modal.Title>
-              <div className="d-flex ">
-                <div>
-                  <input
-                    type="text"
-                    name="title"
-                    value={newModalData.title}
-                    onChange={handleModalChange}
-                    className="form-control"
-                  />
+              <div className="d-flex align-items-center justify-content-between">
+                <div className="me-5">
+                  <h4>Edit Our Programmes </h4>
                 </div>
-                <div className="d-flex justify-content-between">
-                  <span>
-                    <button
-                      className="btn btn-sm link-primary"
-                      onClick={handleModalSaveClick}
-                    >
-                      <FaSave />
-                    </button>
-                  </span>
-                  <span>
-                    <button
-                      className="btn btn-sm link-danger"
-                      onClick={handleClose}
-                    >
-                      <FaTimes />
-                    </button>
-                  </span>
+                <div className="d-flex px-5">
+                  <button
+                    className="btn btn-sm link-primary"
+                    onClick={handleModalSaveClick}
+                  >
+                    <FaSave />
+                  </button>
+                  <button
+                    className="btn btn-sm link-danger"
+                    onClick={handleClose}
+                  >
+                    <FaTimes />
+                  </button>
                 </div>
               </div>
             </Modal.Title>
@@ -298,46 +302,59 @@ function AdminOurProgrammes() {
             }}
           />
           <Modal.Body className="p-4">
-            <p>
-              <b>
-                <input
-                  type="text"
-                  name="subTitle"
-                  value={newModalData.subTitle}
-                  onChange={handleModalChange}
-                  className="form-control"
-                />
-              </b>
-            </p>
-            <textarea
-              name="subContent"
-              value={newModalData.subContent}
-              onChange={handleModalChange}
-              className="form-control mb-3"
-            />
-            <div className="row">
-              <div className="col-6 p-2">
-                <img
-                  src={newModalData.programmesCard}
-                  alt="Programmes Card"
-                  className="img-fluid"
-                  style={{
-                    borderRight: "8px solid rgba(246, 192, 11, 0.4)",
-                    borderBottom: "8px solid rgba(246, 192, 11, 0.4)",
-                    borderRadius: "28px",
-                  }}
-                />
-              </div>
+            <div className="p-2">
+              <label htmlFor="title">Title </label>
+              <input
+                type="text"
+                name="title"
+                value={newModalData.title}
+                onChange={handleModalChange}
+                className="form-control"
+              />
+            </div>
+            <div className="p-2">
+              <label htmlFor="subTitle">Sub Title </label>
+              <p>
+                <b>
+                  <input
+                    type="text"
+                    name="subTitle"
+                    value={newModalData.subTitle}
+                    onChange={handleModalChange}
+                    className="form-control"
+                  />
+                </b>
+              </p>
+            </div>
+            <div className="p-2">
+              <label htmlFor="subContent">Sub Content </label>
+              <textarea
+                name="subContent"
+                value={newModalData.subContent}
+                onChange={handleModalChange}
+                className="form-control mb-3"
+              />
+            </div>
+            <div className="p-2">
+              <label htmlFor="image">Image</label>
+              <input
+                type="file"
+                name="programmesCard"
+                onChange={handleImageChange}
+                className="form-control my-2"
+              />
+              {/* <img
+                src={newModalData.cardImg}
+                alt="Programmes Card"
+                className="img-fluid mb-2"
+                style={{
+                  borderRight: "8px solid rgba(246, 192, 11, 0.4)",
+                  borderBottom: "8px solid rgba(246, 192, 11, 0.4)",
+                  borderRadius: "28px",
+                }}
+              /> */}
             </div>
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="primary" onClick={handleModalSaveClick}>
-              <FaSave /> Save
-            </Button>
-            <Button variant="secondary" onClick={handleClose}>
-              <FaTimes /> Cancel
-            </Button>
-          </Modal.Footer>
         </Modal>
       </div>
     </div>

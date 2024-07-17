@@ -201,7 +201,7 @@ function HeaderAdmin({ handleLogout }) {
                 <NavDropdown.Item as={NavLink} to="/footer">
                   Footer
                 </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/privacypolicy">
+                <NavDropdown.Item as={NavLink} to="/privacyandpolicy">
                   Privacy Policy
                 </NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to="/termsofuse">

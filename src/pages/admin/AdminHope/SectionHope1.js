@@ -270,13 +270,12 @@ function HopeSection1() {
                 <FaSave onClick={handleSave} />
                 <FaTimes onClick={handleCancel} className='mx-2' />
               </>
-            ) : (
-              <img
-                src={section1Text.hopeImage}
-                alt="Goal"
-                className="img-fluid goalImg"
-              />
-            )}
+            ) : null}
+            <img
+              src={section1Text.hopeImage}
+              alt="Goal"
+              className="img-fluid goalImg"
+            />
           </div>
           <div className='col-lg-7 col-12 '>
             <div className="d-flex align-items-center mb-3">
