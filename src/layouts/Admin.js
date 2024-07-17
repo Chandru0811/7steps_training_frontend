@@ -13,6 +13,9 @@ import AdminContact from "../pages/admin/AdminContact";
 import AdminTesimonial from "../pages/admin/AdminTestimonial/AdminTesimonial";
 import HopeTestimonial from "../pages/admin/AdminTestimonial/HopeTestimonial";
 import AdminOurProgrammes from "../pages/admin/AdminOurProgrammes";
+import PrivacyPolicy from "../pages/admin/PrivacyPoliicy";
+import AdminHeader from "../pages/admin/AdminHeader";
+import AdminFooter from "../pages/admin/AdminFooter";
 
 function Admin({ handleLogout }) {
   return (
@@ -37,6 +40,9 @@ function Admin({ handleLogout }) {
           <Route path="/testimonial" element={<AdminTesimonial />} />
           <Route path="/hopetesimonial" element={<HopeTestimonial />} />
           <Route path="/portfolio" element={<AdminPortFolio />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/header" element={<AdminHeader />} />
+          <Route path="/footer" element={<AdminFooter />} />
         </Routes>
         <FooterAdmin />
       </BrowserRouter>
