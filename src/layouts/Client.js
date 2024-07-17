@@ -12,6 +12,7 @@ import Hope from "../pages/client/Hope"
 import ContactUS from "../pages/client/ContactUS";
 import PortFolio from "../pages/client/PortFolio/PortFolio";
 import OurProgrammes from "../pages/client/OurProgrammes/OurProgrammes";
+import PrivacyAndPolicy from "../pages/client/PrivacyAndPolicy";
 
 
 function Client({ handleLogin }) {
@@ -36,6 +37,7 @@ function Client({ handleLogin }) {
           <Route path="/auth" element={<Auth handleLogin={handleLogin}/>} />
           <Route path="/portfolio" element={<PortFolio />} />
           <Route path="/ourprogrammes" element={<OurProgrammes />} />
+          <Route path="/privacyandpolicy" element={<PrivacyAndPolicy />} />
         </Routes>
         <Footer />
       </BrowserRouter>

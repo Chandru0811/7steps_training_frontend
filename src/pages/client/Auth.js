@@ -12,7 +12,7 @@ const Auth = ({ handleLogin }) => {
 
     return (
         <div className="auth-container card my-2">
-            <div className="card-header tabs">
+            <div className="tabs">
                 <button
                     className={activeTab === 'signin' ? 'active' : ''}
                     onClick={() => handleTabClick('signin')}
@@ -94,7 +94,7 @@ const SignInForm = ({ handleLogin }) => {
                     )}
                     <Link to='/forgotpassword' className='mt-2'>Forgot Password?</Link>
                 </div>
-                <button type="submit" className="btn btn-login">Sign In</button>
+                <button type="submit" className="btn auth-button">Sign In</button>
             </form>
         </div>
     );
@@ -201,7 +201,7 @@ const SignUpForm = () => {
                         I agree to the <a href="#">Terms of Condition</a> and <a href="#">Privacy Policy</a>
                     </span>
                 </div>
-                <button type="submit" onClick={formik.handleSubmit} className="btn btn-login">Sign Up</button>
+                <button type="submit" onClick={formik.handleSubmit} className="btn auth-button">Sign Up</button>
             </form>
         </div>
     );
