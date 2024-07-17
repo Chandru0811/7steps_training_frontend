@@ -214,7 +214,7 @@
   color: var(--secondary-color);
 }
 
-.footer-menu span {
+.footer-menu Link {
   padding: 10px 0px;
 }
 .footer-menu p {
@@ -222,6 +222,28 @@
 }
 .para {
   line-height: 2;
+}
+
+.footer_link {
+  color: inherit;
+  text-decoration: none;
+  color: var(--greyColor-text);
+  line-height: 2;
+}
+
+.footer_link:hover {
+  color: var(--secondary-color) !important;
+}
+
+.footer-menu .contact-links{
+  color: inherit;
+  color: var(--greyColor-text);
+  line-height: 2;
+}
+
+
+.footer-menu .contact-links:hover {
+  color: var(--secondary-color) !important;
 }
 
 /* / About  / */
@@ -350,42 +372,10 @@
   margin-bottom: 10px;
   font-size: 16px;
 }
-.auth-container .btn-login{
+.auth-container .auth-button{
   background-color: var(--secondary-color);
   color: var(--background-color);
 }
-
-.or-separator {
-  text-align: center;
-  margin: 20px 0;
-  position: relative;
-}
-
-.or-separator::before,
-.or-separator::after {
-  content: '';
-  display: block;
-  width: 40%;
-  height: 1px;
-  background: #ddd;
-  position: absolute;
-  top: 50%;
-}
-
-.or-separator::before {
-  left: 0;
-}
-
-.or-separator::after {
-  right: 0;
-}
-
-.or-separator span {
-  background: white;
-  padding: 0 10px;
-  position: relative;
-}
-
 /* / Hope Start / */
 .hopeSection1 .goalImg{
   border-radius: 30px;
@@ -560,9 +550,9 @@
   justify-content: center ;
   align-items: center;
 }
-.portyellow{
+/* .portyellow{
   background-color: var(--teritary-color-color);
-}
+} */
 /* / portfolio end / */
 
 /* / Contact Us / */
@@ -582,7 +572,7 @@
 .socialMedia-card{
   border-radius: 50%;
   border: none;
-  background: var(--containerbg-color);
+  background: var(--primary-color);
   color: var(--background-color);
 }
 /* / Contact Us End / */
