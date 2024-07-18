@@ -33,7 +33,7 @@ function HeaderAdmin({ handleLogout }) {
     <>
       <Navbar expand={expand} className="adminNavbar">
         <Container fluid>
-          <Navbar.Brand as={NavLink} to="/">
+          <Navbar.Brand as={NavLink} to="/" className="d-flex justify-content-center">
             <img src={Logo} alt="LOGO" className="img-fluid" width={30} />
             &nbsp;
             <span style={{ color: "#7C2C83", fontWeight: "bolder" }}>
