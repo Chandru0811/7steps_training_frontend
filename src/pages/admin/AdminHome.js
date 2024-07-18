@@ -79,6 +79,7 @@ Become a progressivist in your own life.`,
   const [isEditing, setIsEditing] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
   const [newData, setNewData] = useState(data);
+  const [previewImage, setPreviewImage] = useState(null);
 
   const handleEditClick = (field) => {
     setIsEditing(field);
@@ -87,6 +88,12 @@ Become a progressivist in your own life.`,
   const handleSaveClick = () => {
     setIsEditing(null);
     formik.handleSubmit();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    formik.setFieldValue(e.target.name, file);
+    setPreviewImage(URL.createObjectURL(file)); // Set the preview image
   };
 
   const handleCancel = () => {
@@ -164,12 +171,12 @@ Become a progressivist in your own life.`,
                           <FaTimes />
                         </button>
                       </div>
-                      <input
-                        type="text"
+                      <textarea
                         name="heroContent"
                         {...formik.getFieldProps("heroContent")}
                         onChange={formik.handleChange}
                         className="form-control"
+                        rows="4"
                       />
                     </div>
                   ) : (
@@ -241,12 +248,13 @@ Become a progressivist in your own life.`,
                             <FaTimes />
                           </button>
                         </div>
-                        <input
+                        <textarea
                           type="text"
                           name="heroSubContent"
                           {...formik.getFieldProps("heroSubContent")}
                           onChange={formik.handleChange}
                           className="form-control"
+                          rows="4"
                         />
                       </div>
                     ) : (
@@ -264,9 +272,17 @@ Become a progressivist in your own life.`,
                   </div>
                 </div>
               </div>
-              <div className="col-md-5 col-12 d-flex justify-content-center">
-                <div className="hero-img px-5 py-2">
-                  {isEditing === "homeHeroImg" ? (
+
+              {/* <div className="col-md-5 col-12">
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className="btn btn-sm link-secondary ms-5 edit-button"
+                  style={{ width: "fit-content" }}
+                >
+                  <FaEdit />
+                </button>
+                <div className="hero-img px-5 py-2 ms-5 d-flex justify-content-center">
+                  {isEditing ? (
                     <div>
                       <div className="d-flex">
                         <button
@@ -287,19 +303,14 @@ Become a progressivist in your own life.`,
                       <input
                         type="file"
                         name="homeHeroImg"
-                        onChange={formik.handleChange}
+                        onChange={(event) => {
+                          formik.setFieldValue("homeHeroImg", event.target.files[0]);
+                        }}
                         className="form-control"
                       />
                     </div>
                   ) : (
                     <div>
-                      <button
-                        onClick={() => setIsEditing(true)}
-                        className="btn btn-sm link-secondary ms-2 edit-button"
-                        style={{ width: "fit-content" }}
-                      >
-                        <FaEdit />
-                      </button>
                       {formik.values.homeHeroImg &&
                         (typeof formik.values.homeHeroImg === "string" ? (
                           <img
@@ -317,7 +328,65 @@ Become a progressivist in your own life.`,
                     </div>
                   )}
                 </div>
+              </div> */}
+
+              <div className="col-md-5 col-12">
+                {isEditing === "homeHeroImg" ? (
+                  <div>
+                    <div className="d-flex">
+                      <button
+                        onClick={handleSaveClick}
+                        className="btn btn-sm link-primary ms-2 edit-button"
+                        style={{ width: "fit-content" }}
+                      >
+                        <FaSave />
+                      </button>
+                      <button
+                        onClick={handleCancel}
+                        className="btn btn-sm link-danger  ms-2 edit-button"
+                        style={{ width: "fit-content" }}
+                      >
+                        <FaTimes />
+                      </button>
+                    </div>
+                    <input
+                      type="file"
+                      name="homeHeroImg"
+                      onChange={handleFileChange}
+                      className="form-control"
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      onClick={() => setIsEditing("homeHeroImg")}
+                      className="btn btn-sm link-secondary ms-5 edit-button"
+                      style={{ width: "fit-content" }}
+                    >
+                      <FaEdit />
+                    </button>
+                  </div>
+                )}
+                <div className="hero-img px-5 py-2 ms-5 d-flex justify-content-center">
+                  <div>
+                    {formik.values.homeHeroImg &&
+                      (typeof formik.values.homeHeroImg === "string" ? (
+                        <img
+                          src={formik.values.homeHeroImg}
+                          alt="heroImg"
+                          className="img-fluid"
+                        />
+                      ) : (
+                        <img
+                          src={URL.createObjectURL(formik.values.homeHeroImg)}
+                          alt="heroImg"
+                          className="img-fluid"
+                        />
+                      ))}
+                  </div>
+                </div>
               </div>
+
             </div>
           </div>
           {/* banner end*/}
@@ -392,6 +461,7 @@ Become a progressivist in your own life.`,
                               `heroCard[${index}].description`
                             )}
                             className="form-control"
+                            rows="10"
                           />
                         </div>
                       ) : (

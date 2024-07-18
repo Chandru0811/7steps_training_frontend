@@ -9,6 +9,8 @@ import entrepreneurImg from "../../../assets/Ellipse 6.jpg";
 import { FaEdit, FaSave, FaTimes } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button } from "react-bootstrap";
+import { Formik, useFormik } from "formik";
+
 
 function AdminTestimonial() {
   const testimonialCards = [
@@ -90,21 +92,33 @@ function AdminTestimonial() {
     testimonialSubHeading: `"We deeply value the trust and support you've shown for her program. 
     Your participation and feedback are invaluable to us, helping us improve and grow. Thank you for being a part of 
     this journey with us!"`,
+    testimonialCardData: testimonialCards,
   });
-
+  const formik = useFormik({
+    initialValues: data,
+    onSubmit: (values) => {
+      setData("values", values);
+    },
+  });
   const [isEditing, setIsEditing] = useState(null);
   const [newData, setNewData] = useState(data);
   const [testimonials, setTestimonials] = useState(testimonialCards);
   const [editingIndexTestimonial, setEditingIndexTestimonial] = useState(null);
-  const [modalData, setModalData] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [modalData, setModalData] = useState({
+    name: '',
+    testimonialTitle: '',
+    testimonialDescription: '',
+    testimonialImage: '',
+    testimonialDate: '',
+  });
   const [newCardData, setNewCardData] = useState({
     id: testimonials.length + 1,
-    name: "",
-    testimonialTitle: "",
-    testimonialDescription: "",
-    testimonialImage: "",
-    testimonialDate: "",
+    name: '',
+    testimonialTitle: '',
+    testimonialDescription: '',
+    testimonialImage: '',
+    testimonialDate: '',
   });
 
   const handleEditClick = (field) => {
@@ -113,20 +127,13 @@ function AdminTestimonial() {
 
   const handleSaveClick = () => {
     setIsEditing(null);
-    setData(newData);
+    formik.handleSubmit();
   };
 
   const handleCancel = () => {
     setIsEditing(null);
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setNewData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
 
   const handleModalChange = (event) => {
     const { name, value } = event.target;
@@ -143,6 +150,7 @@ function AdminTestimonial() {
       [name]: value,
     }));
   };
+
 
   const handleModalSave = () => {
     const updatedTestimonials = testimonials.map((card, index) =>
@@ -169,6 +177,14 @@ function AdminTestimonial() {
 
   const handleEditModal = (index) => {
     setEditingIndexTestimonial(index);
+    formik.setValues({
+      ...formik.values,
+      name: index.name,
+      testimonialTitle: index.testimonialTitle,
+      testimonialDescription: index.testimonialDescription,
+      testimonialDate: index.testimonialDate,
+      
+    });
     setModalData(testimonials[index]);
   };
 
@@ -185,6 +201,8 @@ function AdminTestimonial() {
       reader.readAsDataURL(file);
     }
   };
+
+
 
   return (
     <div>
@@ -232,8 +250,8 @@ function AdminTestimonial() {
                   <input
                     type="text"
                     name="testimonialHeading"
-                    value={newData.testimonialHeading}
-                    onChange={handleChange}
+                    {...formik.getFieldProps("testimonialHeading")}
+                    onChange={formik.handleChange}
                     className="form-control"
                   />
                 </div>
@@ -247,7 +265,7 @@ function AdminTestimonial() {
                     <FaEdit />
                   </button>
                   <h1 className="text-center fw-bolder py-4">
-                    {data.testimonialHeading}
+                    {formik.values.testimonialHeading}
                   </h1>
                 </div>
               )}
@@ -272,8 +290,8 @@ function AdminTestimonial() {
                   <input
                     type="text"
                     name="testimonialSubHeading"
-                    value={newData.testimonialSubHeading}
-                    onChange={handleChange}
+                    {...formik.getFieldProps("testimonialSubHeading")}
+                    onChange={formik.handleChange}
                     className="form-control"
                   />
                 </div>
@@ -287,18 +305,18 @@ function AdminTestimonial() {
                     <FaEdit />
                   </button>
                   <p className="text-center px-5 fs-5">
-                    {data.testimonialSubHeading}
+                    {formik.values.testimonialSubHeading}
                   </p>
                 </div>
               )}
             </div>
             <div className="container-fluid px-5">
               <div className="row">
-                {testimonials.map((profileCard, index) => (
-                  <div key={profileCard.id} className="col-md-4 col-12 p-3">
+                {formik.values.testimonialCardData.map((cardData) => (
+                  <div key={cardData.id} className="col-md-4 col-12 p-3">
                     <div className="card h-100">
                       <button
-                        onClick={() => handleEditModal(index)}
+                        onClick={() => {handleEditModal(cardData);}}
                         className="btn btn-sm link-secondary ms-2 edit-button"
                         style={{ width: "fit-content" }}
                       >
@@ -308,18 +326,17 @@ function AdminTestimonial() {
                         <div className="col-3">
                           <img
                             className="rounded-circle img-fluid"
-                            src={profileCard.testimonialImage}
-                            alt={profileCard.name}
+                            src={cardData.testimonialImage}
+                            alt={cardData.name}
                           />
                         </div>
                         <div className="col-9">
                           <p className="text-start px-2">
-                            <b>{profileCard.name}</b> -{" "}
-                            {profileCard.testimonialTitle}
+                            <b>{cardData.name}</b> - {cardData.testimonialTitle}
                           </p>
                           <div className="fs-6 text-start px-2">
                             <span className="text-secondary">
-                              {profileCard.testimonialDate}
+                              {cardData.testimonialDate}
                             </span>
                             <span className="ps-3">
                               {[...Array(5)].map((_, starIndex) => (
@@ -333,11 +350,12 @@ function AdminTestimonial() {
                         </div>
                       </div>
                       <p className="text-start p-3">
-                        {profileCard.testimonialDescription}
+                        {cardData.testimonialDescription}
                       </p>
                     </div>
                   </div>
                 ))}
+
               </div>
             </div>
           </div>
@@ -375,31 +393,33 @@ function AdminTestimonial() {
             <input
               type="text"
               name="name"
-              value={modalData.name}
-              onChange={handleModalChange}
+              {...formik.getFieldProps("name")}
+              onChange={formik.handleChange}
               className="form-control mb-2"
             />
             <input
-              type="text"
               name="testimonialTitle"
-              value={modalData.testimonialTitle}
-              onChange={handleModalChange}
+              {...formik.getFieldProps("testimonialTitle")}
+              onChange={formik.handleChange}
               className="form-control mb-2"
-            />
+              />
             <input
-              type="text"
               name="testimonialDate"
-              value={modalData.testimonialDate}
-              onChange={handleModalChange}
+              {...formik.getFieldProps("testimonialDate")}
+              onChange={formik.handleChange}
               className="form-control mb-2"
-            />
+              />
+
             <textarea
               name="testimonialDescription"
-              value={modalData.testimonialDescription}
-              onChange={handleModalChange}
-              className="form-control mb-2"
+              {...formik.getFieldProps("testimonialDescription")}
+              onChange={formik.handleChange}
               style={{ height: "200px" }}
+              className="form-control mb-2"
             />
+
+            
+
           </Modal.Body>
         </Modal>
       )}

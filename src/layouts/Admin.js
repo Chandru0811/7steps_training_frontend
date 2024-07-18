@@ -16,6 +16,10 @@ import AdminOurProgrammes from "../pages/admin/AdminOurProgrammes";
 import PrivacyPolicy from "../pages/admin/PrivacyPoliicy";
 import AdminHeader from "../pages/admin/AdminHeader";
 import AdminFooter from "../pages/admin/AdminFooter";
+import AdminCertifications from "../pages/admin/Certification/AdminCertifications";
+import AdminSchoolTraining from "../pages/admin/SchoolTrainingProgrammes/AdminSchoolTraining";
+import AdminTrainingSchool from "../pages/admin/TrainingInSchools/AdminTrainingSchool";
+import AdminTrainingExp from "../pages/admin/TrainingExperience/AdminTrainingExp";
 
 function Admin({ handleLogout }) {
   return (
@@ -43,6 +47,10 @@ function Admin({ handleLogout }) {
           <Route path="/privacypolicy" element={<PrivacyPolicy />} />
           <Route path="/header" element={<AdminHeader />} />
           <Route path="/footer" element={<AdminFooter />} />
+          <Route path="/certification" element={<AdminCertifications />} />
+          <Route path="/schooltraining" element={<AdminSchoolTraining />} />
+          <Route path="/trainingschool" element={<AdminTrainingSchool />} />
+          <Route path="/trainingexp" element={<AdminTrainingExp />} />
         </Routes>
         <FooterAdmin />
       </BrowserRouter>

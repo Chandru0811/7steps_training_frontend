@@ -7,6 +7,7 @@ import ourCardImg4 from "../../../assets/Rectangle 4.jpg";
 import ourCardImg5 from "../../../assets/Rectangle 5.jpg";
 import programmesCardImg from "../../../assets/Rectangle 75.jpg";
 import { ImCheckmark } from "react-icons/im";
+import Testimonial from '../Home/Testimonial';
 
 function OurProgrammes() {
   const [show, setShow] = useState(false);
@@ -92,11 +93,11 @@ function OurProgrammes() {
             version of yourself.
           </h5>
         </div>
-        <div className="row m-0">
+        <div className="row m-0 px-5">
           {CardDatas.map((cardData) => (
             <div className="col-md-4 col-12 p-3" key={cardData.id}>
               <div
-                className="card h-100 ps-3"
+                className="card h-100 ps-5"
                 style={{
                   borderRadius: "25px",
                   textAlign: "start",
@@ -105,7 +106,7 @@ function OurProgrammes() {
               >
                 <div className="row">
                   <div className="col-6">
-                    <div className="py-4 ourCardBg">
+                    <div className="py-4">
                       <h3 className="text-light">{cardData.title}</h3>
                       <p className="text-light">{cardData.description}</p>
                       <button
@@ -135,6 +136,7 @@ function OurProgrammes() {
             </div>
           ))}
         </div>
+        <Testimonial />
       </div>
 
       <Modal show={show} onHide={handleClose} size="lg">

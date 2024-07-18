@@ -94,7 +94,7 @@ const SignInForm = ({ handleLogin }) => {
                     )}
                     <Link to='/forgotpassword' className='mt-2'>Forgot Password?</Link>
                 </div>
-                <button type="submit" className="btn auth-button">Sign In</button>
+                <button type="submit" className="btn-signin auth-button">Sign In</button>
             </form>
         </div>
     );
