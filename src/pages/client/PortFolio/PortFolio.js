@@ -7,6 +7,9 @@ import life from "../../../assets/life.png";
 import trainer from "../../../assets/trainer.png";
 import PortFolioCarousel from "./PortFolioCarousel";
 import PortFolioBoottom from "./PortFolioBoottom";
+import CertificationCarousel from "./CertificationsCarousel";
+import TrainingSchoolCarousel from "./TrainingInSchoolsCarousel";
+import SchoolProgrammesCarousel from "./SchoolProgrammesCarousel";
 
 export default function PortFolio() {
   const [activeTab, setActiveTab] = useState("home");
@@ -14,13 +17,13 @@ export default function PortFolio() {
   const renderContent = () => {
     switch (activeTab) {
       case "home":
-        return <PortFolioCarousel />;
+        return <CertificationCarousel />;
       case "profile":
         return <PortFolioCarousel />;
       case "longer-tab":
-        return <PortFolioCarousel />;
+        return <TrainingSchoolCarousel />;
       case "new-tab":
-        return <PortFolioCarousel />;
+        return <SchoolProgrammesCarousel />;
       default:
         return null;
     }

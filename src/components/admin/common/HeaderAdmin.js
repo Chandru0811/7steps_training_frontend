@@ -98,6 +98,21 @@ function HeaderAdmin({ handleLogout }) {
                   <NavDropdown.Item as={NavLink} to="/hopetesimonial">
                     Hope Testimonial
                   </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/certification">
+                    Certifications
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/trainingexp">
+                  Training Experience
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/trainingschool">
+                  Training In Schools
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/schooltraining">
+                  School Training Programmes
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/hopetesimonial">
+                    Hope Testimonial
+                  </NavDropdown.Item>
                 </NavDropdown>
               </OverlayTrigger>
               <NavDropdown
