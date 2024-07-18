@@ -363,7 +363,7 @@
   border: 1px solid var(--greyColor-text);
 }
 
-.btn {
+.btn-signin {
   display: block;
   width: 100%;
   padding: 10px;
@@ -576,3 +576,14 @@
   color: var(--background-color);
 }
 /* / Contact Us End / */
+
+@media screen and (max-width:400px) {
+  .cardImage{
+  border-radius: 0 0 25px 25px !important;
+}
+}
+.cardImage{
+  border-radius: 0 25px 25px 0;
+}
+
+
