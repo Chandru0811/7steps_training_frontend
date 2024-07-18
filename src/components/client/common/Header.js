@@ -11,9 +11,7 @@ function Header() {
         <Navbar.Brand href="#" className="d-flex align-items-center mx-3">
           <img src={Logo} alt="7 STEPS" className="img-fluid" width={30} />
           &nbsp;
-          <span
-            style={{ color: "#7C2C83", fontWeight: "bolder" }}
-          >
+          <span style={{ color: "#7C2C83", fontWeight: "bolder" }}>
             7 STEPS
           </span>
         </Navbar.Brand>
@@ -25,10 +23,17 @@ function Header() {
         >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-              <img src={Logo} alt="7 STEPS" className="img-fluid" width={50} />
-              <span className="mx-2 " style={{ color: "#7C2C83" }}>
-                7 STEPS
-              </span>
+              <Link to="/">
+                <img
+                  src={Logo}
+                  alt="7 STEPS"
+                  className="img-fluid"
+                  width={50}
+                />
+                <span className="mx-2 " style={{ color: "#7C2C83" }}>
+                  7 STEPS
+                </span>
+              </Link>
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>

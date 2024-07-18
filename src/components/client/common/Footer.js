@@ -35,7 +35,7 @@ function Footer() {
                   <span>About</span>
                 </Link>
                 <Link className="footer_link" to="/portfolio">
-                  <span>PortFolio</span>
+                  <span>Portfolio</span>
                 </Link>
                 <Link className="footer_link" to="/ourprogrammes">
                   <span>Our Courses</span>
@@ -54,9 +54,6 @@ function Footer() {
                 </Link>
                 <Link className="footer_link" to="/privacyandpolicy">
                   <span>Privacy Policy</span>
-                </Link>
-                <Link className="footer_link">
-                  <span>FAQ</span>
                 </Link>
               </span>
             </div>
