@@ -1,59 +1,57 @@
 import React, { useState } from 'react';
 import Logo from "../../assets/Logo.png";
 import { FaEdit, FaSave, FaTimes } from "react-icons/fa";
+import { useFormik } from "formik";
 
 function AdminHeader() {
-  const [newImage, setNewImage] = useState(null);
-
-  const [headerText, setHeaderText] = useState({
+  const [editMode, setEditMode] = useState({});
+  
+  const [datas, setDatas] = useState({
     headerLogo: Logo,
     logoText: "7 STEPS"
   });
 
-  const [editMode, setEditMode] = useState({
-    headerLogo: false,
-    logoText: false
+  const formik = useFormik({
+    initialValues: {
+      headerLogo: null,
+      logoText: datas.logoText,
+    },
+    onSubmit: (values) => {
+      console.log("Header Datas :", values);
+      setDatas({
+        headerLogo: values.headerLogo ? URL.createObjectURL(values.headerLogo) : datas.headerLogo,
+        logoText: values.logoText,
+      });
+      setEditMode({});
+    },
   });
 
-  const handleEditClick = (section) => {
+  const handleEditClick = (field) => {
     setEditMode((prevState) => ({
       ...prevState,
-      [section]: !prevState[section],
+      [field]: true,
     }));
   };
 
-  const handleSave = () => {
-    if (newImage) {
-      setHeaderText((prevState) => ({
-        ...prevState,
-        headerLogo: URL.createObjectURL(newImage),
-      }));
-      setNewImage(null);
-    }
-    setEditMode({
-      headerLogo: false,
-      logoText: false
-    });
-  };
-
-  const handleCancel = () => {
-    setEditMode({
-      headerLogo: false,
-      logoText: false
-    });
-  };
-
-  const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setNewImage(e.target.files[0]);
-    }
-  };
-
-  const handlelogoTextChange = (e) => {
-    setHeaderText((prevState) => ({
+  const handleSave = (field) => {
+    formik.handleSubmit();
+    setEditMode((prevState) => ({
       ...prevState,
-      logoText: e.target.value,
+      [field]: false,
     }));
+  };
+
+  const handleCancel = (field) => {
+    formik.resetForm();
+    setEditMode((prevState) => ({
+      ...prevState,
+      [field]: false,
+    }));
+  };
+
+  const handleChange = (e, key) => {
+    const file = e.target.files ? e.target.files[0] : e.target.value;
+    formik.setFieldValue(key, file);
   };
 
   return (
@@ -85,14 +83,14 @@ function AdminHeader() {
                     type="file"
                     className="form-control"
                     accept="image/*"
-                    onChange={handleImageChange}
+                    onChange={(e) => handleChange(e, "headerLogo")}
                   />
-                  <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className='mx-2' />
+                  <FaSave onClick={() => handleSave("headerLogo")} />
+                  <FaTimes onClick={() => handleCancel("headerLogo")} className='mx-2' />
                 </>
               ) : null}
               <img
-                src={headerText.headerLogo}
+                src={datas.headerLogo}
                 alt="Goal"
                 className="img-fluid goalImg"
                 width={50}
@@ -101,7 +99,7 @@ function AdminHeader() {
             <div className='ms-2'>
               {!editMode.logoText ? (
                 <div className='d-flex align-items-center mt-4'>
-                  <span style={{ color: "#7C2C83", fontWeight: "bolder", fontSize: "24px" }}>{headerText.logoText}</span>
+                  <span style={{ color: "#7C2C83", fontWeight: "bolder", fontSize: "24px" }}>{datas.logoText}</span>
                   <FaEdit onClick={() => handleEditClick("logoText")} className='mx-1 mb-4' />
                 </div>
               ) : (
@@ -109,11 +107,12 @@ function AdminHeader() {
                   <input
                     type="text"
                     className="form-control mb-1"
-                    value={headerText.logoText}
-                    onChange={handlelogoTextChange}
+                    {...formik.getFieldProps("logoText")}
+                    value={formik.values.logoText}
+                    onChange={(e) => handleChange(e, "logoText")}
                   />
-                  <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className='mx-2' />
+                  <FaSave onClick={() => handleSave("logoText")} />
+                  <FaTimes onClick={() => handleCancel("logoText")} className='mx-2' />
                 </>
               )}
             </div>

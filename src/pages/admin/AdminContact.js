@@ -109,33 +109,30 @@ function AdminContact() {
               </div>
               <div className="col-md-6 col-12">
                 {editMode.contactMap ? (
-                  <div className="row mb-5">
-                    <div className="">
-                      <input
-                        type="text"
-                        className="form-control mt-4"
-                        {...formik.getFieldProps("contactMap")}
-                        value={formik.values.contactMap}
-                        onChange={(e) => handleChange(e, "contactMap")}
-                      />
-                      <FaSave onClick={() => handleSave("contactMap")} className="ms-2" />
-                      <FaTimes onClick={() => handleCancel("contactMap")} className="ms-2" />
-                    </div>
+                  <div>
+                    <input
+                      type="text"
+                      className="form-control mt-4"
+                      {...formik.getFieldProps("contactMap")}
+                      value={formik.values.contactMap}
+                      onChange={(e) => handleChange(e, "contactMap")}
+                    />
+                    <FaSave onClick={() => handleSave("contactMap")} className="ms-2" />
+                    <FaTimes onClick={() => handleCancel("contactMap")} className="ms-2" />
                   </div>
-                ) : (
-                  <div className="card mt-5">
-                    <FaEdit onClick={() => handleEditClick("contactMap")} className="ms-3" />
-                    <iframe
-                      src={datas.contactMap}
-                      width="100%"
-                      height="450"
-                      style={{ borderRadius: "5px" }}
-                      allowFullScreen=""
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                    ></iframe>
-                  </div>
-                )}
+                ) : null}
+                <FaEdit onClick={() => handleEditClick("contactMap")} className="mt-5" />
+                <div className="card">
+                  <iframe
+                    src={datas.contactMap}
+                    width="100%"
+                    height="450"
+                    style={{ borderRadius: "5px" }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
                 <div className="row mt-3">
                   <div className="">
                     <p>

@@ -1,51 +1,52 @@
 import React, { useState } from 'react';
 import { FaEdit, FaSave, FaTimes } from "react-icons/fa";
+import { useFormik } from "formik";
 
 function AdminFooter() {
+    const [editMode, setEditMode] = useState({});
 
-    const [footerText, setFooterText] = useState({
+    const [datas, setDatas] = useState({
         footerNote: "7 Steps Transformation is a life coaching company that aspires to change lives through mindset awakening and reprogramming.",
         copyrights: "2024 © Copyright 7 Steps Transformation. All Rights Reserved."
     });
 
-    const [editMode, setEditMode] = useState({
-        footerNote: false,
-        copyrights: false
+    const formik = useFormik({
+        initialValues: {
+            footerNote: datas.footerNote,
+            copyrights: datas.copyrights,
+        },
+        onSubmit: (values) => {
+            console.log("Footer Datas :", values);
+            setDatas(values);
+            setEditMode({});
+        },
     });
 
-    const handleEditClick = (section) => {
+    const handleEditClick = (field) => {
         setEditMode((prevState) => ({
             ...prevState,
-            [section]: !prevState[section],
+            [field]: true,
         }));
     };
 
-    const handleSave = () => {
-        setEditMode({
-            footerNote: false,
-            copyrights: false
-        });
-    };
-
-    const handleCancel = () => {
-        setEditMode({
-            footerNote: false,
-            copyrights: false
-        });
-    };
-
-    const handlefooterNoteChange = (e) => {
-        setFooterText((prevState) => ({
+    const handleSave = (field) => {
+        formik.handleSubmit();
+        setEditMode((prevState) => ({
             ...prevState,
-            footerNote: e.target.value,
+            [field]: false,
         }));
     };
 
-    const handlecopyrightsChange = (e) => {
-        setFooterText((prevState) => ({
+    const handleCancel = (field) => {
+        formik.resetForm();
+        setEditMode((prevState) => ({
             ...prevState,
-            copyrights: e.target.value,
+            [field]: false,
         }));
+    };
+
+    const handleChange = (e, key) => {
+        formik.setFieldValue(key, e.target.value);
     };
 
     return (
@@ -67,26 +68,26 @@ function AdminFooter() {
                     <div className='col-4'>
                         {!editMode.footerNote ? (
                             <>
-                                <span>{footerText.footerNote}</span>
+                                <span>{datas.footerNote}</span>
                                 <FaEdit onClick={() => handleEditClick("footerNote")} className='mx-3' />
                             </>
                         ) : (
                             <>
-                                <input
-                                    type="text"
+                                <textarea
                                     className="form-control mb-1"
-                                    value={footerText.footerNote}
-                                    onChange={handlefooterNoteChange}
+                                    {...formik.getFieldProps("footerNote")}
+                                    value={formik.values.footerNote}
+                                    onChange={(e) => handleChange(e, "footerNote")}
                                 />
-                                <FaSave onClick={handleSave} />
-                                <FaTimes onClick={handleCancel} className='mx-2' />
+                                <FaSave onClick={() => handleSave("footerNote")} />
+                                <FaTimes onClick={() => handleCancel("footerNote")} className='mx-2' />
                             </>
                         )}
                     </div>
                     <div className='offset-1 col-7'>
                         {!editMode.copyrights ? (
                             <>
-                                <span>{footerText.copyrights}</span>
+                                <span>{datas.copyrights}</span>
                                 <FaEdit onClick={() => handleEditClick("copyrights")} className='mx-3' />
                             </>
                         ) : (
@@ -94,11 +95,12 @@ function AdminFooter() {
                                 <input
                                     type="text"
                                     className="form-control mb-1"
-                                    value={footerText.copyrights}
-                                    onChange={handlecopyrightsChange}
+                                    {...formik.getFieldProps("copyrights")}
+                                    value={formik.values.copyrights}
+                                    onChange={(e) => handleChange(e, "copyrights")}
                                 />
-                                <FaSave onClick={handleSave} />
-                                <FaTimes onClick={handleCancel} className='mx-2' />
+                                <FaSave onClick={() => handleSave("copyrights")} />
+                                <FaTimes onClick={() => handleCancel("copyrights")} className='mx-2' />
                             </>
                         )}
                     </div>
