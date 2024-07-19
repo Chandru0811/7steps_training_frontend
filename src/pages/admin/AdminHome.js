@@ -78,22 +78,29 @@ Become a progressivist in your own life.`,
 
   const [isEditing, setIsEditing] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
-  const [newData, setNewData] = useState(data);
   const [previewImage, setPreviewImage] = useState(null);
 
-  const handleEditClick = (field) => {
+  const handleEditClick = (field, index = null) => {
     setIsEditing(field);
+    setEditingIndex(index);
   };
 
   const handleSaveClick = () => {
     setIsEditing(null);
+    setEditingIndex(null);
     formik.handleSubmit();
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    formik.setFieldValue(e.target.name, file);
-    setPreviewImage(URL.createObjectURL(file)); // Set the preview image
+    const fieldName = e.target.name;
+    if (fieldName.startsWith("heroCard")) {
+      const [field, index, key] = fieldName.split(".");
+      formik.setFieldValue(`heroCard[${index}].${key}`, file);
+    } else {
+      formik.setFieldValue(fieldName, file);
+    }
+    setPreviewImage(URL.createObjectURL(file));
   };
 
   const handleCancel = () => {
@@ -273,63 +280,6 @@ Become a progressivist in your own life.`,
                 </div>
               </div>
 
-              {/* <div className="col-md-5 col-12">
-                <button
-                  onClick={() => setIsEditing(true)}
-                  className="btn btn-sm link-secondary ms-5 edit-button"
-                  style={{ width: "fit-content" }}
-                >
-                  <FaEdit />
-                </button>
-                <div className="hero-img px-5 py-2 ms-5 d-flex justify-content-center">
-                  {isEditing ? (
-                    <div>
-                      <div className="d-flex">
-                        <button
-                          onClick={() => setIsEditing(false)}
-                          className="btn btn-sm link-primary ms-2 edit-button"
-                          style={{ width: "fit-content" }}
-                        >
-                          <FaSave />
-                        </button>
-                        <button
-                          onClick={() => setIsEditing(null)}
-                          className="btn btn-sm link-danger  ms-2 edit-button"
-                          style={{ width: "fit-content" }}
-                        >
-                          <FaTimes />
-                        </button>
-                      </div>
-                      <input
-                        type="file"
-                        name="homeHeroImg"
-                        onChange={(event) => {
-                          formik.setFieldValue("homeHeroImg", event.target.files[0]);
-                        }}
-                        className="form-control"
-                      />
-                    </div>
-                  ) : (
-                    <div>
-                      {formik.values.homeHeroImg &&
-                        (typeof formik.values.homeHeroImg === "string" ? (
-                          <img
-                            src={formik.values.homeHeroImg}
-                            alt="heroImg"
-                            className="img-fluid"
-                          />
-                        ) : (
-                          <img
-                            src={URL.createObjectURL(formik.values.homeHeroImg)}
-                            alt="heroImg"
-                            className="img-fluid"
-                          />
-                        ))}
-                    </div>
-                  )}
-                </div>
-              </div> */}
-
               <div className="col-md-5 col-12">
                 {isEditing === "homeHeroImg" ? (
                   <div>
@@ -386,7 +336,6 @@ Become a progressivist in your own life.`,
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
           {/* banner end*/}
@@ -398,45 +347,100 @@ Become a progressivist in your own life.`,
                   <div className="card hero-cards h-100">
                     <div className="border-design"></div>
                     <div className="card-body text-center">
-                      {isEditing === `cardTitle${index}` ? (
+                      <div className="d-flex justify-content-center align-items-center">
                         <div>
-                          <div className="d-flex">
-                            <button
-                              onClick={handleSaveClick}
-                              className="btn btn-sm link-primary ms-2 edit-button"
-                              style={{ width: "fit-content" }}
-                            >
-                              <FaSave />
-                            </button>
-                            <button
-                              onClick={handleCancel}
-                              className="btn btn-sm link-danger  ms-2 edit-button"
-                              style={{ width: "fit-content" }}
-                            >
-                              <FaTimes />
-                            </button>
-                          </div>
-                          <input
-                            type="text"
-                            name={`heroCard[${index}].title`}
-                            {...formik.getFieldProps(
-                              `heroCard[${index}].title`
-                            )}
-                            className="form-control"
-                          />
+                          {isEditing === "heroCard" &&
+                          editingIndex === index ? (
+                            <div>
+                              <div className="d-flex">
+                                <button
+                                  onClick={handleSaveClick}
+                                  className="btn btn-sm link-primary ms-2 edit-button"
+                                  style={{ width: "fit-content" }}
+                                >
+                                  <FaSave />
+                                </button>
+                                <button
+                                  onClick={handleCancel}
+                                  className="btn btn-sm link-danger  ms-2 edit-button"
+                                  style={{ width: "fit-content" }}
+                                >
+                                  <FaTimes />
+                                </button>
+                              </div>
+                              <input
+                                type="file"
+                                name={`heroCard.${index}.cardIcon`}
+                                onChange={handleFileChange}
+                                className="form-control"
+                              />
+                            </div>
+                          ) : (
+                            <div>
+                              <button
+                                onClick={() =>
+                                  handleEditClick("heroCard", index)
+                                }
+                                className="btn btn-sm link-secondary ms-2 edit-button"
+                                style={{ width: "fit-content" }}
+                              >
+                                <FaEdit />
+                              </button>
+                              <img
+                                style={{ height: "2rem" }}
+                                src={
+                                  typeof card.cardIcon === "string"
+                                    ? card.cardIcon
+                                    : URL.createObjectURL(card.cardIcon)
+                                }
+                                className="img-fluid"
+                                alt="Card Icon"
+                              />
+                            </div>
+                          )}
                         </div>
-                      ) : (
                         <div>
-                          <button
-                            onClick={() => handleEditClick(`cardTitle${index}`)}
-                            className="btn btn-sm link-secondary ms-2 edit-button"
-                            style={{ width: "fit-content" }}
-                          >
-                            <FaEdit />
-                          </button>
-                          <h5 className="card-title">{card.title}</h5>
+                          {isEditing === `title${index}` ? (
+                            <div>
+                              <div className="d-flex">
+                                <button
+                                  onClick={handleSaveClick}
+                                  className="btn btn-sm link-primary ms-2 edit-button"
+                                  style={{ width: "fit-content" }}
+                                >
+                                  <FaSave />
+                                </button>
+                                <button
+                                  onClick={handleCancel}
+                                  className="btn btn-sm link-danger  ms-2 edit-button"
+                                  style={{ width: "fit-content" }}
+                                >
+                                  <FaTimes />
+                                </button>
+                              </div>
+                              <input
+                                type="text"
+                                name={`heroCard[${index}].title`}
+                                {...formik.getFieldProps(
+                                  `heroCard[${index}].title`
+                                )}
+                                className="form-control"
+                              />
+                            </div>
+                          ) : (
+                            <div>
+                              <button
+                                onClick={() => handleEditClick(`title${index}`)}
+                                className="btn btn-sm link-secondary ms-2 edit-button"
+                                style={{ width: "fit-content" }}
+                              >
+                                <FaEdit />
+                              </button>
+                              <h5 className="text-center ps-2">{card.title}</h5>
+                            </div>
+                          )}
                         </div>
-                      )}
+                      </div>
                       {isEditing === `cardDescription${index}` ? (
                         <div>
                           <div className="d-flex">

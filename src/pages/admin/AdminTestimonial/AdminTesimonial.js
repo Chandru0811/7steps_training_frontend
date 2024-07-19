@@ -9,8 +9,7 @@ import entrepreneurImg from "../../../assets/Ellipse 6.jpg";
 import { FaEdit, FaSave, FaTimes } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button } from "react-bootstrap";
-import { Formik, useFormik } from "formik";
-
+import { useFormik } from "formik";
 
 function AdminTestimonial() {
   const testimonialCards = [
@@ -74,51 +73,21 @@ function AdminTestimonial() {
     },
   ];
 
-  const handleImageChange = (event, index) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const updatedTestimonials = [...testimonials];
-        updatedTestimonials[index].testimonialImage = reader.result;
-        setTestimonials(updatedTestimonials);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const [show, setShow] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [isEditing, setIsEditing] = useState(null);
 
-  const [data, setData] = useState({
-    testimonialHeading: `What our peoples are saying about her programme?`,
-    testimonialSubHeading: `"We deeply value the trust and support you've shown for her program. 
+  const formik = useFormik({
+    initialValues: {
+      testimonialHeading: `What our peoples are saying about her programme?`,
+      testimonialSubHeading: `"We deeply value the trust and support you've shown for her program. 
     Your participation and feedback are invaluable to us, helping us improve and grow. Thank you for being a part of 
     this journey with us!"`,
-    testimonialCardData: testimonialCards,
-  });
-  const formik = useFormik({
-    initialValues: data,
-    onSubmit: (values) => {
-      setData("values", values);
+      cardValues: testimonialCards,
     },
-  });
-  const [isEditing, setIsEditing] = useState(null);
-  const [newData, setNewData] = useState(data);
-  const [testimonials, setTestimonials] = useState(testimonialCards);
-  const [editingIndexTestimonial, setEditingIndexTestimonial] = useState(null);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [modalData, setModalData] = useState({
-    name: '',
-    testimonialTitle: '',
-    testimonialDescription: '',
-    testimonialImage: '',
-    testimonialDate: '',
-  });
-  const [newCardData, setNewCardData] = useState({
-    id: testimonials.length + 1,
-    name: '',
-    testimonialTitle: '',
-    testimonialDescription: '',
-    testimonialImage: '',
-    testimonialDate: '',
+    onSubmit: (values) => {
+      console.log("Form data", values);
+    },
   });
 
   const handleEditClick = (field) => {
@@ -134,67 +103,36 @@ function AdminTestimonial() {
     setIsEditing(null);
   };
 
+  const handleClose = () => setShow(false);
+
+  const handleShow = (card) => {
+    setSelectedCard(card);
+    setShow(true);
+  };
+
+  const handleModalSaveClick = () => {
+    const updatedCardValues = formik.values.cardValues.map((card) =>
+      card.id === selectedCard.id ? selectedCard : card
+    );
+    formik.setFieldValue("cardValues", updatedCardValues);
+    setShow(false);
+  };
 
   const handleModalChange = (event) => {
     const { name, value } = event.target;
-    setModalData((prevData) => ({
-      ...prevData,
+    setSelectedCard((prevCard) => ({
+      ...prevCard,
       [name]: value,
     }));
   };
 
-  const handleNewCardChange = (event) => {
-    const { name, value } = event.target;
-    setNewCardData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-
-  const handleModalSave = () => {
-    const updatedTestimonials = testimonials.map((card, index) =>
-      index === editingIndexTestimonial ? modalData : card
-    );
-    setTestimonials(updatedTestimonials);
-    setEditingIndexTestimonial(null);
-    setModalData(null);
-  };
-
-  const handleAddModalSave = () => {
-    console.log("New Card Data:", newCardData);
-    setTestimonials([...testimonials, newCardData]);
-    setIsAddModalOpen(false);
-    setNewCardData({
-      id: testimonials.length + 1,
-      name: "",
-      testimonialTitle: "",
-      testimonialDescription: "",
-      testimonialImage: "",
-      testimonialDate: "",
-    });
-  };
-
-  const handleEditModal = (index) => {
-    setEditingIndexTestimonial(index);
-    formik.setValues({
-      ...formik.values,
-      name: index.name,
-      testimonialTitle: index.testimonialTitle,
-      testimonialDescription: index.testimonialDescription,
-      testimonialDate: index.testimonialDate,
-      
-    });
-    setModalData(testimonials[index]);
-  };
-
-  const handleImageChangeNewCard = (event) => {
+  const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setNewCardData((prevData) => ({
-          ...prevData,
+        setSelectedCard((prevCard) => ({
+          ...prevCard,
           testimonialImage: reader.result,
         }));
       };
@@ -202,20 +140,14 @@ function AdminTestimonial() {
     }
   };
 
-
-
   return (
     <div>
       <div className="container-fluid py-2 bg-white">
         <div className="row">
           <div className="d-flex justify-content-between align-items-center">
-            <h5 className="fw-bold">Testimonials</h5>
+            <h5 className="fw-bold">Hope Testimonials</h5>
             <div className="d-flex">
-              <button
-                type="button"
-                className="btn btn-button btn-sm px-4 me-3"
-                onClick={() => setIsAddModalOpen(true)}
-              >
+              <button type="button" className="btn btn-button btn-sm px-4 me-3">
                 Add
               </button>
               <button type="button" className="btn btn-button btn-sm px-4">
@@ -225,207 +157,201 @@ function AdminTestimonial() {
           </div>
         </div>
       </div>
-      <div className="admintestimonial">
-        <div>
-          <div className="testimonial pb-4">
-            <div className="testimonial-heading">
-              {isEditing === "testimonialHeading" ? (
-                <div>
-                  <div className="d-flex">
-                    <button
-                      onClick={() => handleSaveClick("testimonialHeading")}
-                      className="btn btn-sm link-primary ms-2 edit-button"
-                      style={{ width: "fit-content" }}
-                    >
-                      <FaSave />
-                    </button>
-                    <button
-                      onClick={handleCancel}
-                      className="btn btn-sm link-danger  ms-2 edit-button"
-                      style={{ width: "fit-content" }}
-                    >
-                      <FaTimes />
-                    </button>
-                  </div>
-                  <input
-                    type="text"
-                    name="testimonialHeading"
-                    {...formik.getFieldProps("testimonialHeading")}
-                    onChange={formik.handleChange}
-                    className="form-control"
-                  />
-                </div>
-              ) : (
-                <div>
-                  <button
-                    onClick={() => handleEditClick("testimonialHeading")}
-                    className="btn btn-sm link-secondary ms-2 edit-button"
-                    style={{ width: "fit-content" }}
-                  >
-                    <FaEdit />
-                  </button>
-                  <h1 className="text-center fw-bolder py-4">
-                    {formik.values.testimonialHeading}
-                  </h1>
-                </div>
-              )}
-              {isEditing === "testimonialSubHeading" ? (
-                <div>
-                  <div className="d-flex">
-                    <button
-                      onClick={() => handleSaveClick("testimonialSubHeading")}
-                      className="btn btn-sm link-primary ms-2 edit-button"
-                      style={{ width: "fit-content" }}
-                    >
-                      <FaSave />
-                    </button>
-                    <button
-                      onClick={handleCancel}
-                      className="btn btn-sm link-danger  ms-2 edit-button"
-                      style={{ width: "fit-content" }}
-                    >
-                      <FaTimes />
-                    </button>
-                  </div>
-                  <input
-                    type="text"
-                    name="testimonialSubHeading"
-                    {...formik.getFieldProps("testimonialSubHeading")}
-                    onChange={formik.handleChange}
-                    className="form-control"
-                  />
-                </div>
-              ) : (
-                <div>
-                  <button
-                    onClick={() => handleEditClick("testimonialSubHeading")}
-                    className="btn btn-sm link-secondary ms-2 edit-button"
-                    style={{ width: "fit-content" }}
-                  >
-                    <FaEdit />
-                  </button>
-                  <p className="text-center px-5 fs-5">
-                    {formik.values.testimonialSubHeading}
-                  </p>
-                </div>
-              )}
-            </div>
-            <div className="container-fluid px-5">
-              <div className="row">
-                {formik.values.testimonialCardData.map((cardData) => (
-                  <div key={cardData.id} className="col-md-4 col-12 p-3">
-                    <div className="card h-100">
+      <form onSubmit={formik.handleSubmit}>
+        <div className="admintestimonial">
+          <div>
+            <div className="testimonial pb-4">
+              <div className="testimonial-heading">
+                {isEditing === "testimonialHeading" ? (
+                  <div>
+                    <div className="d-flex">
                       <button
-                        onClick={() => {handleEditModal(cardData);}}
-                        className="btn btn-sm link-secondary ms-2 edit-button"
+                        onClick={() => handleSaveClick("testimonialHeading")}
+                        className="btn btn-sm link-primary ms-2 edit-button"
                         style={{ width: "fit-content" }}
                       >
-                        <FaEdit />
+                        <FaSave />
                       </button>
-                      <div className="row m-3">
-                        <div className="col-3">
-                          <img
-                            className="rounded-circle img-fluid"
-                            src={cardData.testimonialImage}
-                            alt={cardData.name}
-                          />
-                        </div>
-                        <div className="col-9">
-                          <p className="text-start px-2">
-                            <b>{cardData.name}</b> - {cardData.testimonialTitle}
-                          </p>
-                          <div className="fs-6 text-start px-2">
-                            <span className="text-secondary">
-                              {cardData.testimonialDate}
-                            </span>
-                            <span className="ps-3">
-                              {[...Array(5)].map((_, starIndex) => (
-                                <IoIosStar
-                                  key={starIndex}
-                                  className="yellow-star"
-                                />
-                              ))}
-                            </span>
+                      <button
+                        onClick={handleCancel}
+                        className="btn btn-sm link-danger  ms-2 edit-button"
+                        style={{ width: "fit-content" }}
+                      >
+                        <FaTimes />
+                      </button>
+                    </div>
+                    <input
+                      type="text"
+                      name="testimonialHeading"
+                      {...formik.getFieldProps("testimonialHeading")}
+                      onChange={formik.handleChange}
+                      className="form-control"
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      onClick={() => handleEditClick("testimonialHeading")}
+                      className="btn btn-sm link-secondary ms-2 edit-button"
+                      style={{ width: "fit-content" }}
+                    >
+                      <FaEdit />
+                    </button>
+                    <h1 className="text-center fw-bolder py-4">
+                      {formik.values.testimonialHeading}
+                    </h1>
+                  </div>
+                )}
+                {isEditing === "testimonialSubHeading" ? (
+                  <div>
+                    <div className="d-flex">
+                      <button
+                        onClick={() => handleSaveClick("testimonialSubHeading")}
+                        className="btn btn-sm link-primary ms-2 edit-button"
+                        style={{ width: "fit-content" }}
+                      >
+                        <FaSave />
+                      </button>
+                      <button
+                        onClick={handleCancel}
+                        className="btn btn-sm link-danger  ms-2 edit-button"
+                        style={{ width: "fit-content" }}
+                      >
+                        <FaTimes />
+                      </button>
+                    </div>
+                    <input
+                      type="text"
+                      name="testimonialSubHeading"
+                      {...formik.getFieldProps("testimonialSubHeading")}
+                      onChange={formik.handleChange}
+                      className="form-control"
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      onClick={() => handleEditClick("testimonialSubHeading")}
+                      className="btn btn-sm link-secondary ms-2 edit-button"
+                      style={{ width: "fit-content" }}
+                    >
+                      <FaEdit />
+                    </button>
+                    <p className="text-center px-5 fs-5">
+                      {formik.values.testimonialSubHeading}
+                    </p>
+                  </div>
+                )}
+              </div>
+              <div className="container-fluid px-5">
+                <div className="row">
+                  {formik.values.cardValues.map((cardData) => (
+                    <div key={cardData.id} className="col-md-4 col-12 p-3">
+                      <div className="card h-100">
+                        <button
+                          onClick={() => handleShow(cardData)}
+                          className="btn btn-sm link-secondary ms-2 edit-button"
+                          style={{ width: "fit-content" }}
+                        >
+                          <FaEdit />
+                        </button>
+                        <div className="row m-3">
+                          <div className="col-3">
+                            <img
+                              className="rounded-circle img-fluid"
+                              src={cardData.testimonialImage}
+                              alt={cardData.name}
+                            />
+                          </div>
+                          <div className="col-9">
+                            <p className="text-start px-2">
+                              <b>{cardData.name}</b> -{" "}
+                              {cardData.testimonialTitle}
+                            </p>
+                            <div className="fs-6 text-start px-2">
+                              <span className="text-secondary">
+                                {cardData.testimonialDate}
+                              </span>
+                              <span className="ps-3">
+                                {[...Array(5)].map((_, starIndex) => (
+                                  <IoIosStar
+                                    key={starIndex}
+                                    className="yellow-star"
+                                  />
+                                ))}
+                              </span>
+                            </div>
                           </div>
                         </div>
+                        <p className="text-start p-3">
+                          {cardData.testimonialDescription}
+                        </p>
                       </div>
-                      <p className="text-start p-3">
-                        {cardData.testimonialDescription}
-                      </p>
                     </div>
-                  </div>
-                ))}
-
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </form>
 
       {/* Modal for editing card content */}
-      {editingIndexTestimonial !== null && (
-        <Modal show onHide={() => setEditingIndexTestimonial(null)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Edit Testimonial</Modal.Title>
-          </Modal.Header>
-          <div className="d-flex">
-            <button
-              onClick={handleModalSave}
-              className="btn link-primary ms-2"
-              style={{ width: "fit-content" }}
-            >
-              <FaSave />
-            </button>
-            <button
-              onClick={() => setEditingIndexTestimonial(null)}
-              className="btn link-danger  ms-2"
-              style={{ width: "fit-content" }}
-            >
-              <FaTimes />
-            </button>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Testimonial</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="p-4">
+          <input
+            type="file"
+            name="testimonialImage"
+            onChange={handleImageChange}
+            className="form-control mb-2"
+          />
+          <input
+            type="text"
+            name="name"
+            value={selectedCard ? selectedCard.name : ""}
+            onChange={handleModalChange}
+            className="form-control mb-2"
+          />
+          <input
+            type="text"
+            name="testimonialTitle"
+            value={selectedCard ? selectedCard.testimonialTitle : ""}
+            onChange={handleModalChange}
+            className="form-control mb-2"
+          />
+          <input
+            type="text"
+            name="testimonialDate"
+            value={selectedCard ? selectedCard.testimonialDate : ""}
+            onChange={handleModalChange}
+            className="form-control mb-2"
+          />
+          <textarea
+            name="testimonialDescription"
+            value={selectedCard ? selectedCard.testimonialDescription : ""}
+            onChange={handleModalChange}
+            className="form-control mb-2"
+            style={{ height: "200px" }}
+          />
+
+          <div className="d-flex justify-content-end mt-3">
+            <span>
+              <button
+                className="btn btn-primary btn-sm"
+                onClick={handleModalSaveClick}
+              >
+                Save
+              </button>
+            </span>
           </div>
-          <Modal.Body>
-            <input
-              type="file"
-              onChange={(e) => handleImageChange(e, editingIndexTestimonial)}
-              className="form-control mb-2"
-            />
-            <input
-              type="text"
-              name="name"
-              {...formik.getFieldProps("name")}
-              onChange={formik.handleChange}
-              className="form-control mb-2"
-            />
-            <input
-              name="testimonialTitle"
-              {...formik.getFieldProps("testimonialTitle")}
-              onChange={formik.handleChange}
-              className="form-control mb-2"
-              />
-            <input
-              name="testimonialDate"
-              {...formik.getFieldProps("testimonialDate")}
-              onChange={formik.handleChange}
-              className="form-control mb-2"
-              />
-
-            <textarea
-              name="testimonialDescription"
-              {...formik.getFieldProps("testimonialDescription")}
-              onChange={formik.handleChange}
-              style={{ height: "200px" }}
-              className="form-control mb-2"
-            />
-
-            
-
-          </Modal.Body>
-        </Modal>
-      )}
+        </Modal.Body>
+      </Modal>
 
       {/* Modal for adding new card */}
-      {isAddModalOpen && (
+      {/* {isAddModalOpen && (
         <Modal show onHide={() => setIsAddModalOpen(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Add Testimonial</Modal.Title>
@@ -527,7 +453,7 @@ function AdminTestimonial() {
             </div>
           </Modal.Body>
         </Modal>
-      )}
+      )} */}
     </div>
   );
 }
