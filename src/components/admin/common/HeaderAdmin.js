@@ -33,7 +33,11 @@ function HeaderAdmin({ handleLogout }) {
     <>
       <Navbar expand={expand} className="adminNavbar">
         <Container fluid>
-          <Navbar.Brand as={NavLink} to="/" className="d-flex justify-content-center">
+          <Navbar.Brand
+            as={NavLink}
+            to="/"
+            className="d-flex justify-content-center"
+          >
             <img src={Logo} alt="LOGO" className="img-fluid" width={30} />
             &nbsp;
             <span style={{ color: "#7C2C83", fontWeight: "bolder" }}>
@@ -102,16 +106,13 @@ function HeaderAdmin({ handleLogout }) {
                     Certifications
                   </NavDropdown.Item>
                   <NavDropdown.Item as={NavLink} to="/trainingexp">
-                  Training Experience
+                    Training Experience
                   </NavDropdown.Item>
                   <NavDropdown.Item as={NavLink} to="/trainingschool">
-                  Training In Schools
+                    Training In Schools
                   </NavDropdown.Item>
                   <NavDropdown.Item as={NavLink} to="/schooltraining">
-                  School Training Programmes
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/hopetesimonial">
-                    Hope Testimonial
+                    School Training Programmes
                   </NavDropdown.Item>
                 </NavDropdown>
               </OverlayTrigger>
