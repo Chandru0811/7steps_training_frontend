@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import goalImage from "../../../assets/Hope1.jpg";
 import { FaEdit, FaSave, FaTimes, FaPlus, FaTrash } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 function HopeSection1() {
   const [editMode, setEditMode] = useState({
@@ -20,16 +21,18 @@ function HopeSection1() {
   const [section1Text, setSection1Text] = useState({
     hopeImage: goalImage,
     heading1: "Goals",
-    description1: "To develop the 21st Century Competencies that are essential for the child to develop to prepare them for the future.",
+    description1:
+      "To develop the 21st Century Competencies that are essential for the child to develop to prepare them for the future.",
     heading2: "Objectives",
-    description2: "To cover the 5 social emotional competencies necessary for children to develop healthy identities, recognize and manage emotion, develop a sense of responsibility, care and concern for others, relate to others and develop positive relationships, handle changes, make responsible decisions and act for the good of self, others and the society.",
+    description2:
+      "To cover the 5 social emotional competencies necessary for children to develop healthy identities, recognize and manage emotion, develop a sense of responsibility, care and concern for others, relate to others and develop positive relationships, handle changes, make responsible decisions and act for the good of self, others and the society.",
     objectivesPoints: [
       "Self Awareness",
       "Self-Management",
       "Responsible Decision-Making",
       "Social Awareness",
-      "Relationship Management"
-    ]
+      "Relationship Management",
+    ],
   });
 
   const [section2Text, setSection2Text] = useState({
@@ -57,11 +60,11 @@ function HopeSection1() {
       "Become confident leaders",
       "Become leaders with empathy",
       "Become agents of change in the world",
-    ]
+    ],
   });
 
   const [newImage, setNewImage] = useState(null);
-  const [newPoint, setNewPoint] = useState('');
+  const [newPoint, setNewPoint] = useState("");
 
   const handleEditClick = (section) => {
     setEditMode((prevState) => ({
@@ -91,13 +94,10 @@ function HopeSection1() {
   };
 
   const handleAddPoint = () => {
-    if (newPoint.trim() !== '') {
-      setSection1Text((prevState) => ({
-        ...prevState,
-        objectivesPoints: [...prevState.objectivesPoints, newPoint],
-      }));
-      setNewPoint('');
-    }
+    setSection1Text((prevState) => ({
+      ...prevState,
+      objectivesPoints: [...prevState.objectivesPoints, newPoint],
+    }));
   };
 
   const handleDeletePoint = (index) => {
@@ -176,13 +176,10 @@ function HopeSection1() {
   };
 
   const handleAddSubDescription = () => {
-    if (newPoint.trim() !== '') {
-      setSection2Text((prevState) => ({
-        ...prevState,
-        subcard1Description: [...prevState.subcard1Description, newPoint],
-      }));
-      setNewPoint('');
-    }
+    setSection2Text((prevState) => ({
+      ...prevState,
+      subcard1Description: [...prevState.subcard1Description, newPoint],
+    }));
   };
 
   const handleDeleteSubDescription2 = (index) => {
@@ -197,12 +194,12 @@ function HopeSection1() {
   };
 
   const handleAddSubDescription2 = () => {
-    if (newPoint.trim() !== '') {
+    if (newPoint.trim() == "") {
       setSection2Text((prevState) => ({
         ...prevState,
         subcard2Description: [...prevState.subcard2Description, newPoint],
       }));
-      setNewPoint('');
+      setNewPoint("");
     }
   };
 
@@ -218,13 +215,10 @@ function HopeSection1() {
   };
 
   const handleAddSubDescription3 = () => {
-    if (newPoint.trim() !== '') {
       setSection2Text((prevState) => ({
         ...prevState,
         subcard3Description: [...prevState.subcard3Description, newPoint],
       }));
-      setNewPoint('');
-    }
   };
 
   const handleDeleteSubDescription4 = (index) => {
@@ -239,21 +233,18 @@ function HopeSection1() {
   };
 
   const handleAddSubDescription4 = () => {
-    if (newPoint.trim() !== '') {
       setSection2Text((prevState) => ({
         ...prevState,
-        subcard3Description: [...prevState.subcard4Description, newPoint],
+        subcard4Description: [...prevState.subcard4Description, newPoint],
       }));
-      setNewPoint('');
-    }
   };
 
   return (
-    <section className='hopeSection1 pt-5'>
-      <div className='container'>
+    <section className="hopeSection1 pt-5">
+      <div className="container">
         {/* Section 1 */}
-        <div className='row flex-1 justify-content-center align-items-center'>
-          <div className='col-lg-5 col-12 mb-3'>
+        <div className="row flex-1 justify-content-center align-items-center">
+          <div className="col-lg-5 col-12 mb-3">
             {!editMode.hopeImage && (
               <div className="d-flex justify-content-end mx-4 mb-1">
                 <FaEdit onClick={() => handleEditClick("hopeImage")} />
@@ -268,7 +259,7 @@ function HopeSection1() {
                   onChange={handleImageChange}
                 />
                 <FaSave onClick={handleSave} />
-                <FaTimes onClick={handleCancel} className='mx-2' />
+                <FaTimes onClick={handleCancel} className="mx-2" />
               </>
             ) : null}
             <img
@@ -277,7 +268,7 @@ function HopeSection1() {
               className="img-fluid goalImg"
             />
           </div>
-          <div className='col-lg-7 col-12 '>
+          <div className="col-lg-7 col-12 ">
             <div className="d-flex align-items-center mb-3">
               {editMode.heading1 ? (
                 <>
@@ -285,15 +276,20 @@ function HopeSection1() {
                     type="text"
                     className="form-control me-2"
                     value={section1Text.heading1}
-                    onChange={(e) => handleInputChange(e, 'heading1')}
+                    onChange={(e) => handleInputChange(e, "heading1")}
                   />
-                  <FaSave onClick={handleSave} className='' />
-                  <FaTimes onClick={handleCancel} className='mx-2' />
+                  <FaSave onClick={handleSave} className="" />
+                  <FaTimes onClick={handleCancel} className="mx-2" />
                 </>
               ) : (
                 <>
-                  <h5 className='fw-bold mb-0' style={{ color: "#7C2C83" }}>{section1Text.heading1}</h5>
-                  <FaEdit className="ms-2" onClick={() => handleEditClick("heading1")} />
+                  <h5 className="fw-bold mb-0" style={{ color: "#7C2C83" }}>
+                    {section1Text.heading1}
+                  </h5>
+                  <FaEdit
+                    className="ms-2"
+                    onClick={() => handleEditClick("heading1")}
+                  />
                 </>
               )}
             </div>
@@ -303,15 +299,19 @@ function HopeSection1() {
                   <textarea
                     className="form-control me-2"
                     value={section1Text.description1}
-                    onChange={(e) => handleInputChange(e, 'description1')}
+                    onChange={(e) => handleInputChange(e, "description1")}
                   />
                   <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className='mx-2' />
+                  <FaTimes onClick={handleCancel} className="mx-2" />
                 </>
               ) : (
                 <>
-                  <p className='mb-0'>{section1Text.description1}
-                    <FaEdit className="ms-2" onClick={() => handleEditClick("description1")} />
+                  <p className="mb-0">
+                    {section1Text.description1}
+                    <FaEdit
+                      className="ms-2"
+                      onClick={() => handleEditClick("description1")}
+                    />
                   </p>
                 </>
               )}
@@ -323,15 +323,20 @@ function HopeSection1() {
                     type="text"
                     className="form-control me-2"
                     value={section1Text.heading2}
-                    onChange={(e) => handleInputChange(e, 'heading2')}
+                    onChange={(e) => handleInputChange(e, "heading2")}
                   />
                   <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className='mx-2' />
+                  <FaTimes onClick={handleCancel} className="mx-2" />
                 </>
               ) : (
                 <>
-                  <h5 className='fw-bold mb-0' style={{ color: "#7C2C83" }}>{section1Text.heading2}</h5>
-                  <FaEdit className="ms-2" onClick={() => handleEditClick("heading2")} />
+                  <h5 className="fw-bold mb-0" style={{ color: "#7C2C83" }}>
+                    {section1Text.heading2}
+                  </h5>
+                  <FaEdit
+                    className="ms-2"
+                    onClick={() => handleEditClick("heading2")}
+                  />
                 </>
               )}
             </div>
@@ -341,21 +346,30 @@ function HopeSection1() {
                   <textarea
                     className="form-control me-2"
                     value={section1Text.description2}
-                    onChange={(e) => handleInputChange(e, 'description2')}
+                    onChange={(e) => handleInputChange(e, "description2")}
                   />
                   <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className='mx-2' />
+                  <FaTimes onClick={handleCancel} className="mx-2" />
                 </>
               ) : (
                 <>
-                  <p className='mb-0'>{section1Text.description2}<FaEdit className="ms-2" onClick={() => handleEditClick("description2")} /></p>
+                  <p className="mb-0">
+                    {section1Text.description2}
+                    <FaEdit
+                      className="ms-2"
+                      onClick={() => handleEditClick("description2")}
+                    />
+                  </p>
                 </>
               )}
             </div>
             <div className="d-flex align-items-center mb-3">
               {editMode.objectivesPoints ? (
                 <>
-                  <ul style={{ listStyle: "none", padding: 0 }} className="me-2">
+                  <ul
+                    style={{ listStyle: "none", padding: 0 }}
+                    className="me-2"
+                  >
                     {section1Text.objectivesPoints.map((point, index) => (
                       <li key={index} className="mb-2">
                         <input
@@ -364,31 +378,30 @@ function HopeSection1() {
                           value={point}
                           onChange={(e) => handlePointsChange(e, index)}
                         />
-                        <FaTrash onClick={() => handleDeletePoint(index)} className="ms-2" />
+                        <IoIosCloseCircleOutline
+                          onClick={() => handleDeletePoint(index)}
+                          className="ms-2 sectionHome1Cancel"
+                        />
                       </li>
                     ))}
-                    <li className="mb-2">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={newPoint}
-                        onChange={(e) => setNewPoint(e.target.value)}
-                        placeholder="Add new point"
-                      />
-                    </li>
                   </ul>
                   <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className='mx-2' />
+                  <FaTimes onClick={handleCancel} className="mx-2" />
                   <FaPlus onClick={handleAddPoint} />
                 </>
               ) : (
                 <>
                   <ul style={{ listStyle: "none", padding: 0 }}>
                     {section1Text.objectivesPoints.map((point, index) => (
-                      <li key={index} className="mb-2">{index + 1}. {point}</li>
+                      <li key={index} className="mb-2">
+                        {index + 1}. {point}
+                      </li>
                     ))}
                     {section1Text.objectivesPoints.length > 0 && (
-                      <FaEdit className="ms-2" onClick={() => handleEditClick("objectivesPoints")} />
+                      <FaEdit
+                        className="ms-2"
+                        onClick={() => handleEditClick("objectivesPoints")}
+                      />
                     )}
                   </ul>
                 </>
@@ -397,36 +410,44 @@ function HopeSection1() {
           </div>
         </div>
         {/* Section 2 */}
-        <div className='row py-5'>
+        <div className="row py-5">
           {!editMode.card1Heading ? (
-            <div className='d-flex justify-content-center align-items-center'>
-              <h1 className='fw-bolder mb-5' style={{ color: "#7C2C83" }}>{section2Text.card1Heading}</h1>
+            <div className="d-flex justify-content-center align-items-center">
+              <h1 className="fw-bolder mb-5" style={{ color: "#7C2C83" }}>
+                {section2Text.card1Heading}
+              </h1>
               <FaEdit
-                onClick={() => handleEditClick("card1Heading")} className='mb-5 mx-2' />
+                onClick={() => handleEditClick("card1Heading")}
+                className="mb-5 mx-2"
+              />
             </div>
           ) : (
-            <div className='d-flex'>
+            <div className="d-flex">
               <input
                 type="text"
                 className="form-control mb-3"
                 value={section2Text.card1Heading}
                 onChange={handlecard1HeadingChange}
               />
-              <FaSave onClick={handleSave} className='mx-2 mt-2' />
-              <FaTimes onClick={handleCancel} className='mt-2' />
+              <FaSave onClick={handleSave} className="mx-2 mt-2" />
+              <FaTimes onClick={handleCancel} className="mt-2" />
             </div>
           )}
-          <div className='col-md-6 col-lg-6 col-xl-3 col-12 mb-3'>
-            <div className='card programmeCard h-100'>
-              <div className='programmeHeading'>{section2Text.subcard1Heading}</div>
+          <div className="col-md-6 col-lg-6 col-xl-3 col-12 mb-3">
+            <div className="card programmeCard h-100">
+              <div className="programmeHeading">
+                {section2Text.subcard1Heading}
+              </div>
               {!editMode.subcard1Description ? (
-                <div className='card-body'>
+                <div className="card-body">
                   <ul style={{ listStyle: "none" }}>
-                    {section2Text.subcard1Description.map((description, index) => (
-                      <li key={index} className='mb-3'>
-                        <IoSend color="#7C2C83" /> {description}
-                      </li>
-                    ))}
+                    {section2Text.subcard1Description.map(
+                      (description, index) => (
+                        <li key={index} className="mb-3">
+                          <IoSend color="#7C2C83" /> {description}
+                        </li>
+                      )
+                    )}
                   </ul>
                   <FaEdit
                     onClick={() => handleEditClick("subcard1Description")}
@@ -435,48 +456,49 @@ function HopeSection1() {
                 </div>
               ) : (
                 <div>
-                  <ul className="mx-1" style={{ listStyle: "none", paddingLeft: "0px" }}>
+                  <ul
+                    className="mx-1"
+                    style={{ listStyle: "none", paddingLeft: "0px" }}
+                  >
                     {section2Text.subcard1Description.map((item, index) => (
-                      <li key={index} className='mb-3 d-flex'>
+                      <li key={index} className="mb-3 d-flex">
                         <input
                           type="text"
                           className="form-control"
                           value={item}
-                          onChange={(e) => handleInputChange(e, `subcard1Description[${index}]`)}
+                          onChange={(e) => handleInputChange(e, index)}
                         />
-                        <FaTrash onClick={() => handleDeleteSubDescription(index)} className="ms-2 mt-2" />
+                        <FaTrash
+                          onClick={() => handleDeleteSubDescription(index)}
+                          className="ms-2 mt-2"
+                        />
                       </li>
                     ))}
-                    <li>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={newPoint}
-                        onChange={(e) => setNewPoint(e.target.value)}
-                        placeholder="Add new outcome"
-                      />
-                    </li>
                   </ul>
-                  <span className='mx-2'>
+                  <span className="mx-2">
                     <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} className='mx-2' />
+                    <FaTimes onClick={handleCancel} className="mx-2" />
                     <FaPlus onClick={handleAddSubDescription} />
                   </span>
                 </div>
               )}
             </div>
           </div>
-          <div className='col-md-6 col-lg-6 col-xl-3 col-12 mb-3'>
-            <div className='card programmeCard h-100'>
-              <div className='programmeHeading'>{section2Text.subcard2Heading}</div>
+          <div className="col-md-6 col-lg-6 col-xl-3 col-12 mb-3">
+            <div className="card programmeCard h-100">
+              <div className="programmeHeading">
+                {section2Text.subcard2Heading}
+              </div>
               {!editMode.subcard2Description ? (
-                <div className='card-body'>
+                <div className="card-body">
                   <ul style={{ listStyle: "none" }}>
-                    {section2Text.subcard2Description.map((description, index) => (
-                      <li key={index} className='mb-3'>
-                        <IoSend color="#7C2C83" /> {description}
-                      </li>
-                    ))}
+                    {section2Text.subcard2Description.map(
+                      (description, index) => (
+                        <li key={index} className="mb-3">
+                          <IoSend color="#7C2C83" /> {description}
+                        </li>
+                      )
+                    )}
                   </ul>
                   <FaEdit
                     onClick={() => handleEditClick("subcard2Description")}
@@ -485,48 +507,54 @@ function HopeSection1() {
                 </div>
               ) : (
                 <div>
-                  <ul className="mx-1" style={{ listStyle: "none", paddingLeft: "0px" }}>
+                  <ul
+                    className="mx-1"
+                    style={{ listStyle: "none", paddingLeft: "0px" }}
+                  >
                     {section2Text.subcard2Description.map((item, index) => (
-                      <li key={index} className='mb-3 d-flex'>
+                      <li key={index} className="mb-3 d-flex">
                         <input
                           type="text"
                           className="form-control"
                           value={item}
-                          onChange={(e) => handleInputChange(e, `subcard2Description[${index}]`)}
+                          onChange={(e) =>
+                            handleInputChange(
+                              e,
+                              `subcard2Description[${index}]`
+                            )
+                          }
                         />
-                        <FaTrash onClick={() => handleDeleteSubDescription2(index)} className="ms-2 mt-2" />
+                        <FaTrash
+                          onClick={() => handleDeleteSubDescription2(index)}
+                          className="ms-2 mt-2"
+                        />
                       </li>
                     ))}
-                    <li>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={newPoint}
-                        onChange={(e) => setNewPoint(e.target.value)}
-                        placeholder="Add new outcome"
-                      />
-                    </li>
                   </ul>
-                  <span className='mx-2'>
+                  <span className="mx-2">
                     <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} className='mx-2' />
+                    <FaTimes onClick={handleCancel} className="mx-2" />
                     <FaPlus onClick={handleAddSubDescription2} />
                   </span>
                 </div>
               )}
             </div>
           </div>
-          <div className='col-md-6 col-lg-6 col-xl-3 col-12 mb-3'>
-            <div className='card programmeCard h-100'>
-              <div className='programmeHeading'>{section2Text.subcard3Heading}</div>
+          <div className="col-md-6 col-lg-6 col-xl-3 col-12 mb-3">
+            <div className="card programmeCard h-100">
+              <div className="programmeHeading">
+                {section2Text.subcard3Heading}
+              </div>
               {!editMode.subcard3Description ? (
-                <div className='card-body'>
+                <div className="card-body">
                   <ul style={{ listStyle: "none" }}>
-                    {section2Text.subcard3Description.map((description, index) => (
-                      <li key={index} className='mb-3'>
-                        <IoSend color="#7C2C83" /> {description}
-                      </li>
-                    ))}
+                    {section2Text.subcard3Description.map(
+                      (description, index) => (
+                        <li key={index} className="mb-3">
+                          <IoSend color="#7C2C83" /> {description}
+                        </li>
+                      )
+                    )}
                   </ul>
                   <FaEdit
                     onClick={() => handleEditClick("subcard3Description")}
@@ -535,48 +563,54 @@ function HopeSection1() {
                 </div>
               ) : (
                 <div>
-                  <ul className="mx-1" style={{ listStyle: "none", paddingLeft: "0px" }}>
+                  <ul
+                    className="mx-1"
+                    style={{ listStyle: "none", paddingLeft: "0px" }}
+                  >
                     {section2Text.subcard3Description.map((item, index) => (
-                      <li key={index} className='mb-3 d-flex'>
+                      <li key={index} className="mb-3 d-flex">
                         <input
                           type="text"
                           className="form-control"
                           value={item}
-                          onChange={(e) => handleInputChange(e, `subcard3Description[${index}]`)}
+                          onChange={(e) =>
+                            handleInputChange(
+                              e,
+                              `subcard3Description[${index}]`
+                            )
+                          }
                         />
-                        <FaTrash onClick={() => handleDeleteSubDescription3(index)} className="ms-2 mt-2" />
+                        <FaTrash
+                          onClick={() => handleDeleteSubDescription3(index)}
+                          className="ms-2 mt-2"
+                        />
                       </li>
                     ))}
-                    <li>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={newPoint}
-                        onChange={(e) => setNewPoint(e.target.value)}
-                        placeholder="Add new outcome"
-                      />
-                    </li>
                   </ul>
-                  <span className='mx-2'>
+                  <span className="mx-2">
                     <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} className='mx-2' />
+                    <FaTimes onClick={handleCancel} className="mx-2" />
                     <FaPlus onClick={handleAddSubDescription3} />
                   </span>
                 </div>
               )}
             </div>
           </div>
-          <div className='col-md-6 col-lg-6 col-xl-3 col-12 mb-3'>
-            <div className='card programmeCard h-100'>
-              <div className='programmeHeading'>{section2Text.subcard4Heading}</div>
+          <div className="col-md-6 col-lg-6 col-xl-3 col-12 mb-3">
+            <div className="card programmeCard h-100">
+              <div className="programmeHeading">
+                {section2Text.subcard4Heading}
+              </div>
               {!editMode.subcard4Description ? (
-                <div className='card-body'>
+                <div className="card-body">
                   <ul style={{ listStyle: "none" }}>
-                    {section2Text.subcard4Description.map((description, index) => (
-                      <li key={index} className='mb-3'>
-                        <IoSend color="#7C2C83" /> {description}
-                      </li>
-                    ))}
+                    {section2Text.subcard4Description.map(
+                      (description, index) => (
+                        <li key={index} className="mb-3">
+                          <IoSend color="#7C2C83" /> {description}
+                        </li>
+                      )
+                    )}
                   </ul>
                   <FaEdit
                     onClick={() => handleEditClick("subcard4Description")}
@@ -585,31 +619,33 @@ function HopeSection1() {
                 </div>
               ) : (
                 <div>
-                  <ul className="mx-1" style={{ listStyle: "none", paddingLeft: "0px" }}>
+                  <ul
+                    className="mx-1"
+                    style={{ listStyle: "none", paddingLeft: "0px" }}
+                  >
                     {section2Text.subcard4Description.map((item, index) => (
-                      <li key={index} className='mb-3 d-flex'>
+                      <li key={index} className="mb-3 d-flex">
                         <input
                           type="text"
                           className="form-control"
                           value={item}
-                          onChange={(e) => handleInputChange(e, `subcard4Description[${index}]`)}
+                          onChange={(e) =>
+                            handleInputChange(
+                              e,
+                              `subcard4Description[${index}]`
+                            )
+                          }
                         />
-                        <FaTrash onClick={() => handleDeleteSubDescription4(index)} className="ms-2 mt-2" />
+                        <FaTrash
+                          onClick={() => handleDeleteSubDescription4(index)}
+                          className="ms-2 mt-2"
+                        />
                       </li>
                     ))}
-                    <li>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={newPoint}
-                        onChange={(e) => setNewPoint(e.target.value)}
-                        placeholder="Add new outcome"
-                      />
-                    </li>
                   </ul>
-                  <span className='mx-2'>
+                  <span className="mx-2">
                     <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} className='mx-2' />
+                    <FaTimes onClick={handleCancel} className="mx-2" />
                     <FaPlus onClick={handleAddSubDescription4} />
                   </span>
                 </div>
@@ -619,7 +655,7 @@ function HopeSection1() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 export default HopeSection1;

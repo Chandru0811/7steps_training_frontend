@@ -157,3 +157,10 @@ body {
 }
 
 /* portfolio end */
+
+/* Section Hope 1  */
+
+.hopeSection1 .sectionHome1Cancel{
+  color: red;
+  font-size: 20px;
+}
