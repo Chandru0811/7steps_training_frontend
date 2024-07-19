@@ -68,8 +68,8 @@ const SignInForm = ({ handleLogin }) => {
                     <input
                         type="email"
                         className={`form-control ${formik.touched.email && formik.errors.email
-                                ? "is-invalid"
-                                : ""
+                            ? "is-invalid"
+                            : ""
                             }`}
                         placeholder="Enter email"
                         {...formik.getFieldProps("email")}
@@ -83,8 +83,8 @@ const SignInForm = ({ handleLogin }) => {
                     <input
                         type="password"
                         className={`form-control ${formik.touched.password && formik.errors.password
-                                ? "is-invalid"
-                                : ""
+                            ? "is-invalid"
+                            : ""
                             }`}
                         placeholder="Enter password"
                         {...formik.getFieldProps("password")}
@@ -140,8 +140,8 @@ const SignUpForm = () => {
                     <input
                         type="text"
                         className={`form-control ${formik.touched.name && formik.errors.name
-                                ? "is-invalid"
-                                : ""
+                            ? "is-invalid"
+                            : ""
                             }`}
                         placeholder="Enter name"
                         {...formik.getFieldProps("name")}
@@ -155,8 +155,8 @@ const SignUpForm = () => {
                     <input
                         type="email"
                         className={`form-control ${formik.touched.email && formik.errors.email
-                                ? "is-invalid"
-                                : ""
+                            ? "is-invalid"
+                            : ""
                             }`}
                         placeholder="Enter email"
                         {...formik.getFieldProps("email")}
@@ -170,8 +170,8 @@ const SignUpForm = () => {
                     <input
                         type="password"
                         className={`form-control ${formik.touched.password && formik.errors.password
-                                ? "is-invalid"
-                                : ""
+                            ? "is-invalid"
+                            : ""
                             }`}
                         placeholder="Enter password"
                         {...formik.getFieldProps("password")}
@@ -185,8 +185,8 @@ const SignUpForm = () => {
                     <input
                         type="password"
                         className={`form-control ${formik.touched.confirmPassword && formik.errors.confirmPassword
-                                ? "is-invalid"
-                                : ""
+                            ? "is-invalid"
+                            : ""
                             }`}
                         placeholder="Enter confirmPassword"
                         {...formik.getFieldProps("confirmPassword")}
@@ -198,7 +198,7 @@ const SignUpForm = () => {
                 <div className="input-group d-flex">
                     <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
                     <span>
-                        I agree to the <a href="#">Terms of Condition</a> and <a href="#">Privacy Policy</a>
+                        I agree to the <a href="">Terms of Condition</a> and <Link to="/privacyandpolicy" >Privacy Policy </Link>
                     </span>
                 </div>
                 <button type="submit" onClick={formik.handleSubmit} className="btn auth-button">Sign Up</button>

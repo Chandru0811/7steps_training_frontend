@@ -103,11 +103,11 @@ function Header() {
               >
                 CONTACT US
               </NavLink>
-              <Link to="/auth" style={{ textDecoration: "none" }}>
+              <Link to="/auth" style={{ textDecoration: 'none' }}>
                 <button
-                  style={{ width: "100px" }}
+                  style={{ width: '100px' }}
                   id="signup"
-                  className="btn btn-button my-2"
+                  className="btn my-2 sign-in-border"
                 >
                   SIGN IN
                 </button>
