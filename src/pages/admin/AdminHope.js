@@ -10,7 +10,7 @@ function AdminHope() {
                     <div className="d-flex justify-content-between align-items-center">
                         <h5 className="fw-bold">Hope</h5>
                         <div>
-                            <button type="button" className="btn btn-button btn-sm px-4">
+                            <button type="button" className="btn btn-button btn-sm py-2 px-3">
                                 Publish
                             </button>
                         </div>
