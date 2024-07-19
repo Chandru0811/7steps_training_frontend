@@ -56,7 +56,7 @@ function AdminFooter() {
                     <div className="d-flex justify-content-between align-items-center">
                         <h5 className="fw-bold">Footer</h5>
                         <div>
-                            <button type="button" className="btn btn-button btn-sm px-4">
+                            <button type="button" className="btn btn-button btn-sm px-4 py-2">
                                 Publish
                             </button>
                         </div>
@@ -69,7 +69,7 @@ function AdminFooter() {
                         {!editMode.footerNote ? (
                             <>
                                 <span>{datas.footerNote}</span>
-                                <FaEdit onClick={() => handleEditClick("footerNote")} className='mx-3' />
+                                <FaEdit onClick={() => handleEditClick("footerNote")} className='mx-3 text-secondary' />
                             </>
                         ) : (
                             <>
@@ -79,8 +79,8 @@ function AdminFooter() {
                                     value={formik.values.footerNote}
                                     onChange={(e) => handleChange(e, "footerNote")}
                                 />
-                                <FaSave onClick={() => handleSave("footerNote")} />
-                                <FaTimes onClick={() => handleCancel("footerNote")} className='mx-2' />
+                                <FaSave onClick={() => handleSave("footerNote")} className='text-primary' />
+                                <FaTimes onClick={() => handleCancel("footerNote")} className='mx-2 text-danger' />
                             </>
                         )}
                     </div>
@@ -88,7 +88,7 @@ function AdminFooter() {
                         {!editMode.copyrights ? (
                             <>
                                 <span>{datas.copyrights}</span>
-                                <FaEdit onClick={() => handleEditClick("copyrights")} className='mx-3' />
+                                <FaEdit onClick={() => handleEditClick("copyrights")} className='mx-3 text-secondary' />
                             </>
                         ) : (
                             <>
@@ -99,8 +99,8 @@ function AdminFooter() {
                                     value={formik.values.copyrights}
                                     onChange={(e) => handleChange(e, "copyrights")}
                                 />
-                                <FaSave onClick={() => handleSave("copyrights")} />
-                                <FaTimes onClick={() => handleCancel("copyrights")} className='mx-2' />
+                                <FaSave onClick={() => handleSave("copyrights")} className='text-primary' />
+                                <FaTimes onClick={() => handleCancel("copyrights")} className='mx-2 text-danger' />
                             </>
                         )}
                     </div>
