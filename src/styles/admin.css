@@ -158,9 +158,16 @@ body {
 
 /* portfolio end */
 
-/* Section Hope 1  */
+/* Hope Start*/
 
 .hopeSection1 .sectionHome1Cancel{
-  color: red;
-  font-size: 20px;
+  color: red ;
+  font-size: 25px;
 }
+
+.hopeSection2 .sectionHome1Cancel{
+  color: red ;
+  font-size: 25px;
+}
+
+/* Hope End */

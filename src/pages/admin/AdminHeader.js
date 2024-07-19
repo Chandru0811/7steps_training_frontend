@@ -5,7 +5,8 @@ import { useFormik } from "formik";
 
 function AdminHeader() {
   const [editMode, setEditMode] = useState({});
-  
+  const [previewImage, setPreviewImage] = useState(null);
+
   const [datas, setDatas] = useState({
     headerLogo: Logo,
     logoText: "7 STEPS"
@@ -23,6 +24,7 @@ function AdminHeader() {
         logoText: values.logoText,
       });
       setEditMode({});
+      setPreviewImage(null); // Reset the preview image after saving
     },
   });
 
@@ -47,11 +49,16 @@ function AdminHeader() {
       ...prevState,
       [field]: false,
     }));
+    setPreviewImage(null); // Reset the preview image on cancel
   };
 
   const handleChange = (e, key) => {
     const file = e.target.files ? e.target.files[0] : e.target.value;
     formik.setFieldValue(key, file);
+
+    if (key === "headerLogo" && e.target.files) {
+      setPreviewImage(URL.createObjectURL(file));
+    }
   };
 
   return (
@@ -61,7 +68,7 @@ function AdminHeader() {
           <div className="d-flex justify-content-between align-items-center">
             <h5 className="fw-bold">Header</h5>
             <div>
-              <button type="button" className="btn btn-button btn-sm px-4">
+              <button type="button" className="btn btn-button btn-sm px-4 py-2">
                 Publish
               </button>
             </div>
@@ -74,7 +81,7 @@ function AdminHeader() {
             <div>
               {!editMode.headerLogo && (
                 <div>
-                  <FaEdit onClick={() => handleEditClick("headerLogo")} />
+                  <FaEdit onClick={() => handleEditClick("headerLogo")} className='text-secondary' />
                 </div>
               )}
               {editMode.headerLogo ? (
@@ -85,12 +92,12 @@ function AdminHeader() {
                     accept="image/*"
                     onChange={(e) => handleChange(e, "headerLogo")}
                   />
-                  <FaSave onClick={() => handleSave("headerLogo")} />
-                  <FaTimes onClick={() => handleCancel("headerLogo")} className='mx-2' />
+                  <FaSave onClick={() => handleSave("headerLogo")} className='text-primary' />
+                  <FaTimes onClick={() => handleCancel("headerLogo")} className='mx-2 text-danger' />
                 </>
               ) : null}
               <img
-                src={datas.headerLogo}
+                src={previewImage || datas.headerLogo}
                 alt="Goal"
                 className="img-fluid goalImg"
                 width={50}
@@ -100,7 +107,7 @@ function AdminHeader() {
               {!editMode.logoText ? (
                 <div className='d-flex align-items-center mt-4'>
                   <span style={{ color: "#7C2C83", fontWeight: "bolder", fontSize: "24px" }}>{datas.logoText}</span>
-                  <FaEdit onClick={() => handleEditClick("logoText")} className='mx-1 mb-4' />
+                  <FaEdit onClick={() => handleEditClick("logoText")} className='mx-1 mb-4 text-secondary' />
                 </div>
               ) : (
                 <>
@@ -111,8 +118,8 @@ function AdminHeader() {
                     value={formik.values.logoText}
                     onChange={(e) => handleChange(e, "logoText")}
                   />
-                  <FaSave onClick={() => handleSave("logoText")} />
-                  <FaTimes onClick={() => handleCancel("logoText")} className='mx-2' />
+                  <FaSave onClick={() => handleSave("logoText")} className='text-primary' />
+                  <FaTimes onClick={() => handleCancel("logoText")} className='mx-2 text-danger' />
                 </>
               )}
             </div>

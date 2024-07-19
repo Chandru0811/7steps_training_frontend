@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import goalImage from "../../../assets/Hope1.jpg";
-import { FaEdit, FaSave, FaTimes, FaPlus, FaTrash } from "react-icons/fa";
+import { FaEdit, FaSave, FaTimes, FaPlus } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
@@ -164,6 +164,18 @@ function HopeSection1() {
     }));
   };
 
+  const handlePointsChange1 = (e, index) => {
+    const { value } = e.target;
+    setSection2Text((prevState) => {
+      const updatedPoints = [...prevState.subcard1Description];
+      updatedPoints[index] = value;
+      return {
+        ...prevState,
+        subcard1Description: updatedPoints,
+      };
+    });
+  };
+
   const handleDeleteSubDescription = (index) => {
     setSection2Text((prevState) => {
       const updatedDescriptions = [...prevState.subcard1Description];
@@ -182,6 +194,18 @@ function HopeSection1() {
     }));
   };
 
+  const handlePointsChange2 = (e, index) => {
+    const { value } = e.target;
+    setSection2Text((prevState) => {
+      const updatedPoints = [...prevState.subcard2Description];
+      updatedPoints[index] = value;
+      return {
+        ...prevState,
+        subcard2Description: updatedPoints,
+      };
+    });
+  };
+
   const handleDeleteSubDescription2 = (index) => {
     setSection2Text((prevState) => {
       const updatedDescriptions = [...prevState.subcard2Description];
@@ -194,13 +218,22 @@ function HopeSection1() {
   };
 
   const handleAddSubDescription2 = () => {
-    if (newPoint.trim() == "") {
-      setSection2Text((prevState) => ({
+    setSection2Text((prevState) => ({
+      ...prevState,
+      subcard2Description: [...prevState.subcard2Description, newPoint],
+    }));
+  };
+
+  const handlePointsChange3 = (e, index) => {
+    const { value } = e.target;
+    setSection2Text((prevState) => {
+      const updatedPoints = [...prevState.subcard3Description];
+      updatedPoints[index] = value;
+      return {
         ...prevState,
-        subcard2Description: [...prevState.subcard2Description, newPoint],
-      }));
-      setNewPoint("");
-    }
+        subcard3Description: updatedPoints,
+      };
+    });
   };
 
   const handleDeleteSubDescription3 = (index) => {
@@ -215,10 +248,22 @@ function HopeSection1() {
   };
 
   const handleAddSubDescription3 = () => {
-      setSection2Text((prevState) => ({
+    setSection2Text((prevState) => ({
+      ...prevState,
+      subcard3Description: [...prevState.subcard3Description, newPoint],
+    }));
+  };
+
+  const handlePointsChange4 = (e, index) => {
+    const { value } = e.target;
+    setSection2Text((prevState) => {
+      const updatedPoints = [...prevState.subcard4Description];
+      updatedPoints[index] = value;
+      return {
         ...prevState,
-        subcard3Description: [...prevState.subcard3Description, newPoint],
-      }));
+        subcard4Description: updatedPoints,
+      };
+    });
   };
 
   const handleDeleteSubDescription4 = (index) => {
@@ -233,10 +278,10 @@ function HopeSection1() {
   };
 
   const handleAddSubDescription4 = () => {
-      setSection2Text((prevState) => ({
-        ...prevState,
-        subcard4Description: [...prevState.subcard4Description, newPoint],
-      }));
+    setSection2Text((prevState) => ({
+      ...prevState,
+      subcard4Description: [...prevState.subcard4Description, newPoint],
+    }));
   };
 
   return (
@@ -247,7 +292,7 @@ function HopeSection1() {
           <div className="col-lg-5 col-12 mb-3">
             {!editMode.hopeImage && (
               <div className="d-flex justify-content-end mx-4 mb-1">
-                <FaEdit onClick={() => handleEditClick("hopeImage")} />
+                <FaEdit className="text-secondary" onClick={() => handleEditClick("hopeImage")} />
               </div>
             )}
             {editMode.hopeImage ? (
@@ -258,8 +303,8 @@ function HopeSection1() {
                   accept="image/*"
                   onChange={handleImageChange}
                 />
-                <FaSave onClick={handleSave} />
-                <FaTimes onClick={handleCancel} className="mx-2" />
+                <FaSave onClick={handleSave} className="text-primary" />
+                <FaTimes onClick={handleCancel} className="mx-2 text-danger" />
               </>
             ) : null}
             <img
@@ -278,8 +323,8 @@ function HopeSection1() {
                     value={section1Text.heading1}
                     onChange={(e) => handleInputChange(e, "heading1")}
                   />
-                  <FaSave onClick={handleSave} className="" />
-                  <FaTimes onClick={handleCancel} className="mx-2" />
+                  <FaSave onClick={handleSave} className="text-primary" />
+                  <FaTimes onClick={handleCancel} className="mx-2 text-danger" />
                 </>
               ) : (
                 <>
@@ -287,7 +332,7 @@ function HopeSection1() {
                     {section1Text.heading1}
                   </h5>
                   <FaEdit
-                    className="ms-2"
+                    className="ms-2 text-secondary"
                     onClick={() => handleEditClick("heading1")}
                   />
                 </>
@@ -301,15 +346,15 @@ function HopeSection1() {
                     value={section1Text.description1}
                     onChange={(e) => handleInputChange(e, "description1")}
                   />
-                  <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className="mx-2" />
+                  <FaSave onClick={handleSave} className="text-primary" />
+                  <FaTimes onClick={handleCancel} className="mx-2 text-danger" />
                 </>
               ) : (
                 <>
                   <p className="mb-0">
                     {section1Text.description1}
                     <FaEdit
-                      className="ms-2"
+                      className="ms-2 text-secondary"
                       onClick={() => handleEditClick("description1")}
                     />
                   </p>
@@ -325,8 +370,8 @@ function HopeSection1() {
                     value={section1Text.heading2}
                     onChange={(e) => handleInputChange(e, "heading2")}
                   />
-                  <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className="mx-2" />
+                  <FaSave onClick={handleSave} className="text-primary" />
+                  <FaTimes onClick={handleCancel} className="mx-2 text-danger" />
                 </>
               ) : (
                 <>
@@ -334,7 +379,7 @@ function HopeSection1() {
                     {section1Text.heading2}
                   </h5>
                   <FaEdit
-                    className="ms-2"
+                    className="ms-2 text-secondary"
                     onClick={() => handleEditClick("heading2")}
                   />
                 </>
@@ -348,15 +393,15 @@ function HopeSection1() {
                     value={section1Text.description2}
                     onChange={(e) => handleInputChange(e, "description2")}
                   />
-                  <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className="mx-2" />
+                  <FaSave onClick={handleSave} className="text-primary" />
+                  <FaTimes onClick={handleCancel} className="mx-2 text-danger" />
                 </>
               ) : (
                 <>
                   <p className="mb-0">
                     {section1Text.description2}
                     <FaEdit
-                      className="ms-2"
+                      className="ms-2 text-secondary"
                       onClick={() => handleEditClick("description2")}
                     />
                   </p>
@@ -372,21 +417,23 @@ function HopeSection1() {
                   >
                     {section1Text.objectivesPoints.map((point, index) => (
                       <li key={index} className="mb-2">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={point}
-                          onChange={(e) => handlePointsChange(e, index)}
-                        />
-                        <IoIosCloseCircleOutline
-                          onClick={() => handleDeletePoint(index)}
-                          className="ms-2 sectionHome1Cancel"
-                        />
+                        <div className="d-flex">
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={point}
+                            onChange={(e) => handlePointsChange(e, index)}
+                          />
+                          <IoIosCloseCircleOutline
+                            onClick={() => handleDeletePoint(index)}
+                            className="ms-2 mt-2 sectionHome1Cancel"
+                          />
+                        </div>
                       </li>
                     ))}
                   </ul>
-                  <FaSave onClick={handleSave} />
-                  <FaTimes onClick={handleCancel} className="mx-2" />
+                  <FaSave onClick={handleSave} className="text-primary" />
+                  <FaTimes onClick={handleCancel} className="mx-2 text-danger" />
                   <FaPlus onClick={handleAddPoint} />
                 </>
               ) : (
@@ -399,7 +446,7 @@ function HopeSection1() {
                     ))}
                     {section1Text.objectivesPoints.length > 0 && (
                       <FaEdit
-                        className="ms-2"
+                        className="ms-2 text-secondary"
                         onClick={() => handleEditClick("objectivesPoints")}
                       />
                     )}
@@ -418,7 +465,7 @@ function HopeSection1() {
               </h1>
               <FaEdit
                 onClick={() => handleEditClick("card1Heading")}
-                className="mb-5 mx-2"
+                className="mb-5 mx-2 text-secondary"
               />
             </div>
           ) : (
@@ -429,8 +476,8 @@ function HopeSection1() {
                 value={section2Text.card1Heading}
                 onChange={handlecard1HeadingChange}
               />
-              <FaSave onClick={handleSave} className="mx-2 mt-2" />
-              <FaTimes onClick={handleCancel} className="mt-2" />
+              <FaSave onClick={handleSave} className="mx-2 mt-2 text-primary" />
+              <FaTimes onClick={handleCancel} className="mt-2 text-danger" />
             </div>
           )}
           <div className="col-md-6 col-lg-6 col-xl-3 col-12 mb-3">
@@ -451,7 +498,7 @@ function HopeSection1() {
                   </ul>
                   <FaEdit
                     onClick={() => handleEditClick("subcard1Description")}
-                    className="position-absolute top-0 end-0 mt-5 me-3"
+                    className="position-absolute top-0 end-0 mt-5 me-3 text-secondary"
                   />
                 </div>
               ) : (
@@ -466,18 +513,18 @@ function HopeSection1() {
                           type="text"
                           className="form-control"
                           value={item}
-                          onChange={(e) => handleInputChange(e, index)}
+                          onChange={(e) => handlePointsChange1(e, index)}
                         />
-                        <FaTrash
+                        <IoIosCloseCircleOutline
                           onClick={() => handleDeleteSubDescription(index)}
-                          className="ms-2 mt-2"
+                          className="ms-2 mt-2 sectionHome1Cancel"
                         />
                       </li>
                     ))}
                   </ul>
                   <span className="mx-2">
-                    <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} className="mx-2" />
+                    <FaSave onClick={handleSave} className="text-primary" />
+                    <FaTimes onClick={handleCancel} className="mx-2 text-danger" />
                     <FaPlus onClick={handleAddSubDescription} />
                   </span>
                 </div>
@@ -502,7 +549,7 @@ function HopeSection1() {
                   </ul>
                   <FaEdit
                     onClick={() => handleEditClick("subcard2Description")}
-                    className="position-absolute top-0 end-0 mt-5 me-3"
+                    className="position-absolute top-0 end-0 mt-5 me-3 text-secondary"
                   />
                 </div>
               ) : (
@@ -517,23 +564,18 @@ function HopeSection1() {
                           type="text"
                           className="form-control"
                           value={item}
-                          onChange={(e) =>
-                            handleInputChange(
-                              e,
-                              `subcard2Description[${index}]`
-                            )
-                          }
+                          onChange={(e) => handlePointsChange2(e, index)}
                         />
-                        <FaTrash
+                        <IoIosCloseCircleOutline
                           onClick={() => handleDeleteSubDescription2(index)}
-                          className="ms-2 mt-2"
+                          className="ms-2 mt-2 sectionHome1Cancel"
                         />
                       </li>
                     ))}
                   </ul>
                   <span className="mx-2">
-                    <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} className="mx-2" />
+                    <FaSave onClick={handleSave} className="text-primary" />
+                    <FaTimes onClick={handleCancel} className="mx-2 text-danger" />
                     <FaPlus onClick={handleAddSubDescription2} />
                   </span>
                 </div>
@@ -558,7 +600,7 @@ function HopeSection1() {
                   </ul>
                   <FaEdit
                     onClick={() => handleEditClick("subcard3Description")}
-                    className="position-absolute top-0 end-0 mt-5 me-3"
+                    className="position-absolute top-0 end-0 mt-5 me-3 text-secondary"
                   />
                 </div>
               ) : (
@@ -573,23 +615,18 @@ function HopeSection1() {
                           type="text"
                           className="form-control"
                           value={item}
-                          onChange={(e) =>
-                            handleInputChange(
-                              e,
-                              `subcard3Description[${index}]`
-                            )
-                          }
+                          onChange={(e) => handlePointsChange3(e, index)}
                         />
-                        <FaTrash
+                        <IoIosCloseCircleOutline
                           onClick={() => handleDeleteSubDescription3(index)}
-                          className="ms-2 mt-2"
+                          className="ms-2 mt-2 sectionHome1Cancel"
                         />
                       </li>
                     ))}
                   </ul>
                   <span className="mx-2">
-                    <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} className="mx-2" />
+                    <FaSave onClick={handleSave} className="text-primary" />
+                    <FaTimes onClick={handleCancel} className="mx-2 text-danger" />
                     <FaPlus onClick={handleAddSubDescription3} />
                   </span>
                 </div>
@@ -614,7 +651,7 @@ function HopeSection1() {
                   </ul>
                   <FaEdit
                     onClick={() => handleEditClick("subcard4Description")}
-                    className="position-absolute top-0 end-0 mt-5 me-3"
+                    className="position-absolute top-0 end-0 mt-5 me-3 text-secondary"
                   />
                 </div>
               ) : (
@@ -629,23 +666,18 @@ function HopeSection1() {
                           type="text"
                           className="form-control"
                           value={item}
-                          onChange={(e) =>
-                            handleInputChange(
-                              e,
-                              `subcard4Description[${index}]`
-                            )
-                          }
+                          onChange={(e) => handlePointsChange4(e, index)}
                         />
-                        <FaTrash
+                        <IoIosCloseCircleOutline
                           onClick={() => handleDeleteSubDescription4(index)}
-                          className="ms-2 mt-2"
+                          className="ms-2 mt-2 sectionHome1Cancel"
                         />
                       </li>
                     ))}
                   </ul>
                   <span className="mx-2">
-                    <FaSave onClick={handleSave} />
-                    <FaTimes onClick={handleCancel} className="mx-2" />
+                    <FaSave onClick={handleSave} className="text-primary" />
+                    <FaTimes onClick={handleCancel} className="mx-2 text-danger" />
                     <FaPlus onClick={handleAddSubDescription4} />
                   </span>
                 </div>
