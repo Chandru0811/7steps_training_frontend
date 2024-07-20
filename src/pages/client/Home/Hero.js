@@ -1,65 +1,82 @@
-import React from "react";
-import heroImg from "../../../assets/Home hero img.jpg";
+import React, { useEffect, useState } from "react";
 import cardIcon1 from "../../../assets/Home-card-icon-1.jpg";
 import cardIcon2 from "../../../assets/Home-card-icon-2.jpg";
 import cardIcon3 from "../../../assets/Home-card-icon-3.jpg";
 import cardIcon4 from "../../../assets/Home-card-icon-4.jpg";
 import cardIcon5 from "../../../assets/Home-card-icon-5.jpg";
 import cardIcon6 from "../../../assets/Home-card-icon-6.jpg";
+import api from "../../../config/URL";
+import imgUrl from "../../../config/ImgUrl";
 
-function hero() {
+function Hero() {
+  const [data, setData] = useState({
+    title: "",
+    description: "",
+    subtitle: "",
+    subdescription: "",
+    journey: "",
+    journeydescription: "",
+    transformation: "",
+    transformationdescription: "",
+    mission: "",
+    missiondescription: "",
+    success: "",
+    successdescription: "",
+    passion: "",
+    passiondescription: "",
+    moto: "",
+    motodescription: "",
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get("homepage");
+        setData(response.data);
+      } catch (error) {
+        error(`Error Fetching Data: ${error.message}`);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const heroCards = [
     {
       id: 1,
       cardIcon: cardIcon1,
-      title: "My Journey",
-      description: `Having lost her mum to schizophrenia. Her own journey of losing her identity 
-      in trying to fulfil her role as a mother, wife, and a homemaker. Her spiralling into depths
-       of low self-esteem, resentments and unfulfillment with life. Her eventual rock bottom came
-        when she found herself on a hospital bed almost going to be paralysed from the waist down,
-         due to spinal issues (cauda equina syndrome).<br/><br/> Her spine surgery in 2019 which 
-         put 6 metal screws and a metal cage in her spine, and her having to relearn walking again.
-          Her estrangement with her family due to strained relationships which almost ended up in 
-          divorce. And everything in her life became out of balance.`,
+      title: data.journey,
+      description: data.journeydescription,
     },
     {
       id: 2,
       cardIcon: cardIcon2,
-      title: "My Transformation",
-      description: `In 2019-2020, she managed to turn her life around, awakening herself out of 
-      darkness and regaining her power to emerge successful in her health, finances, relations, 
-      career and life. <br/><br/>All this was due to her changing her mindset - shift in her thinking,
-       speaking, behaviour and positive actions, together with persistence and perserverence.`,
+      title: data.transformation,
+      description: data.transformationdescription,
     },
     {
       id: 3,
       cardIcon: cardIcon3,
-      title: "My Mission",
-      description: `Realising that many people were, like herself, victims of self-doubt, self-sabotage
-       and self-destruction due to trauma, negative thoughts and past programming and events which have
-        occurred in their lives, which often lead to destructive behaviours, depression and suicide, she
-         felt she had to step up to help others.<br/><br/>With experiences from her own life, her mum’s,
-          her work with students and individuals, she is now on a mission transforming lives and empowering
-           and inspiring many.,`,
+      title: data.mission,
+      description: data.missiondescription,
     },
     {
       id: 4,
       cardIcon: cardIcon4,
-      title: "My Success",
-      description: `In a few short years, she has changed her life drastically and the life of her family
-             and participants. She has regained back her confidence; her life, finances, relationships and career.`,
+      title: data.success,
+      description: data.successdescription,
     },
     {
       id: 5,
       cardIcon: cardIcon5,
-      title: "My Passion",
-      description: `Her passion still remails with working with youths and the vulnerable of society`,
+      title: data.passion,
+      description: data.passiondescription,
     },
     {
       id: 6,
       cardIcon: cardIcon6,
-      title: "My Motto",
-      description: `Passion and commitment in all that I do.<br/><br/>Become a progressivist in your own life.`,
+      title: data.moto,
+      description: data.motodescription,
     },
   ];
 
@@ -71,29 +88,21 @@ function hero() {
           <div className="row m-0">
             <div className="col-md-7 col-12">
               <div className="hero">
-                <h1 className="fw-bolder">
-                  Hello! I'm <span>Reihana</span>, Intervention Coach
-                </h1>
-                <p className="text-start">
-                  I'm a specialising in and Emotional Healing. She “intervenes”
-                  in helping individuals, entrepreneurs and business persons in
-                  overcoming their limiting beliefs and bring positive mindset
-                  changes, resulting in them achieving breakthroughs and
-                  becoming champions of their lives.
-                </p>
+                <h1 className="fw-bolder">{data.title}</h1>
+                <p className="text-start">{data.description}</p>
                 <div className="second-heading">
-                  <h3 className="">My Calling</h3>
-                  <p>
-                    She had discovered her life's calling through her work in
-                    schools and how she could make an impact to the youths and
-                    children and create positive changes in them.
-                  </p>
+                  <h3>{data.subtitle}</h3>
+                  <p>{data.subdescription}</p>
                 </div>
               </div>
             </div>
             <div className="col-md-5 col-12 d-flex justify-content-center">
               <div className="hero-img px-5 py-2">
-                <img src={heroImg} alt="heroImg" className="img-fluid" />
+                <img
+                  src={`${imgUrl}${data.image_path}`}
+                  alt={data.title}
+                  className="img-fluid"
+                />
               </div>
             </div>
           </div>
@@ -126,4 +135,4 @@ function hero() {
   );
 }
 
-export default hero;
+export default Hero;
