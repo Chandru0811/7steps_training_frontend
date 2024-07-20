@@ -14,17 +14,20 @@ function AdminHeader() {
 
   const formik = useFormik({
     initialValues: {
-      headerLogo: null,
+      headerLogo: datas.headerLogo,
       logoText: datas.logoText,
     },
     onSubmit: (values) => {
       console.log("Header Datas :", values);
+      if (previewImage) {
+        values.headerLogo = URL.createObjectURL(previewImage);
+      }
       setDatas({
-        headerLogo: values.headerLogo ? URL.createObjectURL(values.headerLogo) : datas.headerLogo,
+        headerLogo: values.headerLogo,
         logoText: values.logoText,
       });
       setEditMode({});
-      setPreviewImage(null); // Reset the preview image after saving
+      setPreviewImage(null);
     },
   });
 
@@ -49,15 +52,12 @@ function AdminHeader() {
       ...prevState,
       [field]: false,
     }));
-    setPreviewImage(null); // Reset the preview image on cancel
+    setPreviewImage(null); 
   };
 
-  const handleChange = (e, key) => {
-    const file = e.target.files ? e.target.files[0] : e.target.value;
-    formik.setFieldValue(key, file);
-
-    if (key === "headerLogo" && e.target.files) {
-      setPreviewImage(URL.createObjectURL(file));
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+        setPreviewImage(e.target.files[0]);
     }
   };
 
@@ -88,16 +88,16 @@ function AdminHeader() {
                 <>
                   <input
                     type="file"
-                    className="form-control"
+                    className="form-control mb-2"
                     accept="image/*"
-                    onChange={(e) => handleChange(e, "headerLogo")}
+                    onChange={handleImageChange}
                   />
                   <FaSave onClick={() => handleSave("headerLogo")} className='text-primary' />
                   <FaTimes onClick={() => handleCancel("headerLogo")} className='mx-2 text-danger' />
                 </>
               ) : null}
               <img
-                src={previewImage || datas.headerLogo}
+                src={previewImage ? URL.createObjectURL(previewImage) : formik.values.headerLogo}
                 alt="Goal"
                 className="img-fluid goalImg"
                 width={50}
@@ -116,7 +116,7 @@ function AdminHeader() {
                     className="form-control mb-1"
                     {...formik.getFieldProps("logoText")}
                     value={formik.values.logoText}
-                    onChange={(e) => handleChange(e, "logoText")}
+                    onChange={(e) => formik.setFieldValue("logoText", e.target.value)}
                   />
                   <FaSave onClick={() => handleSave("logoText")} className='text-primary' />
                   <FaTimes onClick={() => handleCancel("logoText")} className='mx-2 text-danger' />

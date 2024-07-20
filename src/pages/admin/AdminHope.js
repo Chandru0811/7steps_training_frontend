@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import goalImage from "../../assets/Hope1.jpg";
-import { FaEdit, FaSave, FaTimes, FaPlus } from "react-icons/fa";
+import { FaEdit, FaSave, FaTimes, FaPlus, FaCheckSquare } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
 import { useFormik } from "formik";
@@ -10,8 +10,7 @@ function AdminHope() {
     const [previewImage, setPreviewImage] = useState(null);
 
     const [datas, setDatas] = useState({
-        section1: [
-            {
+        section1: {
                 hopeImage: goalImage,
                 hopeHeading1: "Goals",
                 hopeDescription1:
@@ -27,7 +26,6 @@ function AdminHope() {
                     "Relationship Management",
                 ],
             },
-        ],
         section2: {
             hopeHeading3: "Programme Outcomes",
             programmeCards: [
@@ -117,12 +115,12 @@ function AdminHope() {
 
     const formik = useFormik({
         initialValues: {
-            hopeImage: datas.section1[0].hopeImage,
-            hopeHeading1: datas.section1[0].hopeHeading1,
-            hopeDescription1: datas.section1[0].hopeDescription1,
-            hopeHeading2: datas.section1[0].hopeHeading2,
-            hopeDescription2: datas.section1[0].hopeDescription2,
-            objectivesPoints: datas.section1[0].objectivesPoints,
+            hopeImage: datas.section1.hopeImage,
+            hopeHeading1: datas.section1.hopeHeading1,
+            hopeDescription1: datas.section1.hopeDescription1,
+            hopeHeading2: datas.section1.hopeHeading2,
+            hopeDescription2: datas.section1.hopeDescription2,
+            objectivesPoints: datas.section1.objectivesPoints,
             hopeHeading3: datas.section2.hopeHeading3,
             programmeCards: datas.section2.programmeCards,
             hopeHeading4: datas.section3.hopeHeading4,
@@ -241,6 +239,94 @@ function AdminHope() {
             return card;
         });
         formik.setFieldValue("programmeCards", newProgrammeCards);
+    };
+
+    const handlePointsChange1 = (e, index) => {
+        const { value } = e.target;
+        formik.setFieldValue(
+            "hPoints",
+            formik.values.hPoints.map((point, i) => (i === index ? value : point))
+        );
+    };
+
+    const handleAddPoint1 = () => {
+        formik.setFieldValue("hPoints", [
+            ...formik.values.hPoints,
+            "",
+        ]);
+    };
+
+    const handleDeletePoint1 = (index) => {
+        formik.setFieldValue(
+            "hPoints",
+            formik.values.hPoints.filter((_, i) => i !== index)
+        );
+    };
+
+    const handlePointsChange2 = (e, index) => {
+        const { value } = e.target;
+        formik.setFieldValue(
+            "oPoints",
+            formik.values.oPoints.map((point, i) => (i === index ? value : point))
+        );
+    };
+
+    const handleAddPoint2 = () => {
+        formik.setFieldValue("oPoints", [
+            ...formik.values.oPoints,
+            "",
+        ]);
+    };
+
+    const handleDeletePoint2 = (index) => {
+        formik.setFieldValue(
+            "oPoints",
+            formik.values.oPoints.filter((_, i) => i !== index)
+        );
+    };
+
+    const handlePointsChange3 = (e, index) => {
+        const { value } = e.target;
+        formik.setFieldValue(
+            "pPoints",
+            formik.values.pPoints.map((point, i) => (i === index ? value : point))
+        );
+    };
+
+    const handleAddPoint3 = () => {
+        formik.setFieldValue("pPoints", [
+            ...formik.values.pPoints,
+            "",
+        ]);
+    };
+
+    const handleDeletePoint3 = (index) => {
+        formik.setFieldValue(
+            "pPoints",
+            formik.values.pPoints.filter((_, i) => i !== index)
+        );
+    };
+
+    const handlePointsChange4 = (e, index) => {
+        const { value } = e.target;
+        formik.setFieldValue(
+            "ePoints",
+            formik.values.ePoints.map((point, i) => (i === index ? value : point))
+        );
+    };
+
+    const handleAddPoint4 = () => {
+        formik.setFieldValue("ePoints", [
+            ...formik.values.ePoints,
+            "",
+        ]);
+    };
+
+    const handleDeletePoint4 = (index) => {
+        formik.setFieldValue(
+            "ePoints",
+            formik.values.ePoints.filter((_, i) => i !== index)
+        );
     };
 
     return (
@@ -512,7 +598,7 @@ function AdminHope() {
                             </div>
                         ) : (
                             <div className="d-flex justify-content-center align-items-center">
-                                <h1 className="fw-bolder mb-5" style={{ color: "#7C2C83" }}>
+                                <h1 className="fw-bolder mb-5">
                                     {formik.values.hopeHeading4}
                                 </h1>
                                 <FaEdit
@@ -529,7 +615,7 @@ function AdminHope() {
                                         <div className='d-flex'>
                                             <input
                                                 type="text"
-                                                className="form-control mb-3"
+                                                className="form-control"
                                                 name="hContent"
                                                 value={formik.values.hContent}
                                                 onChange={formik.handleChange}
@@ -543,10 +629,266 @@ function AdminHope() {
                                                 {formik.values.hContent}
                                             </h4>
                                             <FaEdit
-                                                className="mb-5 ms-2 text-secondary"
+                                                className="position-absolute top-0 end-0 mt-2 me-3 text-secondary"
                                                 onClick={() => handleEditClick("hContent")}
                                             />
                                         </div>
+                                    )}
+                                </div>
+                            </div>
+                            <div className='col-md-9 col-12'>
+                                <div className='card modulesSubcard1 p-3'>
+                                    {editMode.hPoints ? (
+                                        <>
+                                            <ul style={{ listStyle: "none", padding: 0 }} className="me-2">
+                                                {formik.values.hPoints.map((point, index) => (
+                                                    <li key={index} className="d-flex align-items-center mb-3">
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            value={point}
+                                                            onChange={(e) => handlePointsChange1(e, index)}
+                                                        />
+                                                        <IoIosCloseCircleOutline
+                                                            className="ms-2 mt-2 sectionHome1Cancel"
+                                                            onClick={() => handleDeletePoint1(index)}
+                                                        />
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <div className="d-flex">
+                                                <FaPlus onClick={handleAddPoint1} className="text-success" />
+                                                <FaSave onClick={formik.handleSubmit} className="text-primary mx-2" />
+                                                <FaTimes onClick={() => setEditMode({})} className="text-danger" />
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <ul style={{ listStyle: "none", padding: 0 }}>
+                                                {formik.values.hPoints.map((point, index) => (
+                                                    <li key={index} className='mb-3'><FaCheckSquare color="#F6C00B" className='mb-1' /> {point}</li>
+                                                ))}
+                                            </ul>
+                                            <FaEdit
+                                                className="position-absolute top-0 end-0 mt-2 me-3 text-secondary"
+                                                onClick={() => handleEditClick("hPoints")}
+                                            />
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='row hopeCardRow2 mt-5 pt-5'>
+                            <div className='col-md-9 col-12 order-md-1 order-2'>
+                                <div className='card modulesSubcard2 p-3'>
+                                    {editMode.oPoints ? (
+                                        <>
+                                            <ul style={{ listStyle: "none", padding: 0 }} className="me-2">
+                                                {formik.values.oPoints.map((point, index) => (
+                                                    <li key={index} className="d-flex align-items-center mb-3">
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            value={point}
+                                                            onChange={(e) => handlePointsChange2(e, index)}
+                                                        />
+                                                        <IoIosCloseCircleOutline
+                                                            className="ms-2 mt-2 sectionHome1Cancel"
+                                                            onClick={() => handleDeletePoint2(index)}
+                                                        />
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <div className="d-flex">
+                                                <FaPlus onClick={handleAddPoint2} className="text-success" />
+                                                <FaSave onClick={formik.handleSubmit} className="text-primary mx-2" />
+                                                <FaTimes onClick={() => setEditMode({})} className="text-danger" />
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <ul style={{ listStyle: "none", padding: 0 }}>
+                                                {formik.values.oPoints.map((point, index) => (
+                                                    <li key={index} className='mb-3'><FaCheckSquare color="#F6C00B" className='mb-1' /> {point}</li>
+                                                ))}
+                                            </ul>
+                                            <FaEdit
+                                                className="position-absolute top-0 end-0 mt-2 me-3 text-secondary"
+                                                onClick={() => handleEditClick("oPoints")}
+                                            />
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                            <div className='col-md-3 col-12 hopeImageCard2 order-md-2 order-1'>
+                                <div className='card modulesCard p-3'>
+                                    <h1 style={{ color: "#7C2C83" }} className='text-center fw-bold'>H<span className='modulesHeading'>O</span>PE</h1>
+                                    {editMode.oContent ? (
+                                        <div className='d-flex'>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="oContent"
+                                                value={formik.values.oContent}
+                                                onChange={formik.handleChange}
+                                            />
+                                            <FaSave onClick={formik.handleSubmit} className="mt-2 mx-2 text-primary" />
+                                            <FaTimes onClick={() => setEditMode({})} className="mt-2 text-danger" />
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <FaEdit
+                                                className="position-absolute top-0 end-0 mt-2 me-3 text-secondary"
+                                                onClick={() => handleEditClick("oContent")}
+                                            />
+                                            <h4 className="text-center">
+                                                {formik.values.oContent}
+                                            </h4>
+                                            
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='row hopeCardRow pt-5' style={{ marginTop: "100px" }}>
+                            <div className='col-md-3 col-12 hopeImageCard1'>
+                                <div className='card modulesCard p-3'>
+                                    <h1 style={{ color: "#7C2C83" }} className='text-center fw-bold'>HO<span className='modulesHeading'>P</span>E</h1>
+                                    {editMode.pContent ? (
+                                        <div className='d-flex'>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="pContent"
+                                                value={formik.values.pContent}
+                                                onChange={formik.handleChange}
+                                            />
+                                            <FaSave onClick={formik.handleSubmit} className="mt-2 mx-2 text-primary" />
+                                            <FaTimes onClick={() => setEditMode({})} className="mt-2 text-danger" />
+                                        </div>
+                                    ) : (
+                                        <div className="d-flex justify-content-center align-items-center">
+                                            <h4 className="text-center">
+                                                {formik.values.pContent}
+                                            </h4>
+                                            <FaEdit
+                                                className="position-absolute top-0 end-0 mt-2 me-3 text-secondary"
+                                                onClick={() => handleEditClick("pContent")}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                            <div className='col-md-9 col-12'>
+                                <div className='card modulesSubcard1 p-3'>
+                                    {editMode.pPoints ? (
+                                        <>
+                                            <ul style={{ listStyle: "none", padding: 0 }} className="me-2">
+                                                {formik.values.pPoints.map((point, index) => (
+                                                    <li key={index} className="d-flex align-items-center mb-3">
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            value={point}
+                                                            onChange={(e) => handlePointsChange3(e, index)}
+                                                        />
+                                                        <IoIosCloseCircleOutline
+                                                            className="ms-2 mt-2 sectionHome1Cancel"
+                                                            onClick={() => handleDeletePoint3(index)}
+                                                        />
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <div className="d-flex">
+                                                <FaPlus onClick={handleAddPoint3} className="text-success" />
+                                                <FaSave onClick={formik.handleSubmit} className="text-primary mx-2" />
+                                                <FaTimes onClick={() => setEditMode({})} className="text-danger" />
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <ul style={{ listStyle: "none", padding: 0 }}>
+                                                {formik.values.pPoints.map((point, index) => (
+                                                    <li key={index} className='mb-3'><FaCheckSquare color="#F6C00B" className='mb-1' /> {point}</li>
+                                                ))}
+                                            </ul>
+                                            <FaEdit
+                                                className="position-absolute top-0 end-0 mt-2 me-3 text-secondary"
+                                                onClick={() => handleEditClick("pPoints")}
+                                            />
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='row hopeCardRow2 mt-5 pt-5'>
+                            <div className='col-md-9 col-12 order-md-1 order-2'>
+                                <div className='card modulesSubcard2 p-3'>
+                                    {editMode.ePoints ? (
+                                        <>
+                                            <ul style={{ listStyle: "none", padding: 0 }} className="me-2">
+                                                {formik.values.ePoints.map((point, index) => (
+                                                    <li key={index} className="d-flex align-items-center mb-3">
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            value={point}
+                                                            onChange={(e) => handlePointsChange4(e, index)}
+                                                        />
+                                                        <IoIosCloseCircleOutline
+                                                            className="ms-2 mt-2 sectionHome1Cancel"
+                                                            onClick={() => handleDeletePoint4(index)}
+                                                        />
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <div className="d-flex">
+                                                <FaPlus onClick={handleAddPoint4} className="text-success" />
+                                                <FaSave onClick={formik.handleSubmit} className="text-primary mx-2" />
+                                                <FaTimes onClick={() => setEditMode({})} className="text-danger" />
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <ul style={{ listStyle: "none", padding: 0 }}>
+                                                {formik.values.ePoints.map((point, index) => (
+                                                    <li key={index} className='mb-3'><FaCheckSquare color="#F6C00B" className='mb-1' /> {point}</li>
+                                                ))}
+                                            </ul>
+                                            <FaEdit
+                                                className="position-absolute top-0 end-0 mt-2 me-3 text-secondary"
+                                                onClick={() => handleEditClick("ePoints")}
+                                            />
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                            <div className='col-md-3 col-12 hopeImageCard2 order-md-2 order-1'>
+                                <div className='card modulesCard p-3'>
+                                    <h1 style={{ color: "#7C2C83" }} className='text-center fw-bold'>HOP<span className='modulesHeading'>E</span></h1>
+                                    {editMode.eContent ? (
+                                        <div className='d-flex'>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="eContent"
+                                                value={formik.values.eContent}
+                                                onChange={formik.handleChange}
+                                            />
+                                            <FaSave onClick={formik.handleSubmit} className="mt-2 mx-2 text-primary" />
+                                            <FaTimes onClick={() => setEditMode({})} className="mt-2 text-danger" />
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <FaEdit
+                                                className="position-absolute top-0 end-0 mt-2 me-3 text-secondary"
+                                                onClick={() => handleEditClick("eContent")}
+                                            />
+                                            <h4 className="text-center">
+                                                {formik.values.eContent}
+                                            </h4>
+                                            
+                                        </>
                                     )}
                                 </div>
                             </div>
