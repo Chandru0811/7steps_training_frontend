@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import heroImg from "../../assets/Home hero img.jpg";
+import React, { useState, useEffect } from "react";
+import api from "../../config/URL";
+import imgUrl from "../../config/ImgUrl";
 import cardIcon1 from "../../assets/Home-card-icon-1.jpg";
 import cardIcon2 from "../../assets/Home-card-icon-2.jpg";
 import cardIcon3 from "../../assets/Home-card-icon-3.jpg";
@@ -11,66 +12,78 @@ import { Formik, useFormik } from "formik";
 
 function AdminHome() {
   const [data, setData] = useState({
-    heroTitle: `Hello! I'm Reihana, Intervention Coach`,
-    heroContent: `I'm a specialising in and Emotional Healing. She
-                    “intervenes” in helping individuals, entrepreneurs and
-                    business persons in overcoming their limiting beliefs and
-                    bring positive mindset changes, resulting in them achieving
-                    breakthroughs and becoming champions of their lives.`,
-    heroSubTitle: `My Calling`,
-    heroSubContent: `She had discovered her life's calling through her work in schools and how she
-     could make an impact to the youths and children and create positive changes in them.`,
-    heroCard: [
-      {
-        id: 1,
-        cardIcon: cardIcon1,
-        title: "My Journey",
-        description: `Having lost her mum to schizophrenia. Her own journey of losing her identity of low self-esteem, resentments and unfulfillment with life. Her eventual rock bottom came when she found herself on a hospital bed almost going to be paralysed from the waist down, due to spinal issues (cauda equina syndrome). 
-     
-Her spine surgery in 2019 which put 6 metal screws and a metal cage in her spine, and her having to relearn walking again. Her estrangement with her family due to strained relationships which almost ended up in divorce. And everything in her life became out of balance.`,
-      },
-      {
-        id: 2,
-        cardIcon: cardIcon2,
-        title: "My Transformation",
-        description: `In 2019-2020, she managed to turn her life around, awakening herself out of darkness and regaining her power to emerge successful in her health, finances, relations, career and life. 
-
-All this was due to her changing her mindset - shift in her thinking, speaking, behaviour and positive actions, together with persistence and perserverence.`,
-      },
-      {
-        id: 3,
-        cardIcon: cardIcon3,
-        title: "My Mission",
-        description: `Realising that many people were, like herself, victims of self-doubt, self-sabotage and self-destruction due to trauma, negative thoughts and past programming and events which have occurred in their lives, which often lead to destructive behaviours, depression and suicide, she felt she had to step up to help others.
-      
-With experiences from her own life, her mum’s, her work with students and individuals, she is now on a mission transforming lives and empowering and inspiring many.,`,
-      },
-      {
-        id: 4,
-        cardIcon: cardIcon4,
-        title: "My Success",
-        description: `In a few short years, she has changed her life drastically and the life of her family and participants. She has regained back her confidence; her life, finances, relationships and career.`,
-      },
-      {
-        id: 5,
-        cardIcon: cardIcon5,
-        title: "My Passion",
-        description: `Her passion still remails with working with youths and the vulnerable of society`,
-      },
-      {
-        id: 6,
-        cardIcon: cardIcon6,
-        title: "My Motto",
-        description: `Passion and commitment in all that I do.
-      
-Become a progressivist in your own life.`,
-      },
-    ],
-    homeHeroImg: heroImg,
+    heroTitle: "",
+    heroContent: "",
+    heroSubTitle: "",
+    heroSubContent: "",
+    heroCard: [],
+    homeHeroImg: "",
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get("homepage");
+        const apiData = response.data;
+
+        const formattedData = {
+          heroTitle: apiData.title,
+          heroContent: apiData.description,
+          heroSubTitle: apiData.subtitle,
+          heroSubContent: apiData.subdescription,
+          heroCard: [
+            {
+              id: 1,
+              cardIcon: cardIcon1, // Adjust if the icons are different
+              title: apiData.journey,
+              description: apiData.journeydescription,
+            },
+            {
+              id: 2,
+              cardIcon: cardIcon2,
+              title: apiData.transformation,
+              description: apiData.transformationdescription,
+            },
+            {
+              id: 3,
+              cardIcon: cardIcon3,
+              title: apiData.mission,
+              description: apiData.missiondescription,
+            },
+            {
+              id: 4,
+              cardIcon: cardIcon4,
+              title: apiData.success,
+              description: apiData.successdescription,
+            },
+            {
+              id: 5,
+              cardIcon: cardIcon5,
+              title: apiData.passion,
+              description: apiData.passiondescription,
+            },
+            {
+              id: 6,
+              cardIcon: cardIcon6,
+              title: apiData.moto,
+              description: apiData.motodescription,
+            },
+          ],
+          homeHeroImg: `${imgUrl}${apiData.image_path}`,
+        };
+
+        setData(formattedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const formik = useFormik({
     initialValues: data,
+    enableReinitialize: true,
     onSubmit: (values) => {
       console.log("values", values);
       setData("values", values);
