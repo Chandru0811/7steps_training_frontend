@@ -148,106 +148,182 @@ function AdminAbout() {
     setEditingIndex(null);
   };
 
+  const handleAddPoint = () => {
+    formik.setFieldValue("heroCard", [
+      ...formik.values.heroCard,
+      "",
+    ]);
+  };
+
+  const handleDeletePoint = (index) => {
+    formik.setFieldValue(
+      "heroCard",
+      formik.values.heroCard.filter((_, i) => i !== index)
+    );
+  };
+
+  const handleDescriptionChange = (e, cardIndex, descIndex) => {
+    const { value } = e.target;
+    const newHeroCard = formik.values.heroCard.map((card, i) => {
+      if (i === cardIndex) {
+        return {
+          ...card,
+          description: card.description.map((desc, j) =>
+            j === descIndex ? value : desc
+          ),
+        };
+      }
+      return card;
+    });
+    formik.setFieldValue("heroCard", newHeroCard);
+  };
+
+  const handleAddDescription = (cardIndex) => {
+    const newHeroCard = formik.values.heroCard.map((card, i) => {
+      if (i === cardIndex) {
+        return {
+          ...card,
+          description: [...card.description, ""],
+        };
+      }
+      return card;
+    });
+    formik.setFieldValue("heroCard", newHeroCard);
+  };
+
+  const handleDeleteDescription = (cardIndex, descIndex) => {
+    const newHeroCard = formik.values.heroCard.map((card, i) => {
+      if (i === cardIndex) {
+        return {
+          ...card,
+          description: card.description.filter((_, j) => j !== descIndex),
+        };
+      }
+      return card;
+    });
+    formik.setFieldValue("heroCard", newHeroCard);
+  };
+
   return (
     <section>
-      <form onSubmit={formik.handleSubmit}>
-        <div className="container-fluid">
+      <div className="container-fluid">
+        <form onSubmit={formik.handleSubmit}>
           {/* Hero Section */}
-          <div className="row mb-5">
-            {isEditing === "homeHeroImg" ? (
-              <div>
-                <div className="d-flex">
-                  <FaSave onClick={handleSaveClick} />
-                  <FaTimes onClick={handleCancel} />
-                </div>
-                <input
-                  type="file"
-                  name="homeHeroImg"
-                  onChange={handleFileChange}
-                  className="form-control"
-                />
-              </div>
-            ) : (
-              <div>
-                <FaEdit onClick={() => setIsEditing("homeHeroImg")} />
-              </div>
-            )}
-            <div>
-              {formik.values.homeHeroImg &&
-                (typeof formik.values.homeHeroImg === "string" ? (
-                  <img
-                    src={formik.values.homeHeroImg}
-                    alt="heroImg"
-                    className="img-fluid"
-                  />
-                ) : (
-                  <img
-                    src={URL.createObjectURL(formik.values.homeHeroImg)}
-                    alt="heroImg"
-                    className="img-fluid"
-                  />
-                ))}
-
-              {isEditing === "heroTitle" ? (
+          <div className="hero-section" style={{ position: 'relative', textAlign: 'center', maxHeight: '100vh', overflow: 'hidden' }}>
+            <div className="row mb-5">
+              {isEditing === 'homeHeroImg' ? (
                 <div>
-                  <div className="d-flex">
-                    <FaSave onClick={() => handleSaveClick("heroTitle")} />
-                    <FaTimes onClick={handleCancel} />
+                  <div className="d-flex justify-content-center mb-2">
+                    <FaSave onClick={handleSaveClick} style={{ cursor: 'pointer' }} />
+                    <FaTimes onClick={handleCancel} style={{ cursor: 'pointer', marginLeft: '10px' }} />
                   </div>
                   <input
-                    type="text"
-                    name="heroTitle"
-                    {...formik.getFieldProps("heroTitle")}
-                    onChange={formik.handleChange}
+                    type="file"
+                    name="homeHeroImg"
+                    onChange={handleFileChange}
                     className="form-control"
+                    style={{ margin: '0 auto', width: '300px' }}
                   />
                 </div>
               ) : (
                 <div>
-                  <FaEdit onClick={() => handleEditClick("heroTitle")} />
-                  <h1>{formik.values.heroTitle}</h1>
+                  <FaEdit onClick={() => setIsEditing('homeHeroImg')} style={{ cursor: 'pointer' }} />
                 </div>
               )}
-              {isEditing === "heroContent" ? (
-                <div>
-                  <div className="d-flex">
-                    <FaSave onClick={() => handleSaveClick("heroContent")} />
-                    <FaTimes onClick={handleCancel} />
-                  </div>
-                  <textarea
-                    name="heroContent"
-                    {...formik.getFieldProps("heroContent")}
-                    onChange={formik.handleChange}
-                    className="form-control"
-                    rows="3"
-                  />
+              <div style={{ position: 'relative', width: '100%' }}>
+                {formik.values.homeHeroImg &&
+                  (typeof formik.values.homeHeroImg === 'string' ? (
+                    <img
+                      src={formik.values.homeHeroImg}
+                      alt="heroImg"
+                      className="img-fluid"
+                      style={{ width: '100%', height: '100vh', opacity: '0.3', objectFit: 'cover' }}
+                    />
+                  ) : (
+                    <img
+                      src={URL.createObjectURL(formik.values.homeHeroImg)}
+                      alt="heroImg"
+                      className="img-fluid"
+                      style={{ width: '100%', height: '100vh', opacity: '0.3', objectFit: 'cover' }}
+                    />
+                  ))}
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    color: 'white',
+                    textAlign: 'center',
+                    width: '100%',
+                    padding: '0 10px',
+                  }}
+                >
+                  {isEditing === 'heroTitle' ? (
+                    <div>
+                      <div className="d-flex justify-content-center mb-2">
+                        <FaSave onClick={handleSaveClick} style={{ cursor: 'pointer' }} />
+                        <FaTimes onClick={handleCancel} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+                      </div>
+                      <input
+                        type="text"
+                        name="heroTitle"
+                        {...formik.getFieldProps('heroTitle')}
+                        onChange={formik.handleChange}
+                        className="form-control"
+                        style={{ margin: '0 auto', width: '300px' }}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <FaEdit onClick={() => handleEditClick('heroTitle')} style={{ cursor: 'pointer' }} />
+                      <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>{formik.values.heroTitle}</h1>
+                    </div>
+                  )}
+                  {isEditing === 'heroContent' ? (
+                    <div>
+                      <div className="d-flex justify-content-center mb-2">
+                        <FaSave onClick={handleSaveClick} style={{ cursor: 'pointer' }} />
+                        <FaTimes onClick={handleCancel} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+                      </div>
+                      <textarea
+                        name="heroContent"
+                        {...formik.getFieldProps('heroContent')}
+                        onChange={formik.handleChange}
+                        className="form-control"
+                        rows="3"
+                        style={{ margin: '0 auto', width: '300px' }}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <FaEdit onClick={() => handleEditClick('heroContent')} style={{ cursor: 'pointer' }} />
+                      <p style={{ fontSize: '1.2rem' }}>{formik.values.heroContent}</p>
+                    </div>
+                  )}
+                  {isEditing === 'heroFounded' ? (
+                    <div>
+                      <div className="d-flex justify-content-center mb-2">
+                        <FaSave onClick={handleSaveClick} style={{ cursor: 'pointer' }} />
+                        <FaTimes onClick={handleCancel} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+                      </div>
+                      <input
+                        type="text"
+                        name="heroFounded"
+                        {...formik.getFieldProps('heroFounded')}
+                        onChange={formik.handleChange}
+                        className="form-control"
+                        style={{ margin: '0 auto', width: '300px' }}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <FaEdit onClick={() => handleEditClick('heroFounded')} style={{ cursor: 'pointer' }} />
+                      <p style={{ fontSize: '1rem' }}>{formik.values.heroFounded}</p>
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <div>
-                  <FaEdit onClick={() => handleEditClick("heroContent")} />
-                  <p>{formik.values.heroContent}</p>
-                </div>
-              )}
-              {isEditing === "heroFounded" ? (
-                <div>
-                  <div className="d-flex">
-                    <FaSave onClick={() => handleSaveClick("heroFounded")} />
-                    <FaTimes onClick={handleCancel} />
-                  </div>
-                  <input
-                    type="text"
-                    name="heroFounded"
-                    {...formik.getFieldProps("heroFounded")}
-                    onChange={formik.handleChange}
-                    className="form-control"
-                  />
-                </div>
-              ) : (
-                <div>
-                  <FaEdit onClick={() => handleEditClick("heroFounded")} />
-                  <p>{formik.values.heroFounded}</p>
-                </div>
-              )}
+              </div>
             </div>
           </div>
           {/* What we do */}
@@ -370,10 +446,12 @@ function AdminAbout() {
                                   />
                                 </div>
                               ) : (
-                                <div>
+                                <>
                                   <FaEdit onClick={() => handleEditClick(`cardDescription${index}_${descIndex}`)} />
-                                  <ImCheckmark style={{ color: "#7c2c83" }} /><p>{desc}</p>
-                                </div>
+                                  <div className="">
+                                  <p><ImCheckmark style={{ color: "#7c2c83" }} />{desc}</p>
+                                  </div>
+                                </>
                               )}
                             </li>
                           ))}
@@ -489,8 +567,9 @@ function AdminAbout() {
               </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
+
     </section>
   );
 }

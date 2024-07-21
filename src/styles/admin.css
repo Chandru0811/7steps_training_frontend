@@ -173,6 +173,11 @@ body {
 /* Hope End */
 
 /* About */
+.adminAbout-container{
+  text-align: center;
+  color: var(--background-color);
+  min-height: 80vh;
+}
 
 .Admin-ourPartner {
   border-radius: 50%;
