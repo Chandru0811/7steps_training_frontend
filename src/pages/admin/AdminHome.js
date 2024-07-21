@@ -72,6 +72,7 @@ Become a progressivist in your own life.`,
   const formik = useFormik({
     initialValues: data,
     onSubmit: (values) => {
+      console.log("values", values);
       setData("values", values);
     },
   });
@@ -378,6 +379,7 @@ Become a progressivist in your own life.`,
                           ) : (
                             <div>
                               <button
+                                type="button"
                                 onClick={() =>
                                   handleEditClick("heroCard", index)
                                 }
@@ -430,6 +432,7 @@ Become a progressivist in your own life.`,
                           ) : (
                             <div>
                               <button
+                                type="button"
                                 onClick={() => handleEditClick(`title${index}`)}
                                 className="btn btn-sm link-secondary ms-2 edit-button"
                                 style={{ width: "fit-content" }}
@@ -471,6 +474,7 @@ Become a progressivist in your own life.`,
                       ) : (
                         <div>
                           <button
+                            type="button"
                             onClick={() =>
                               handleEditClick(`cardDescription${index}`)
                             }

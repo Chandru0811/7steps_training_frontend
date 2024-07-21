@@ -76,6 +76,14 @@ function HopeTestimonial() {
   const [show, setShow] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [isEditing, setIsEditing] = useState(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [newCardData, setNewCardData] = useState({
+    name: "",
+    testimonialTitle: "",
+    testimonialDescription: "",
+    testimonialImage: "",
+    testimonialDate: "",
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -111,6 +119,7 @@ function HopeTestimonial() {
   };
 
   const handleModalSaveClick = () => {
+    formik.handleSubmit();
     const updatedCardValues = formik.values.cardValues.map((card) =>
       card.id === selectedCard.id ? selectedCard : card
     );
@@ -140,6 +149,43 @@ function HopeTestimonial() {
     }
   };
 
+  const handleAddModalChange = (event) => {
+    const { name, value } = event.target;
+    setNewCardData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleAddImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewCardData((prevData) => ({
+          ...prevData,
+          testimonialImage: reader.result,
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleAddModalSave = () => {
+    const newCard = {
+      ...newCardData,
+      id: formik.values.cardValues.length + 1,
+    };
+    formik.setFieldValue("cardValues", [...formik.values.cardValues, newCard]);
+    setIsAddModalOpen(false);
+    setNewCardData({
+      name: "",
+      testimonialTitle: "",
+      testimonialDescription: "",
+      testimonialImage: "",
+      testimonialDate: "",
+    });
+  };
   return (
     <div>
       <div className="container-fluid py-2 bg-white">
@@ -147,7 +193,11 @@ function HopeTestimonial() {
           <div className="d-flex justify-content-between align-items-center">
             <h5 className="fw-bold">Hope Testimonials</h5>
             <div className="d-flex">
-              <button type="button" className="btn btn-button btn-sm px-4 me-3">
+              <button
+                type="button"
+                className="btn btn-button btn-sm px-4 me-3"
+                onClick={() => setIsAddModalOpen(true)}
+              >
                 Add
               </button>
               <button type="button" className="btn btn-button btn-sm px-4">
@@ -249,6 +299,7 @@ function HopeTestimonial() {
                     <div key={cardData.id} className="col-md-4 col-12 p-3">
                       <div className="card h-100">
                         <button
+                          type="button"
                           onClick={() => handleShow(cardData)}
                           className="btn btn-sm link-secondary ms-2 edit-button"
                           style={{ width: "fit-content" }}
@@ -301,159 +352,160 @@ function HopeTestimonial() {
         <Modal.Header closeButton>
           <Modal.Title>Edit Testimonial</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="p-4">
-          <input
-            type="file"
-            name="testimonialImage"
-            onChange={handleImageChange}
-            className="form-control mb-2"
-          />
-          <input
-            type="text"
-            name="name"
-            value={selectedCard ? selectedCard.name : ""}
-            onChange={handleModalChange}
-            className="form-control mb-2"
-          />
-          <input
-            type="text"
-            name="testimonialTitle"
-            value={selectedCard ? selectedCard.testimonialTitle : ""}
-            onChange={handleModalChange}
-            className="form-control mb-2"
-          />
-          <input
-            type="text"
-            name="testimonialDate"
-            value={selectedCard ? selectedCard.testimonialDate : ""}
-            onChange={handleModalChange}
-            className="form-control mb-2"
-          />
-          <textarea
-            name="testimonialDescription"
-            value={selectedCard ? selectedCard.testimonialDescription : ""}
-            onChange={handleModalChange}
-            className="form-control mb-2"
-            style={{ height: "200px" }}
-          />
-
-          <div className="d-flex justify-content-end mt-3">
-            <span>
-              <button
-                className="btn btn-primary btn-sm"
-                onClick={handleModalSaveClick}
-              >
-                Save
-              </button>
-            </span>
-          </div>
+        <Modal.Body>
+          {selectedCard && (
+            <>
+              <form>
+                <div className="form-group">
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    name="name"
+                    value={selectedCard.name}
+                    onChange={handleModalChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="testimonialTitle">Title</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="testimonialTitle"
+                    name="testimonialTitle"
+                    value={selectedCard.testimonialTitle}
+                    onChange={handleModalChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="testimonialDescription">Description</label>
+                  <textarea
+                    className="form-control"
+                    id="testimonialDescription"
+                    name="testimonialDescription"
+                    value={selectedCard.testimonialDescription}
+                    onChange={handleModalChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="testimonialDate">Date</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="testimonialDate"
+                    name="testimonialDate"
+                    value={selectedCard.testimonialDate}
+                    onChange={handleModalChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="testimonialImage">Image</label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    id="testimonialImage"
+                    onChange={handleImageChange}
+                  />
+                  {selectedCard.testimonialImage && (
+                    <img
+                      src={selectedCard.testimonialImage}
+                      alt={selectedCard.name}
+                      className="img-fluid mt-2"
+                    />
+                  )}
+                </div>
+              </form>
+            </>
+          )}
         </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleModalSaveClick}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
       </Modal>
 
       {/* Modal for adding new card */}
-      {/* {isAddModalOpen && (
-        <Modal show onHide={() => setIsAddModalOpen(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add Testimonial</Modal.Title>
-          </Modal.Header>
-          <div className="d-flex">
-            <button
-              onClick={handleAddModalSave}
-              className="btn link-primary ms-2"
-              style={{ width: "fit-content" }}
-            >
-              <FaSave />
-            </button>
-            <button
-              onClick={() => setIsAddModalOpen(false)}
-              className="btn link-danger  ms-2"
-              style={{ width: "fit-content" }}
-            >
-              <FaTimes />
-            </button>
-          </div>
-          <Modal.Body>
-            <div className="row">
-              <div className="col-3">
-                <div>
-                  <label htmlFor="testimonialImage">New Image</label>
-                </div>
-              </div>
-              <div className="col-9">
-                <input
-                  type="file"
-                  onChange={handleImageChangeNewCard}
-                  className="form-control mb-2"
-                />
-              </div>
+      <Modal show={isAddModalOpen} onHide={() => setIsAddModalOpen(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add New Testimonial</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form>
+            <div className="form-group">
+              <label htmlFor="newName">Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="newName"
+                name="name"
+                value={newCardData.name}
+                onChange={handleAddModalChange}
+              />
             </div>
-            <div className="row">
-              <div className="col-3">
-                <div>
-                  <label htmlFor="testimonialName">Name</label>
-                </div>
-              </div>
-              <div className="col-9">
-                <input
-                  type="text"
-                  name="name"
-                  value={newCardData.name}
-                  onChange={handleNewCardChange}
-                  className="form-control mb-2"
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="newTitle">Title</label>
+              <input
+                type="text"
+                className="form-control"
+                id="newTitle"
+                name="testimonialTitle"
+                value={newCardData.testimonialTitle}
+                onChange={handleAddModalChange}
+              />
             </div>
-            <div className="row">
-              <div className="col-3">
-                <div>
-                  <label htmlFor="testimonialTitle">Title</label>
-                </div>
-              </div>
-              <div className="col-9">
-                <input
-                  type="text"
-                  name="testimonialTitle"
-                  value={newCardData.testimonialTitle}
-                  onChange={handleNewCardChange}
-                  className="form-control mb-2"
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="newDescription">Description</label>
+              <textarea
+                className="form-control"
+                id="newDescription"
+                name="testimonialDescription"
+                value={newCardData.testimonialDescription}
+                onChange={handleAddModalChange}
+              />
             </div>
-            <div className="row">
-              <div className="col-3">
-                <div>
-                  <label htmlFor="testimonialDate">Date</label>
-                </div>
-              </div>
-              <div className="col-9">
-                <input
-                  type="text"
-                  name="testimonialDate"
-                  value={newCardData.testimonialDate}
-                  onChange={handleNewCardChange}
-                  className="form-control mb-2"
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="newDate">Date</label>
+              <input
+                type="text"
+                className="form-control"
+                id="newDate"
+                name="testimonialDate"
+                value={newCardData.testimonialDate}
+                onChange={handleAddModalChange}
+              />
             </div>
-            <div className="row">
-              <div className="col-3">
-                <div>
-                  <label htmlFor="testimonialDescription">Description</label>
-                </div>
-              </div>
-              <div className="col-9">
-                <textarea
-                  name="testimonialDescription"
-                  value={newCardData.testimonialDescription}
-                  onChange={handleNewCardChange}
-                  className="form-control mb-2"
-                  style={{ height: "200px" }}
+            <div className="form-group">
+              <label htmlFor="newImage">Image</label>
+              <input
+                type="file"
+                className="form-control"
+                id="newImage"
+                onChange={handleAddImageChange}
+              />
+              {newCardData.testimonialImage && (
+                <img
+                  src={newCardData.testimonialImage}
+                  alt={newCardData.name}
+                  className="img-fluid mt-2"
                 />
-              </div>
+              )}
             </div>
-          </Modal.Body>
-        </Modal>
-      )} */}
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setIsAddModalOpen(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleAddModalSave}>
+            Save Testimonial
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

@@ -16,9 +16,11 @@ function AdminOurProgrammes() {
       cardImg: ourCardImg1,
       title: "Awakening Your Power",
       description: "Mindset Transformation",
-      subTitle: "It is a 4-hour mindset transformation workshop. It covers the following topics:",
+      subTitle:
+        "It is a 4-hour mindset transformation workshop. It covers the following topics:",
       programmesCard: programmesCardImg,
-      subContent: "UNLOCK your subconscious beliefs that has been ruining your life-script and sabotaging your life",
+      subContent:
+        "UNLOCK your subconscious beliefs that has been ruining your life-script and sabotaging your life",
       btnTextColor: "#b7316e",
     },
     {
@@ -26,9 +28,11 @@ function AdminOurProgrammes() {
       cardImg: ourCardImg2,
       title: "Regaining Your Power",
       description: "Self Transformation",
-      subTitle: "It is a 4-hour mindset transformation workshop. It covers the following topics:",
+      subTitle:
+        "It is a 4-hour mindset transformation workshop. It covers the following topics:",
       programmesCard: programmesCardImg,
-      subContent: "UNLOCK your subconscious beliefs that has been ruining your life-script and sabotaging your life",
+      subContent:
+        "UNLOCK your subconscious beliefs that has been ruining your life-script and sabotaging your life",
       btnTextColor: "#01bb00",
     },
     {
@@ -36,9 +40,11 @@ function AdminOurProgrammes() {
       cardImg: ourCardImg3,
       title: "Living In Power",
       description: "Lifestyle Transformation",
-      subTitle: "It is a 4-hour mindset transformation workshop. It covers the following topics:",
+      subTitle:
+        "It is a 4-hour mindset transformation workshop. It covers the following topics:",
       programmesCard: programmesCardImg,
-      subContent: "UNLOCK your subconscious beliefs that has been ruining your life-script and sabotaging your life",
+      subContent:
+        "UNLOCK your subconscious beliefs that has been ruining your life-script and sabotaging your life",
       btnTextColor: "#ef6036",
     },
     {
@@ -46,9 +52,11 @@ function AdminOurProgrammes() {
       cardImg: ourCardImg4,
       title: "Awaken the Entrepreneur",
       description: "Journey to Entrepreneurship",
-      subTitle: "It is a 4-hour mindset transformation workshop. It covers the following topics:",
+      subTitle:
+        "It is a 4-hour mindset transformation workshop. It covers the following topics:",
       programmesCard: programmesCardImg,
-      subContent: "UNLOCK your subconscious beliefs that has been ruining your life-script and sabotaging your life",
+      subContent:
+        "UNLOCK your subconscious beliefs that has been ruining your life-script and sabotaging your life",
       btnTextColor: "#019bff",
     },
     {
@@ -56,9 +64,11 @@ function AdminOurProgrammes() {
       cardImg: ourCardImg5,
       title: "Awaken the Youth",
       description: "Youth Empowerment series (Project H.O.P.E)",
-      subTitle: "It is a 4-hour mindset transformation workshop. It covers the following topics:",
+      subTitle:
+        "It is a 4-hour mindset transformation workshop. It covers the following topics:",
       programmesCard: programmesCardImg,
-      subContent: "UNLOCK your subconscious beliefs that has been ruining your life-script and sabotaging your life",
+      subContent:
+        "UNLOCK your subconscious beliefs that has been ruining your life-script and sabotaging your life",
       btnTextColor: "#b7316e",
     },
   ];
@@ -99,6 +109,7 @@ function AdminOurProgrammes() {
   };
 
   const handleModalSaveClick = () => {
+    formik.handleSubmit();
     const updatedCardValues = formik.values.cardValues.map((card) =>
       card.id === selectedCard.id ? selectedCard : card
     );
@@ -233,6 +244,7 @@ function AdminOurProgrammes() {
                     <div className="col-lg-6 col-12 ps-5">
                       <div className="py-4">
                         <button
+                          type="button"
                           onClick={() => handleShow(cardData)}
                           className="btn link-light ms-2"
                           style={{
@@ -242,7 +254,7 @@ function AdminOurProgrammes() {
                         >
                           <FaEdit />
                         </button>
-                        <h3 className="text-light">{cardData.title}</h3>
+                        <h4 className="text-light">{cardData.title}</h4>
                         <p className="text-light">{cardData.description}</p>
                       </div>
                     </div>
@@ -261,20 +273,11 @@ function AdminOurProgrammes() {
         </div>
       </form>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header>
+        <Modal.Header closeButton>
           <Modal.Title>
             <div className="d-flex justify-content-between align-items-center">
               <div className="me-5">
                 <h4>Edit Our Programmes</h4>
-              </div>
-              <div className="d-flex px-5">
-               
-                <button
-                  className="btn btn-sm link-danger"
-                  onClick={handleClose}
-                >
-                  <FaTimes />
-                </button>
               </div>
             </div>
           </Modal.Title>
@@ -338,7 +341,12 @@ function AdminOurProgrammes() {
                 value={selectedCard ? selectedCard.btnTextColor : ""}
                 onChange={handleColorChange}
                 className="form-control"
-                style={{ width: "50px", height: "50px", borderRadius: "50%", marginRight: "10px" }}
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: "50%",
+                  marginRight: "10px",
+                }}
               />
               <input
                 type="text"
@@ -350,13 +358,15 @@ function AdminOurProgrammes() {
             </div>
           </div>
           <div className="d-flex justify-content-end mt-3">
-     <span> <button
-        className="btn btn-primary btn-sm"
-        onClick={handleModalSaveClick}
-      >
-        Save
-      </button></span>
-    </div>
+            <span>
+              <button
+                className="btn btn-primary btn-sm"
+                onClick={handleModalSaveClick}
+              >
+                Save
+              </button>
+            </span>
+          </div>
         </Modal.Body>
       </Modal>
     </>
