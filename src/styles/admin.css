@@ -171,3 +171,19 @@ body {
 }
 
 /* Hope End */
+
+/* About */
+
+.Admin-ourPartner {
+  border-radius: 50%;
+  background-color: var(--imagebg-color);
+  width: 100%;
+  min-height: 40vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+/* About End */
