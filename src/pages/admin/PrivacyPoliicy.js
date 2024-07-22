@@ -43,7 +43,7 @@ function PrivacyPolicy() {
                             <h4 className='fw-bold'>Privacy Policy</h4>
                         </div>
                         <div>
-                            <button type="button" className="btn btn-button btn-sm px-4">
+                            <button type="button" className="btn btn-button btn-sm px-4 py-2">
                                 Publish
                             </button>
                         </div>

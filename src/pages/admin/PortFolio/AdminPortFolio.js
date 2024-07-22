@@ -198,13 +198,25 @@ She considers herself a progress-tivist, an activist always on the path leading 
 
   return (
     <div>
+      <div className="container-fluid py-2 bg-white">
+                    <div className="row">
+                        <div className="d-flex justify-content-between align-items-center">
+                            <h5 className="fw-bold">Portfolio</h5>
+                            <div>
+                                <button type="button" className="btn btn-button btn-sm px-4 py-2">
+                                    Publish
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
       <div
         style={{
           backgroundImage: `url(${bgImg})`,
           backgroundSize: "cover",
           minHeight: "85vh",
           backgroundPosition: "center",
-        }}
+        }} className="pt-3"
       >
         {editingField === "heading" ? (
           <>
@@ -216,13 +228,13 @@ She considers herself a progress-tivist, an activist always on the path leading 
                 className="form-control form-control-sm mb-3 w-25"
               />
               <button
-                className="btn btn-sm btn-primary ms-2 "
+                className="btn btn-sm link-primary mb-3"
                 onClick={() => saveContent("heading")}
               >
                 <FaSave />
               </button>
               <button
-                className="btn btn-sm btn-secondary ms-2"
+                className="btn btn-sm link-danger mb-3"
                 onClick={cancelEdit}
               >
                 <FaTimes />
@@ -233,7 +245,7 @@ She considers herself a progress-tivist, an activist always on the path leading 
           <div className="d-flex justify-content-center">
             <h2 className="text-dark ">{formik.values.heading}</h2>
             <button
-              className="btn btn-sm  ms-2 "
+              className="btn btn-sm link-secondary mb-2"
               onClick={() => toggleEdit("heading")}
             >
               <FaEdit />
@@ -251,13 +263,13 @@ She considers herself a progress-tivist, an activist always on the path leading 
             />
 
             <button
-              className="btn btn-sm btn-primary ms-2 "
+              className="btn btn-sm link-primary mb-3"
               onClick={() => saveContent("subheading")}
             >
               <FaSave />
             </button>
             <button
-              className="btn btn-sm btn-secondary ms-2"
+              className="btn btn-sm link-danger mb-3"
               onClick={cancelEdit}
             >
               <FaTimes />
@@ -267,7 +279,7 @@ She considers herself a progress-tivist, an activist always on the path leading 
           <div className=" d-flex justify-content-center">
             <span className="custom-badge">{formik.values.subheading}</span>
             <button
-              className="btn btn-sm  ms-2 "
+              className="btn btn-sm link-secondary"
               onClick={() => toggleEdit("subheading")}
             >
               <FaEdit />
@@ -289,13 +301,13 @@ She considers herself a progress-tivist, an activist always on the path leading 
                   className="form-control mb-3"
                 />
                 <button
-                  className="btn btn-sm btn-primary ms-2"
+                  className="btn btn-sm link-primary mb-3"
                   onClick={() => saveContent("coach")}
                 >
                   <FaSave />
                 </button>
                 <button
-                  className="btn btn-sm btn-secondary ms-2"
+                  className="btn btn-sm link-danger mb-3"
                   onClick={cancelEdit}
                 >
                   <FaTimes />
@@ -305,7 +317,7 @@ She considers herself a progress-tivist, an activist always on the path leading 
               <>
                 <span className="custom-badge">{formik.values.coach}</span>
                 <button
-                  className="btn-sm edit-container ms-2"
+                  className="btn btn-sm link-secondary"
                   onClick={() => toggleEdit("coach")}
                 >
                   <FaEdit />
@@ -323,13 +335,13 @@ She considers herself a progress-tivist, an activist always on the path leading 
                   className="form-control mb-3"
                 />
                 <button
-                  className="btn btn-sm btn-primary ms-2"
+                  className="btn btn-sm link-primary mb-3"
                   onClick={() => saveContent("speaker")}
                 >
                   <FaSave />
                 </button>
                 <button
-                  className="btn btn-sm btn-secondary ms-2"
+                  className="btn btn-sn link-danger mb-3"
                   onClick={cancelEdit}
                 >
                   <FaTimes />
@@ -339,7 +351,7 @@ She considers herself a progress-tivist, an activist always on the path leading 
               <>
                 <span className="custom-badge">{formik.values.speaker}</span>
                 <button
-                  className="btn-sm edit-container ms-2"
+                  className="btn btn-sm link-secondary"
                   onClick={() => toggleEdit("speaker")}
                 >
                   <FaEdit />
@@ -362,7 +374,7 @@ She considers herself a progress-tivist, an activist always on the path leading 
         </div>
 
         {editingField === "heroImg" ? (
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center mt-2">
             <input
               type="file"
               name="heroImg"
@@ -373,25 +385,27 @@ She considers herself a progress-tivist, an activist always on the path leading 
             />
 
             <button
-              className="btn btn-sm btn-primary ms-2"
+              className="btn btn-sm link-primary ms-2"
               onClick={() => saveContent("heroImg")}
             >
               <FaSave />
             </button>
             <button
-              className="btn btn-sm btn-secondary ms-2"
+              className="btn btn-sm link-danger ms-2"
               onClick={cancelEdit}
             >
               <FaTimes />
             </button>
           </div>
         ) : (
-          <button
-            className="btn-sm edit-container ms-2"
+          <div className="d-flex justify-content-center">
+            <button
+            className="btn btn-sm link-secondary"
             onClick={() => toggleEdit("heroImg")}
           >
             <FaEdit />
           </button>
+          </div>
         )}
       </div>
       <div className="container-fluid mb-5">

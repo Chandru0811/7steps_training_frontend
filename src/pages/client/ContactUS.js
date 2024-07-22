@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/iframe-has-title */
 import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -51,11 +50,10 @@ function ContactUS() {
                     <label className="form-label">Name</label>
                     <input
                       type="text"
-                      className={`form-control ${
-                        formik.touched.name && formik.errors.name
+                      className={`form-control ${formik.touched.name && formik.errors.name
                           ? "is-invalid"
                           : ""
-                      }`}
+                        }`}
                       {...formik.getFieldProps("name")}
                     />
                     {formik.touched.name && formik.errors.name && (
@@ -70,11 +68,10 @@ function ContactUS() {
                     </label>
                     <input
                       type="email"
-                      className={`form-control ${
-                        formik.touched.email && formik.errors.email
+                      className={`form-control ${formik.touched.email && formik.errors.email
                           ? "is-invalid"
                           : ""
-                      }`}
+                        }`}
                       {...formik.getFieldProps("email")}
                     />
                     {formik.touched.email && formik.errors.email && (
@@ -112,7 +109,7 @@ function ContactUS() {
                 ></iframe>
               </div>
               <div className="row mt-3">
-                <div className="">
+                <div className="col-10">
                   <p>
                     <SlLocationPin size={20} color="#7C2C83" /> The Alexiar,237
                     Alexandra Road,#04-10,Singapore-159929.
@@ -127,85 +124,83 @@ function ContactUS() {
                     7Stepscoach.sg@gmail.com{" "}
                   </p>
                 </div>
+                <div className="col-2">
+                  <div className="d-flex flex-column justify-content-end align-items-end">
+                    <div
+                      className="card p-2 mb-3 iconBg"
+                    >
+                      <div>
+                        <a
+                          href="https://www.facebook.com/profile.php?id=100076189750922&mibextid=9R9pX"
+                          target="_blank"
+                        >
+                          <p className="card socialMedia-card p-2 mb-2">
+                            <FaFacebookF />
+                          </p>
+                        </a>
+                      </div>
+                      <div>
+                        <a
+                          href="https://instagram.com/7stepscoach?utm_source=qr&igshid=MzNlNGNkZWQ4M"
+                          target="_blank"
+                        >
+                          <p className="card socialMedia-card p-2 mb-2">
+                            <FaInstagram />
+                          </p>
+                        </a>
+                      </div>
+                      <div>
+                        <a
+                          href="https://www.linkedin.com/in/reihana-abdullah"
+                          target="_blank"
+                        >
+                          <p className="card socialMedia-card p-2 mb-2">
+                            <FaLinkedin />
+                          </p>
+                        </a>
+                      </div>
+                      <div>
+                        <a href="https://www.youtube.com/@fight2fit582" target="_blank">
+                          <p className="card socialMedia-card p-2 mb-2">
+                            <FaYoutube />
+                          </p>
+                        </a>
+                      </div>
+                      <div>
+                        <a
+                          href="https://www.tiktok.com/@the7stepscoach?_t=8f1ZaezjUhu&_r=1"
+                          target="_blank"
+                        >
+                          <p className="card socialMedia-card p-2 mb-2">
+                            <AiFillTikTok />
+                          </p>
+                        </a>
+                      </div>
+                      <div>
+                        <a href="https://wa.me/6590214952" target="_blank">
+                          <p className="card socialMedia-card p-2 mb-2">
+                            <FaWhatsapp />
+                          </p>
+                        </a>
+                      </div>
+                      <div>
+                        <a
+                          href="https://www.facebook.com/Meena013?mibextid=ZbWKwL"
+                          target="_blank"
+                        >
+                          <p className="card socialMedia-card p-2 mb-2">
+                            <FaFacebookF />
+                          </p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="d-flex flex-column justify-content-end align-items-end">
-          <div
-            className="card p-3"
-            style={{
-              borderRadius: "15px",
-              border: "none",
-              background: "#f6bf0b38",
-            }}
-          >
-            <div>
-              <a
-                href="https://www.facebook.com/profile.php?id=100076189750922&mibextid=9R9pX"
-                target="_blank"
-              >
-                <p className="card socialMedia-card p-2">
-                  <FaFacebookF />
-                </p>
-              </a>
-            </div>
-            <div>
-              <a
-                href="https://instagram.com/7stepscoach?utm_source=qr&igshid=MzNlNGNkZWQ4M"
-                target="_blank"
-              >
-                <p className="card socialMedia-card p-2">
-                  <FaInstagram />
-                </p>
-              </a>
-            </div>
-            <div>
-              <a
-                href="https://www.linkedin.com/in/reihana-abdullah"
-                target="_blank"
-              >
-                <p className="card socialMedia-card p-2">
-                  <FaLinkedin />
-                </p>
-              </a>
-            </div>
-            <div>
-              <a href="https://www.youtube.com/@fight2fit582" target="_blank">
-                <p className="card socialMedia-card p-2">
-                  <FaYoutube />
-                </p>
-              </a>
-            </div>
-            <div>
-              <a
-                href="https://www.tiktok.com/@the7stepscoach?_t=8f1ZaezjUhu&_r=1"
-                target="_blank"
-              >
-                <p className="card socialMedia-card p-2">
-                  <AiFillTikTok />
-                </p>
-              </a>
-            </div>
-            <div>
-              <a href="https://wa.me/6590214952" target="_blank">
-                <p className="card socialMedia-card p-2">
-                  <FaWhatsapp />
-                </p>
-              </a>
-            </div>
-            <div>
-              <a
-                href="https://www.facebook.com/Meena013?mibextid=ZbWKwL"
-                target="_blank"
-              >
-                <p className="card socialMedia-card p-2">
-                  <FaFacebookF />
-                </p>
-              </a>
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
   );

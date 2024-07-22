@@ -11,21 +11,21 @@ function AdminHope() {
 
     const [datas, setDatas] = useState({
         section1: {
-                hopeImage: goalImage,
-                hopeHeading1: "Goals",
-                hopeDescription1:
-                    "To develop the 21st Century Competencies that are essential for the child to develop to prepare them for the future.",
-                hopeHeading2: "Objectives",
-                hopeDescription2:
-                    "To cover the 5 social emotional competencies necessary for children to develop healthy identities, recognize and manage emotion, develop a sense of responsibility, care and concern for others, relate to others and develop positive relationships, handle changes, make responsible decisions and act for the good of self, others and the society.",
-                objectivesPoints: [
-                    "Self Awareness",
-                    "Self-Management",
-                    "Responsible Decision-Making",
-                    "Social Awareness",
-                    "Relationship Management",
-                ],
-            },
+            hopeImage: goalImage,
+            hopeHeading1: "Goals",
+            hopeDescription1:
+                "To develop the 21st Century Competencies that are essential for the child to develop to prepare them for the future.",
+            hopeHeading2: "Objectives",
+            hopeDescription2:
+                "To cover the 5 social emotional competencies necessary for children to develop healthy identities, recognize and manage emotion, develop a sense of responsibility, care and concern for others, relate to others and develop positive relationships, handle changes, make responsible decisions and act for the good of self, others and the society.",
+            objectivesPoints: [
+                "Self Awareness",
+                "Self-Management",
+                "Responsible Decision-Making",
+                "Social Awareness",
+                "Relationship Management",
+            ],
+        },
         section2: {
             hopeHeading3: "Programme Outcomes",
             programmeCards: [
@@ -331,9 +331,21 @@ function AdminHope() {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <section className="pt-5">
+            <section>
+                <div className="container-fluid py-2 bg-white">
+                    <div className="row">
+                        <div className="d-flex justify-content-between align-items-center">
+                            <h5 className="fw-bold">Hope</h5>
+                            <div>
+                                <button type="button" className="btn btn-button btn-sm px-4 py-2">
+                                    Publish
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {/* Section 1 */}
-                <div className="container hopeSection1">
+                <div className="container hopeSection1 mt-5">
                     <div className="row flex-1 justify-content-center align-items-center">
                         <div className="col-lg-5 col-12 mb-3">
                             {!editMode.hopeImage && (
@@ -744,7 +756,7 @@ function AdminHope() {
                                             <h4 className="text-center">
                                                 {formik.values.oContent}
                                             </h4>
-                                            
+
                                         </>
                                     )}
                                 </div>
@@ -887,7 +899,7 @@ function AdminHope() {
                                             <h4 className="text-center">
                                                 {formik.values.eContent}
                                             </h4>
-                                            
+
                                         </>
                                     )}
                                 </div>

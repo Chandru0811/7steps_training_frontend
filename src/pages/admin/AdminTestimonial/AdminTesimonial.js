@@ -195,12 +195,12 @@ function AdminTestimonial() {
             <div className="d-flex">
               <button
                 type="button"
-                className="btn btn-button btn-sm px-4 me-3"
+                className="btn btn-button btn-sm px-4 py-2 me-3"
                 onClick={() => setIsAddModalOpen(true)}
               >
                 Add
               </button>
-              <button type="button" className="btn btn-button btn-sm px-4">
+              <button type="button" className="btn btn-button btn-sm py-2 px-4">
                 Publish
               </button>
             </div>

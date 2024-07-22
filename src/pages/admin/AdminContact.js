@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/iframe-has-title */
 import React, { useState } from "react";
 import { SlLocationPin } from "react-icons/sl";
 import { IoCallOutline } from "react-icons/io5";
@@ -76,6 +75,18 @@ function AdminContact() {
 
   return (
     <section className="contactUs">
+      <div className="container-fluid py-2 bg-white">
+        <div className="row">
+          <div className="d-flex justify-content-between align-items-center">
+            <h5 className="fw-bold">Contact Us</h5>
+            <div>
+              <button type="button" className="btn btn-button btn-sm px-4 py-2">
+                Publish
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <form onSubmit={formik.handleSubmit}>
         <div className="card m-5">
           <div className="container">
@@ -117,11 +128,13 @@ function AdminContact() {
                       value={formik.values.contactMap}
                       onChange={(e) => handleChange(e, "contactMap")}
                     />
-                    <FaSave onClick={() => handleSave("contactMap")} className="ms-2" />
-                    <FaTimes onClick={() => handleCancel("contactMap")} className="ms-2" />
+                    <FaSave onClick={() => handleSave("contactMap")} className="ms-2 text-primary" />
+                    <FaTimes onClick={() => handleCancel("contactMap")} className="ms-2 text-danger" />
                   </div>
                 ) : null}
-                <FaEdit onClick={() => handleEditClick("contactMap")} className="mt-5" />
+                {!editMode.contactMap && (
+                  <FaEdit onClick={() => handleEditClick("contactMap")} className="mt-5 text-secondary mb-2" />
+                )}
                 <div className="card">
                   <iframe
                     src={datas.contactMap}
@@ -134,262 +147,234 @@ function AdminContact() {
                   ></iframe>
                 </div>
                 <div className="row mt-3">
-                  <div className="">
-                    <p>
-                      <SlLocationPin size={20} color="#7C2C83" />{" "}
-                      {editMode.location ? (
-                        <>
-                          <input
-                            type="text"
-                            className="form-control mt-4"
-                            {...formik.getFieldProps("location")}
-                            value={formik.values.location}
-                            onChange={(e) => handleChange(e, "location")}
-                          />
-                          <FaSave onClick={() => handleSave("location")} className="ms-2" />
-                          <FaTimes onClick={() => handleCancel("location")} className="ms-2" />
-                        </>
-                      ) : (
-                        datas.location
+                  <div className="col-10">
+                    <div className="d-flex">
+                      <p className="d-flex">
+                        <SlLocationPin size={20} color="#7C2C83" className="mt-1 me-2" />{" "}
+                        {editMode.location ? (
+                          <>
+                            <input
+                              type="text"
+                              className="form-control"
+                              {...formik.getFieldProps("location")}
+                              value={formik.values.location}
+                              onChange={(e) => handleChange(e, "location")}
+                            />
+                            <FaSave onClick={() => handleSave("location")} className="ms-2 mt-2 text-primary" />
+                            <FaTimes onClick={() => handleCancel("location")} className="ms-2 mt-2 text-danger" />
+                          </>
+                        ) : (
+                          datas.location
+                        )}
+                      </p>{" "}
+                      {!editMode.location && (
+                        <FaEdit onClick={() => handleEditClick("location")} className="ms-2 mt-1 text-secondary" />
                       )}
-                    </p>{" "}
-                    {!editMode.location && (
-                      <FaEdit onClick={() => handleEditClick("location")} className="ms-3" />
-                    )}
-                    <p>
-                      <IoCallOutline size={20} color="#7C2C83" />{" "}
-                      {editMode.phoneNumber ? (
-                        <>
-                          <input
-                            type="text"
-                            className="form-control mt-4"
-                            {...formik.getFieldProps("phoneNumber")}
-                            value={formik.values.phoneNumber}
-                            onChange={(e) => handleChange(e, "phoneNumber")}
-                          />
-                          <FaSave onClick={() => handleSave("phoneNumber")} className="ms-2" />
-                          <FaTimes onClick={() => handleCancel("phoneNumber")} className="ms-2" />
-                        </>
-                      ) : (
-                        datas.phoneNumber
+                    </div>
+                    <div className="d-flex">
+                      <p className="d-flex">
+                        <IoCallOutline size={20} color="#7C2C83" className="me-2 mt-1" />{" "}
+                        {editMode.phoneNumber ? (
+                          <div className="d-flex">
+                            <input
+                              type="text"
+                              className="form-control"
+                              {...formik.getFieldProps("phoneNumber")}
+                              value={formik.values.phoneNumber}
+                              onChange={(e) => handleChange(e, "phoneNumber")}
+                            />
+                            <FaSave onClick={() => handleSave("phoneNumber")} className="mt-2 ms-2 text-primary" />
+                            <FaTimes onClick={() => handleCancel("phoneNumber")} className="mt-2 ms-2 text-danger" />
+                          </div>
+                        ) : (
+                          datas.phoneNumber
+                        )}
+                      </p>{" "}
+                      {!editMode.phoneNumber && (
+                        <FaEdit onClick={() => handleEditClick("phoneNumber")} className="ms-2 mt-1 text-secondary" />
                       )}
-                    </p>{" "}
-                    {!editMode.phoneNumber && (
-                      <FaEdit onClick={() => handleEditClick("phoneNumber")} className="ms-3" />
-                    )}
-                    <p>
-                      <CiMail size={20} color="#7C2C83" />{" "}
-                      {editMode.email ? (
-                        <>
-                          <input
-                            type="text"
-                            className="form-control mt-4"
-                            {...formik.getFieldProps("email")}
-                            value={formik.values.email}
-                            onChange={(e) => handleChange(e, "email")}
-                          />
-                          <FaSave onClick={() => handleSave("email")} className="ms-2" />
-                          <FaTimes onClick={() => handleCancel("email")} className="ms-2" />
-                        </>
-                      ) : (
-                        datas.email
+                    </div>
+                    <div className="d-flex">
+                      <p className="d-flex">
+                        <CiMail size={20} color="#7C2C83" className="me-2" style={{ marginTop: "2px" }} />{" "}
+                        {editMode.email ? (
+                          <>
+                            <input
+                              type="text"
+                              className="form-control"
+                              {...formik.getFieldProps("email")}
+                              value={formik.values.email}
+                              onChange={(e) => handleChange(e, "email")}
+                            />
+                            <FaSave onClick={() => handleSave("email")} className="ms-2 mt-2 text-primary" />
+                            <FaTimes onClick={() => handleCancel("email")} className="ms-2 mt-2 text-danger" />
+                          </>
+                        ) : (
+                          datas.email
+                        )}
+                      </p>{" "}
+                      {!editMode.email && (
+                        <FaEdit onClick={() => handleEditClick("email")} className="ms-2 mt-1 text-secondary" />
                       )}
-                    </p>{" "}
-                    {!editMode.email && (
-                      <FaEdit onClick={() => handleEditClick("email")} className="ms-3" />
-                    )}
+                    </div>
+                  </div>
+                  <div className="col-2">
+                    <div className="d-flex flex-column justify-content-end align-items-end">
+                      <div
+                        className="card p-3 mb-3 iconBg"
+                      >
+                        {editMode.faceBook ? (
+                          <div>
+                            <input
+                              type="text"
+                              className="form-control mt-4"
+                              value={formik.values.faceBook}
+                              onChange={(e) => handleChange(e, "faceBook")}
+                            />
+                            <FaSave onClick={() => handleSave("faceBook")} className="ms-2 text-primary" />
+                            <FaTimes onClick={() => handleCancel("faceBook")} className="ms-2 text-danger" />
+                          </div>
+                        ) : (
+                          <>
+                            <a href={datas.faceBook} target="_blank" rel="noopener noreferrer">
+                              <p className="card socialMedia-card p-3 mb-0">
+                                <FaFacebookF />
+                              </p>
+                            </a>
+                            <FaEdit onClick={() => handleEditClick("faceBook")} className="ms-3 text-secondary mb-2" />
+                          </>
+                        )}
+                        {editMode.instagram ? (
+                          <div>
+                            <input
+                              type="text"
+                              className="form-control mt-4"
+                              value={formik.values.instagram}
+                              onChange={(e) => handleChange(e, "instagram")}
+                            />
+                            <FaSave onClick={() => handleSave("instagram")} className="ms-2 text-primary" />
+                            <FaTimes onClick={() => handleCancel("instagram")} className="ms-2 text-danger" />
+                          </div>
+                        ) : (
+                          <>
+                            <a href={datas.instagram} target="_blank" rel="noopener noreferrer">
+                              <p className="card socialMedia-card p-3 mb-0">
+                                <FaInstagram />
+                              </p>
+                            </a>
+                            <FaEdit onClick={() => handleEditClick("instagram")} className="ms-3 text-secondary mb-2" />
+                          </>
+                        )}
+                        {editMode.linkdin ? (
+                          <div>
+                            <input
+                              type="text"
+                              className="form-control mt-4"
+                              value={formik.values.linkdin}
+                              onChange={(e) => handleChange(e, "linkdin")}
+                            />
+                            <FaSave onClick={() => handleSave("linkdin")} className="ms-2 text-primary" />
+                            <FaTimes onClick={() => handleCancel("linkdin")} className="ms-2 text-danger" />
+                          </div>
+                        ) : (
+                          <>
+                            <a href={datas.linkdin} target="_blank" rel="noopener noreferrer">
+                              <p className="card socialMedia-card p-3 mb-0">
+                                <FaLinkedin />
+                              </p>
+                            </a>
+                            <FaEdit onClick={() => handleEditClick("linkdin")} className="ms-3 text-secondary mb-2" />
+                          </>
+                        )}
+                        {editMode.youtube ? (
+                          <div>
+                            <input
+                              type="text"
+                              className="form-control mt-4"
+                              value={formik.values.youtube}
+                              onChange={(e) => handleChange(e, "youtube")}
+                            />
+                            <FaSave onClick={() => handleSave("youtube")} className="ms-2 text-primary" />
+                            <FaTimes onClick={() => handleCancel("youtube")} className="ms-2 text-danger" />
+                          </div>
+                        ) : (
+                          <>
+                            <a href={datas.youtube} target="_blank" rel="noopener noreferrer">
+                              <p className="card socialMedia-card p-3 mb-0">
+                                <FaYoutube />
+                              </p>
+                            </a>
+                            <FaEdit onClick={() => handleEditClick("youtube")} className="ms-3 text-secondary mb-2" />
+                          </>
+                        )}
+                        {editMode.whatapp ? (
+                          <div>
+                            <input
+                              type="text"
+                              className="form-control mt-4"
+                              value={formik.values.whatapp}
+                              onChange={(e) => handleChange(e, "whatapp")}
+                            />
+                            <FaSave onClick={() => handleSave("whatapp")} className="ms-2 text-primary" />
+                            <FaTimes onClick={() => handleCancel("whatapp")} className="ms-2 text-danger" />
+                          </div>
+                        ) : (
+                          <>
+                            <a href={datas.whatapp} target="_blank" rel="noopener noreferrer">
+                              <p className="card socialMedia-card p-3 mb-0">
+                                <FaWhatsapp />
+                              </p>
+                            </a>
+                            <FaEdit onClick={() => handleEditClick("whatapp")} className="ms-3 text-secondary mb-2" />
+                          </>
+                        )}
+                        {editMode.tiktok ? (
+                          <div>
+                            <input
+                              type="text"
+                              className="form-control mt-4"
+                              value={formik.values.tiktok}
+                              onChange={(e) => handleChange(e, "tiktok")}
+                            />
+                            <FaSave onClick={() => handleSave("tiktok")} className="ms-2 text-primary" />
+                            <FaTimes onClick={() => handleCancel("tiktok")} className="ms-2 text-danger" />
+                          </div>
+                        ) : (
+                          <>
+                            <a href={datas.tiktok} target="_blank" rel="noopener noreferrer">
+                              <p className="card socialMedia-card p-3 mb-0">
+                                <AiFillTikTok />
+                              </p>
+                            </a>
+                            <FaEdit onClick={() => handleEditClick("tiktok")} className="ms-3 text-secondary mb-2" />
+                          </>
+                        )}
+                        {editMode.facebook1 ? (
+                          <div>
+                            <input
+                              type="text"
+                              className="form-control mt-4"
+                              value={formik.values.facebook1}
+                              onChange={(e) => handleChange(e, "facebook1")}
+                            />
+                            <FaSave onClick={() => handleSave("facebook1")} className="ms-2 text-primary" />
+                            <FaTimes onClick={() => handleCancel("facebook1")} className="ms-2 text-danger" />
+                          </div>
+                        ) : (
+                          <>
+                            <a href={datas.facebook1} target="_blank" rel="noopener noreferrer">
+                              <p className="card socialMedia-card p-3 mb-0">
+                                <FaFacebookF />
+                              </p>
+                            </a>
+                            <FaEdit onClick={() => handleEditClick("facebook1")} className="ms-3 text-secondary mb-2" />
+                          </>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="d-flex flex-column justify-content-end align-items-end">
-            <div
-              className="card p-3"
-              style={{
-                borderRadius: "15px",
-                border: "none",
-                background: "#f6bf0b38",
-              }}
-            >
-              {editMode.faceBook ? (
-                <div>
-                  <input
-                    type="text"
-                    className="form-control mt-4"
-                    value={formik.values.faceBook}
-                    onChange={(e) => handleChange(e, "faceBook")}
-                  />
-                  <FaSave onClick={() => handleSave("faceBook")} className="ms-2" />
-                  <FaTimes onClick={() => handleCancel("faceBook")} className="ms-2" />
-                </div>
-              ) : (
-                <>                <a href={datas.faceBook} target="_blank" rel="noopener noreferrer">
-                  <p className="card socialMedia-card p-3">
-                    <FaFacebookF />
-
-                  </p>
-                </a>
-                  <FaEdit onClick={() => handleEditClick("faceBook")} className="ms-3" />
-                </>
-              )}
-              {editMode.instagram ? (
-                <div>
-                  <input
-                    type="text"
-                    className="form-control mt-4"
-                    value={formik.values.instagram}
-                    onChange={(e) => handleChange(e, "instagram")}
-                  />
-                  <FaSave onClick={() => handleSave("instagram")} className="ms-2" />
-                  <FaTimes onClick={() => handleCancel("instagram")} className="ms-2" />
-                </div>
-              ) : (
-                <>                <a href={datas.instagram} target="_blank" rel="noopener noreferrer">
-                  <p className="card socialMedia-card p-3">
-                    <FaInstagram />
-
-                  </p>
-                </a>
-                  <FaEdit onClick={() => handleEditClick("instagram")} className="ms-3" />
-                </>
-              )}
-              {/* <a href={datas.instagram} target="_blank" rel="noopener noreferrer">
-                <p className="card socialMedia-card p-3">
-                  <FaInstagram />
-                </p>
-              </a>  */}
-              {editMode.linkdin ? (
-                <div>
-                  <input
-                    type="text"
-                    className="form-control mt-4"
-                    value={formik.values.linkdin}
-                    onChange={(e) => handleChange(e, "linkdin")}
-                  />
-                  <FaSave onClick={() => handleSave("linkdin")} className="ms-2" />
-                  <FaTimes onClick={() => handleCancel("linkdin")} className="ms-2" />
-                </div>
-              ) : (
-                <>                <a href={datas.linkdin} target="_blank" rel="noopener noreferrer">
-                  <p className="card socialMedia-card p-3">
-                    <FaLinkedin />
-
-                  </p>
-                </a>
-                  <FaEdit onClick={() => handleEditClick("linkdin")} className="ms-3" />
-                </>
-              )}
-              {/* 
-              <a href={datas.linkdin} target="_blank" rel="noopener noreferrer">
-                <p className="card socialMedia-card p-3">
-                  <FaLinkedin />
-                </p>
-              </a> */}
-              {editMode.youtube ? (
-                <div>
-                  <input
-                    type="text"
-                    className="form-control mt-4"
-                    value={formik.values.youtube}
-                    onChange={(e) => handleChange(e, "youtube")}
-                  />
-                  <FaSave onClick={() => handleSave("youtube")} className="ms-2" />
-                  <FaTimes onClick={() => handleCancel("youtube")} className="ms-2" />
-                </div>
-              ) : (
-                <>                <a href={datas.youtube} target="_blank" rel="noopener noreferrer">
-                  <p className="card socialMedia-card p-3">
-                    <FaYoutube />
-
-                  </p>
-                </a>
-                  <FaEdit onClick={() => handleEditClick("youtube")} className="ms-3" />
-                </>
-              )}
-              {/* <a href={datas.youtube} target="_blank" rel="noopener noreferrer">
-                <p className="card socialMedia-card p-3">
-                  <FaYoutube />
-                </p>
-              </a> */}
-              {editMode.whatapp ? (
-                <div>
-                  <input
-                    type="text"
-                    className="form-control mt-4"
-                    value={formik.values.whatapp}
-                    onChange={(e) => handleChange(e, "whatapp")}
-                  />
-                  <FaSave onClick={() => handleSave("whatapp")} className="ms-2" />
-                  <FaTimes onClick={() => handleCancel("whatapp")} className="ms-2" />
-                </div>
-              ) : (
-                <>                <a href={datas.whatapp} target="_blank" rel="noopener noreferrer">
-                  <p className="card socialMedia-card p-3">
-                    <FaWhatsapp />
-
-                  </p>
-                </a>
-                  <FaEdit onClick={() => handleEditClick("whatapp")} className="ms-3" />
-                </>
-              )}
-              {/* <a href={datas.whatapp} target="_blank" rel="noopener noreferrer">
-                <p className="card socialMedia-card p-3">
-                  <FaWhatsapp />
-                </p>
-              </a> */}
-              {editMode.tiktok ? (
-                <div>
-                  <input
-                    type="text"
-                    className="form-control mt-4"
-                    value={formik.values.tiktok}
-                    onChange={(e) => handleChange(e, "tiktok")}
-                  />
-                  <FaSave onClick={() => handleSave("tiktok")} className="ms-2" />
-                  <FaTimes onClick={() => handleCancel("tiktok")} className="ms-2" />
-                </div>
-              ) : (
-                <>                <a href={datas.tiktok} target="_blank" rel="noopener noreferrer">
-                  <p className="card socialMedia-card p-3">
-                    <AiFillTikTok />
-
-                  </p>
-                </a>
-                  <FaEdit onClick={() => handleEditClick("tiktok")} className="ms-3" />
-                </>
-              )}
-              {/* <a href={datas.tiktok} target="_blank" rel="noopener noreferrer">
-                <p className="card socialMedia-card p-3">
-                  <AiFillTikTok />
-                </p>
-              </a> */}
-              {editMode.facebook1 ? (
-                <div>
-                  <input
-                    type="text"
-                    className="form-control mt-4"
-                    value={formik.values.facebook1}
-                    onChange={(e) => handleChange(e, "facebook1")}
-                  />
-                  <FaSave onClick={() => handleSave("facebook1")} className="ms-2" />
-                  <FaTimes onClick={() => handleCancel("facebook1")} className="ms-2" />
-                </div>
-              ) : (
-                <>                <a href={datas.facebook1} target="_blank" rel="noopener noreferrer">
-                  <p className="card socialMedia-card p-3">
-                    <FaFacebookF />
-
-                  </p>
-                </a>
-                  <FaEdit onClick={() => handleEditClick("facebook1")} className="ms-3" />
-                </>
-              )}
-              {/* <a href={datas.facebook1} target="_blank" rel="noopener noreferrer">
-                <p className="card socialMedia-card p-3">
-                  <FaFacebookF />
-                </p>
-              </a> */}
             </div>
           </div>
         </div>

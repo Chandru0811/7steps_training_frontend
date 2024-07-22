@@ -11,11 +11,10 @@ import person_5 from "../../assets/ELEFPI LEARNSCAPE.png";
 import { ImCheckmark } from "react-icons/im";
 import heroImg from "../../assets/About_hero_image.png";
 import { useFormik } from "formik";
-import { FaEdit, FaSave, FaTimes } from "react-icons/fa";
-
+import { FaEdit, FaSave, FaTimes, FaPlus } from "react-icons/fa";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 function AdminAbout() {
-
   const [isEditing, setIsEditing] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
@@ -80,7 +79,7 @@ function AdminAbout() {
       },
     ],
 
-    partnerTitle: " OUR PARTNERS",
+    partnerTitle: "OUR PARTNERS",
     partnerContent: `Essential allies who share our vision and commitment, working
                     collaboratively to drive meaningful change and achieve shared goals.`,
     partnerCard: [
@@ -115,7 +114,7 @@ function AdminAbout() {
   const formik = useFormik({
     initialValues: data,
     onSubmit: (values) => {
-      console.log("Aboud Datas :", values);
+      console.log("About Datas:", values);
       setData(values);
     },
   });
@@ -146,20 +145,6 @@ function AdminAbout() {
   const handleCancel = () => {
     setIsEditing(null);
     setEditingIndex(null);
-  };
-
-  const handleAddPoint = () => {
-    formik.setFieldValue("heroCard", [
-      ...formik.values.heroCard,
-      "",
-    ]);
-  };
-
-  const handleDeletePoint = (index) => {
-    formik.setFieldValue(
-      "heroCard",
-      formik.values.heroCard.filter((_, i) => i !== index)
-    );
   };
 
   const handleDescriptionChange = (e, cardIndex, descIndex) => {
@@ -206,6 +191,18 @@ function AdminAbout() {
 
   return (
     <section>
+      <div className="container-fluid py-2 bg-white">
+        <div className="row">
+          <div className="d-flex justify-content-between align-items-center">
+            <h5 className="fw-bold">About</h5>
+            <div>
+              <button type="button" className="btn btn-button btn-sm px-4 py-2">
+                Publish
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="container-fluid">
         <form onSubmit={formik.handleSubmit}>
           {/* Hero Section */}
@@ -214,8 +211,8 @@ function AdminAbout() {
               {isEditing === 'homeHeroImg' ? (
                 <div>
                   <div className="d-flex justify-content-center mb-2">
-                    <FaSave onClick={handleSaveClick} style={{ cursor: 'pointer' }} />
-                    <FaTimes onClick={handleCancel} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+                    <FaSave onClick={handleSaveClick} className="text-primary" />
+                    <FaTimes onClick={handleCancel} style={{ marginLeft: '10px' }} className="text-danger" />
                   </div>
                   <input
                     type="file"
@@ -227,7 +224,7 @@ function AdminAbout() {
                 </div>
               ) : (
                 <div>
-                  <FaEdit onClick={() => setIsEditing('homeHeroImg')} style={{ cursor: 'pointer' }} />
+                  <FaEdit onClick={() => setIsEditing('homeHeroImg')} className="text-secondary" />
                 </div>
               )}
               <div style={{ position: 'relative', width: '100%' }}>
@@ -262,8 +259,8 @@ function AdminAbout() {
                   {isEditing === 'heroTitle' ? (
                     <div>
                       <div className="d-flex justify-content-center mb-2">
-                        <FaSave onClick={handleSaveClick} style={{ cursor: 'pointer' }} />
-                        <FaTimes onClick={handleCancel} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+                        <FaSave onClick={handleSaveClick} className="text-primary" />
+                        <FaTimes onClick={handleCancel} style={{ marginLeft: '10px' }} className="text-danger" />
                       </div>
                       <input
                         type="text"
@@ -276,15 +273,15 @@ function AdminAbout() {
                     </div>
                   ) : (
                     <div>
-                      <FaEdit onClick={() => handleEditClick('heroTitle')} style={{ cursor: 'pointer' }} />
+                      <FaEdit onClick={() => handleEditClick('heroTitle')} className="text-secondary" />
                       <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>{formik.values.heroTitle}</h1>
                     </div>
                   )}
                   {isEditing === 'heroContent' ? (
                     <div>
                       <div className="d-flex justify-content-center mb-2">
-                        <FaSave onClick={handleSaveClick} style={{ cursor: 'pointer' }} />
-                        <FaTimes onClick={handleCancel} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+                        <FaSave onClick={handleSaveClick} className="text-primary" />
+                        <FaTimes onClick={handleCancel} style={{ marginLeft: '10px' }} className="text-danger" />
                       </div>
                       <textarea
                         name="heroContent"
@@ -297,15 +294,15 @@ function AdminAbout() {
                     </div>
                   ) : (
                     <div>
-                      <FaEdit onClick={() => handleEditClick('heroContent')} style={{ cursor: 'pointer' }} />
+                      <FaEdit onClick={() => handleEditClick('heroContent')} className="text-secondary" />
                       <p style={{ fontSize: '1.2rem' }}>{formik.values.heroContent}</p>
                     </div>
                   )}
                   {isEditing === 'heroFounded' ? (
                     <div>
                       <div className="d-flex justify-content-center mb-2">
-                        <FaSave onClick={handleSaveClick} style={{ cursor: 'pointer' }} />
-                        <FaTimes onClick={handleCancel} style={{ cursor: 'pointer', marginLeft: '10px' }} />
+                        <FaSave onClick={handleSaveClick} className="text-primary" />
+                        <FaTimes onClick={handleCancel} style={{ marginLeft: '10px' }} className="text-danger" />
                       </div>
                       <input
                         type="text"
@@ -318,7 +315,7 @@ function AdminAbout() {
                     </div>
                   ) : (
                     <div>
-                      <FaEdit onClick={() => handleEditClick('heroFounded')} style={{ cursor: 'pointer' }} />
+                      <FaEdit onClick={() => handleEditClick('heroFounded')} className="text-secondary" />
                       <p style={{ fontSize: '1rem' }}>{formik.values.heroFounded}</p>
                     </div>
                   )}
@@ -326,13 +323,13 @@ function AdminAbout() {
               </div>
             </div>
           </div>
-          {/* What we do */}
+          {/* What We Do Section */}
           <div className="row mb-5">
             {isEditing === "whatDoTitle" ? (
               <div>
                 <div className="d-flex">
-                  <FaSave onClick={() => handleSaveClick("whatDoTitle")} />
-                  <FaTimes onClick={handleCancel} />
+                  <FaSave onClick={() => handleSaveClick("whatDoTitle")} className="text-primary" />
+                  <FaTimes onClick={handleCancel} className="text-danger" />
                 </div>
                 <input
                   type="text"
@@ -347,14 +344,14 @@ function AdminAbout() {
                 <h3 className="text-center"
                   style={{ textDecoration: "underline" }}>
                   {formik.values.whatDoTitle}</h3>
-                <FaEdit onClick={() => handleEditClick("whatDoTitle")} />
+                <FaEdit onClick={() => handleEditClick("whatDoTitle")} className="text-secondary" />
               </>
             )}
             {isEditing === "whatDoContent" ? (
               <div>
                 <div className="d-flex">
-                  <FaSave onClick={() => handleSaveClick("whatDoContent")} />
-                  <FaTimes onClick={handleCancel} />
+                  <FaSave onClick={() => handleSaveClick("whatDoContent")} className="text-primary" />
+                  <FaTimes onClick={handleCancel} className="text-danger" />
                 </div>
                 <textarea
                   type="text"
@@ -368,95 +365,77 @@ function AdminAbout() {
             ) : (
               <>
                 <p className="text-center">{formik.values.whatDoContent}</p>
-                <FaEdit onClick={() => handleEditClick("whatDoContent")} />
+                <FaEdit onClick={() => handleEditClick("whatDoContent")} className="text-secondary" />
               </>
             )}
           </div>
           {/* Card Section */}
           <div className="container mb-5">
             <div className="row">
-              {formik.values.heroCard.map((card, index) => (
+              {formik.values.heroCard.map((card, cardIndex) => (
                 <div className="col-md-6 col-12 mb-3" key={card.id}>
                   <div className="card about-card h-100">
-                    <div className="card-body p-4" style={{ backgroundColor: "#FFF5E1", borderRadius: "10px" }}>
-                      <div className="card-heading d-flex align-items-center justify-content-center mb-3">
-                        {isEditing === "heroCard" && editingIndex === index ? (
-                          <div>
-                            <div className="d-flex">
-                              <FaSave onClick={handleSaveClick} />
-                              <FaTimes onClick={handleCancel} />
+                    <div className="card-body p-4">
+                      {isEditing === 'heroCard' && editingIndex === cardIndex ? (
+                        <div>
+                          <input
+                            type="file"
+                            name={`heroCard.${cardIndex}.cardIcon`}
+                            onChange={handleFileChange}
+                            className="form-control mb-3"
+                          />
+                          <input
+                            type="text"
+                            name={`heroCard.${cardIndex}.title`}
+                            value={card.title}
+                            onChange={formik.handleChange}
+                            className="form-control mb-3"
+                          />
+                          {card.description.map((desc, descIndex) => (
+                            <div key={descIndex} className="d-flex">
+                              <input
+                                value={desc}
+                                onChange={(e) => handleDescriptionChange(e, cardIndex, descIndex)}
+                                rows="2"
+                                className="form-control mb-3"
+                                style={{ margin: '5px 0' }}
+                              />
+                              <IoIosCloseCircleOutline color="Red" size={25}
+                                className="ms-2 mt-2"
+                                onClick={() => handleDeleteDescription(cardIndex, descIndex)}
+                              />
                             </div>
-                            <input
-                              type="file"
-                              name={`heroCard.${index}.cardIcon`}
-                              onChange={handleFileChange}
-                              className="form-control"
-                            />
+                          ))}
+                          <div className="d-flex">
+                            <FaPlus onClick={() => handleAddDescription(cardIndex)} className="text-success" />
+                            <FaSave onClick={handleSaveClick} className="mx-2 text-primary" />
+                            <FaTimes onClick={handleCancel} className="text-danger" />
                           </div>
-                        ) : (
-                          <div>
-                            <FaEdit onClick={() => handleEditClick("heroCard", index)} />
+                        </div>
+                      ) : (
+                        <div>
+                          <div className="d-flex align-items-center justify-content-center">
                             <img
                               src={
                                 typeof card.cardIcon === "string"
                                   ? card.cardIcon
                                   : URL.createObjectURL(card.cardIcon)
                               }
-                              className="img-fluid me-2"
-                              alt="Card Icon"
-                              style={{ width: "30px", height: "30px" }}
+                              alt={card.title}
+                              className="img-fluid"
+                              style={{ width: '30px' }}
                             />
+                            <h5 className="mt-2 mx-2">{card.title}</h5>
                           </div>
-                        )}
-                        {isEditing === `title${index}` ? (
-                          <div>
-                            <div className="d-flex">
-                              <FaSave onClick={handleSaveClick} />
-                              <FaTimes onClick={handleCancel} />
-                            </div>
-                            <input
-                              type="text"
-                              name={`heroCard[${index}].title`}
-                              {...formik.getFieldProps(`heroCard[${index}].title`)}
-                              className="form-control"
-                            />
-                          </div>
-                        ) : (
-                          <div>
-                            <FaEdit onClick={() => handleEditClick(`title${index}`)} />
-                            <h5 className="text-center head-color ps-2">{card.title}</h5>
-                          </div>
-                        )}
-                      </div>
-                      <div className="card-body">
-                        <ul>
                           {card.description.map((desc, descIndex) => (
-                            <li key={descIndex} style={{ listStyle: "none" }}>
-                              {isEditing === `cardDescription${index}_${descIndex}` ? (
-                                <div>
-                                  <div className="d-flex">
-                                    <FaSave onClick={handleSaveClick} />
-                                    <FaTimes onClick={handleCancel} />
-                                  </div>
-                                  <textarea
-                                    name={`heroCard[${index}].description[${descIndex}]`}
-                                    {...formik.getFieldProps(`heroCard[${index}].description[${descIndex}]`)}
-                                    className="form-control"
-                                    rows="3"
-                                  />
-                                </div>
-                              ) : (
-                                <>
-                                  <FaEdit onClick={() => handleEditClick(`cardDescription${index}_${descIndex}`)} />
-                                  <div className="">
-                                  <p><ImCheckmark style={{ color: "#7c2c83" }} />{desc}</p>
-                                  </div>
-                                </>
-                              )}
-                            </li>
+                            <p key={descIndex}><ImCheckmark style={{ color: "#7c2c83" }} /> {desc}</p>
                           ))}
-                        </ul>
-                      </div>
+                          <FaEdit
+                            onClick={() => handleEditClick('heroCard', cardIndex)}
+                            className="position-absolute top-0 end-0 mt-3 me-3 text-secondary"
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -468,8 +447,8 @@ function AdminAbout() {
             {isEditing === "partnerTitle" ? (
               <div>
                 <div className="d-flex">
-                  <FaSave onClick={() => handleSaveClick("partnerTitle")} />
-                  <FaTimes onClick={handleCancel} />
+                  <FaSave onClick={() => handleSaveClick("partnerTitle")} className="text-primary" />
+                  <FaTimes onClick={handleCancel} className="text-danger" />
                 </div>
                 <input
                   type="text"
@@ -484,14 +463,14 @@ function AdminAbout() {
                 <h3 className="text-center" style={{ textDecoration: "underline" }}>
                   {formik.values.partnerTitle}
                 </h3>
-                <FaEdit onClick={() => handleEditClick("partnerTitle")} />
+                <FaEdit onClick={() => handleEditClick("partnerTitle")} className="text-secondary" />
               </>
             )}
             {isEditing === "partnerContent" ? (
               <div>
                 <div className="d-flex">
-                  <FaSave onClick={() => handleSaveClick("partnerContent")} />
-                  <FaTimes onClick={handleCancel} />
+                  <FaSave onClick={() => handleSaveClick("partnerContent")} className="text-primary" />
+                  <FaTimes onClick={handleCancel} className="text-danger" />
                 </div>
                 <textarea
                   type="text"
@@ -505,20 +484,20 @@ function AdminAbout() {
             ) : (
               <>
                 <p className="text-center">{formik.values.partnerContent}</p>
-                <FaEdit onClick={() => handleEditClick("partnerContent")} />
+                <FaEdit onClick={() => handleEditClick("partnerContent")} className="text-secondary" />
               </>
             )}
             <div className="row">
               <div className="container d-flex flex-wrap justify-content-between">
                 {formik.values.partnerCard.map((card, index) => (
                   <div className="col-12 col-md-2 mb-3" key={card.id}>
-                    <FaEdit onClick={() => handleEditClick("partnerCard", index)} />
+                    <FaEdit onClick={() => handleEditClick("partnerCard", index)} className="text-secondary" />
                     <div className="Admin-ourPartner">
                       {isEditing === "partnerCard" && editingIndex === index ? (
                         <div>
                           <div className="d-flex">
-                            <FaSave onClick={handleSaveClick} />
-                            <FaTimes onClick={handleCancel} />
+                            <FaSave onClick={handleSaveClick} className="text-primary" />
+                            <FaTimes onClick={handleCancel} className="text-danger" />
                           </div>
                           <input
                             type="file"
@@ -545,8 +524,8 @@ function AdminAbout() {
                       {isEditing === `partnerName${index}` ? (
                         <div>
                           <div className="d-flex">
-                            <FaSave onClick={handleSaveClick} />
-                            <FaTimes onClick={handleCancel} />
+                            <FaSave onClick={handleSaveClick} className="text-primary" />
+                            <FaTimes onClick={handleCancel} className="text-danger" />
                           </div>
                           <input
                             type="text"
@@ -557,7 +536,7 @@ function AdminAbout() {
                         </div>
                       ) : (
                         <div>
-                          <FaEdit onClick={() => handleEditClick(`partnerName${index}`)} />
+                          <FaEdit onClick={() => handleEditClick(`partnerName${index}`)} className="text-secondary" />
                           <p className="text-center">{card.partnerName}</p>
                         </div>
                       )}
