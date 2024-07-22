@@ -7,7 +7,7 @@ import ourCardImg4 from "../../../assets/Rectangle 4.jpg";
 import ourCardImg5 from "../../../assets/Rectangle 5.jpg";
 import programmesCardImg from "../../../assets/Rectangle 75.jpg";
 import { ImCheckmark } from "react-icons/im";
-import Testimonial from '../Home/Testimonial';
+import Testimonial from "../Home/Testimonial";
 
 function OurProgrammes() {
   const [show, setShow] = useState(false);
@@ -93,42 +93,46 @@ function OurProgrammes() {
             version of yourself.
           </h5>
         </div>
-        <div className="row m-0 px-5">
+        <div className="row m-0 px-3 px-md-5">
           {CardDatas.map((cardData) => (
-            <div className="col-md-4 col-12 p-3" key={cardData.id}>
+            <div className="col-12 col-md-6 col-lg-4 p-3" key={cardData.id}>
               <div
-                className="card h-100 ps-5"
+                className="card h-100"
                 style={{
                   borderRadius: "25px",
                   textAlign: "start",
-                  background: `${cardData.btnTextColor}`,
+                  background: cardData.btnTextColor,
                 }}
               >
-                <div className="row">
-                  <div className="col-6">
-                    <div className="py-4">
-                      <h3 className="text-light">{cardData.title}</h3>
+                <div className="row no-gutters">
+                  <div className="col-12 col-md-6">
+                    <div className="p-2">
+                      <h4 className="text-light">{cardData.title}</h4>
                       <p className="text-light">{cardData.description}</p>
                       <button
                         style={{
                           borderRadius: "25px",
                           border: "none",
                           background: "white",
-                          color: `${cardData.btnTextColor}`,
+                          color: cardData.btnTextColor,
                         }}
-                        className="px-2 py-1"
+                        className="btn btn-sm"
                         onClick={() => handleShow(cardData)}
                       >
                         Read More
                       </button>
                     </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-12 col-md-6">
                     <img
                       src={cardData.cardImg}
                       alt="cardImg"
-                      className="img-fluid"
-                      style={{ borderRadius: "0 25px 25px 0 " }}
+                      className="img-fluid cardImage"
+                      style={{
+                        height: "100%",
+                        width: "100%",
+                        objectFit: "cover",
+                      }}
                     />
                   </div>
                 </div>
@@ -136,6 +140,7 @@ function OurProgrammes() {
             </div>
           ))}
         </div>
+
         <Testimonial />
       </div>
 
