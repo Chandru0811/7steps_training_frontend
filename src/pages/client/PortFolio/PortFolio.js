@@ -61,9 +61,9 @@ export default function PortFolio() {
         <div className="row portyellow">
           <div className="col-md-6 p-3">
             <div className="card align-items-center p-3 h-100">
-              <div className="d-flex gap-1">
+              <div className="d-flex align-items-center gap-1">
                 <img src={coach} alt="coach" className="img-fluid" />
-                <h2 className="text-dark border-bottom">COACH</h2>
+                <h2 className="text-dark" style={{ textDecoration: "underline" }}>COACH</h2>
               </div>
               <p className="preserve-whitespace">
                 Reihana Abdullah is a revolutionary Mindset Intervention Coach.
@@ -79,9 +79,9 @@ export default function PortFolio() {
           </div>
           <div className="col-md-6 p-3">
             <div className="card align-items-center p-3 h-100">
-              <div className="d-flex gap-1">
+              <div className="d-flex align-items-center gap-1">
                 <img src={trainer} alt="trainer" className="img-fluid w-25" />
-                <h2 className="text-dark border-bottom">TRAINER</h2>
+                <h2 className="text-dark" style={{ textDecoration: "underline" }}>TRAINER</h2>
               </div>
               <p className="preserve-whitespace">
                 She has helped more than 12,000 young students, professionals,
@@ -95,9 +95,9 @@ export default function PortFolio() {
           </div>
           <div className="col-md-6 p-3 mt-4">
             <div className="card align-items-center p-3 h-100">
-              <div className="d-flex gap-1">
+              <div className="d-flex align-items-center gap-1">
                 <img src={speaker} alt="speaker" className="img-fluid w-25" />
-                <h2 className="text-dark border-bottom">SPEAKER</h2>
+                <h2 className="text-dark" style={{ textDecoration: "underline" }}>SPEAKER</h2>
               </div>
               <p className="preserve-whitespace">
                 She is constantly invited to speak online at International
@@ -113,9 +113,9 @@ export default function PortFolio() {
           </div>
           <div className="col-md-6 p-3 mt-4">
             <div className="card align-items-center p-3 h-100">
-              <div className="d-flex gap-1">
+              <div className="d-flex align-items-center gap-1">
                 <img src={life} alt="life" className="img-fluid w-25" />
-                <h2 className="text-dark border-bottom">LIFE MISSION</h2>
+                <h2 className="text-dark" style={{ textDecoration: "underline" }}>LIFE MISSION</h2>
               </div>
               <p className="preserve-whitespace">
                 She is a strong advocate for education and uplifting of

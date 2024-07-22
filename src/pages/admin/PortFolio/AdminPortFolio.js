@@ -413,18 +413,18 @@ She considers herself a progress-tivist, an activist always on the path leading 
           {formik.values.sections.map((section) => (
             <div key={section.id} className="col-md-6 p-3 mt-4">
               <div className="card align-items-center p-3 h-100">
-                <div className="d-flex gap-1">
+                <div className="d-flex align-items-center gap-1">
                   <img
                     src={section.image}
                     alt="life"
                     className="img-fluid w-25"
                   />
-                  <h2 className="text-dark border-bottom">{section.title}</h2>
+                  <h2 className="text-dark" style={{ textDecoration: "underline" }}>{section.title}</h2>
                 </div>
                 <p className="preserve-whitespace">
                   {section.content}
                   <button
-                    className="btn btn-sm btn-outline-warning border ms-2 edit-container"
+                    className="btn btn-sm link-secondary position-absolute top-0 end-0 mt-2 me-3"
                     onClick={() => handleEdit(section)}
                   >
                     <FaEdit />
