@@ -8,12 +8,14 @@ function Header() {
   return (
     <Navbar expand={expand} className="header">
       <Container fluid>
-        <Navbar.Brand href="#" className="d-flex align-items-center mx-3">
-          <img src={Logo} alt="7 STEPS" className="img-fluid" width={30} />
-          &nbsp;
-          <span style={{ color: "#7C2C83", fontWeight: "bolder" }}>
-            7 STEPS
-          </span>
+        <Navbar.Brand className="d-flex align-items-center mx-3">
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <img src={Logo} alt="7 STEPS" className="img-fluid" width={30} />
+            &nbsp;
+            <span style={{ color: "#7C2C83", fontWeight: "bolder" }}>
+              7 STEPS
+            </span>
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
         <Navbar.Offcanvas
@@ -103,9 +105,13 @@ function Header() {
               >
                 CONTACT US
               </NavLink>
-              <Link to="/auth" style={{ textDecoration: 'none' }}>
+              <Link
+                to="/auth"
+                className="mx-2"
+                style={{ textDecoration: "none" }}
+              >
                 <button
-                  style={{ width: '100px' }}
+                  style={{ width: "100px" }}
                   id="signup"
                   className="btn my-2 sign-in-border"
                 >
